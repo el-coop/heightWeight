@@ -1,0 +1,10 @@
+.component-fade-enter-active, .component-fade-leave-active {
+	transition: transform 1s ease;
+	width: 100%;
+	height: 100%;
+	transform: translate(0);
+}
+.component-fade-enter, .component-fade-leave-to
+	/* .component-fade-leave-active below version 2.1.8 */ {
+	transform: translate(100%);
+}

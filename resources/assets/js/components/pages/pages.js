@@ -1,0 +1,1 @@
+Vue.component('store-home-page',require('./store/Home'));

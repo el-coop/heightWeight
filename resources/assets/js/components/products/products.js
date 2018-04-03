@@ -1,0 +1,1 @@
+Vue.component('product-actions', require('./Actions'));

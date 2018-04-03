@@ -1,0 +1,1 @@
+Vue.component('Datatable',require('./Datatable'));

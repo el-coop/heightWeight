@@ -11,3 +11,13 @@
 |
 */
 
+Route::group(['middleware' => ['auth.shop', 'billable']], function () {
+	Route::get('/', 'StoreController@home')->name('home');
+	Route::group(['prefix' => 'store'], function () {
+		Route::get('/products', 'StoreController@products');
+		Route::get('/products/{productId}', 'StoreController@productForm');
+		Route::post('/products/{productId}', 'StoreController@updateProduct');
+	});
+});
+
+Route::get('/billing/process', 'InstallController@ProcessBilling')->name('billing.process');
