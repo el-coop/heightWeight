@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <form method="post" action="{{ action('StoreController@updateProduct', $product->id) }}">
+    <form method="post" action="{{ action('ProductController@updateProduct', $product->id) }}">
         @csrf
         <section class="box">
             <div class="container is-fluid">
