@@ -18,10 +18,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="level-right">
-                        <slot name="extra-buttons"></slot>
-                    </div>
-
+                    <slot name="extra-buttons"></slot>
                 </div>
             </div>
             <div class="column is-full">
@@ -30,12 +27,15 @@
                           pagination-path=""
                           :css="css"
                           :fields="fields"
-                          :per-page="1"
+                          :per-page="25"
                           :append-params="params"
                           :no-data-template="emptyText"
                           @vuetable:pagination-data="paginationData"
                           @vuetable:loading='tableLoading'
                           @vuetable:loaded='tableLoaded'>
+                    <template slot="productactions" slot-scope="props">
+                        <actions :row-data="props.rowData" :copy-active="copyActive" @copying="amplifyEvent"></actions>
+                    </template>
                 </vuetable>
             </div>
             <div class="column is-full">
@@ -51,11 +51,13 @@
 <script>
 	import Vuetable from 'vuetable-2/src/components/Vuetable.vue';
 	import VuetablePagination from './DatatablePagination';
+	import Actions from "../products/Actions";
 
 
 	export default {
 		name: "datatable",
 		components: {
+			Actions,
 			Vuetable,
 			VuetablePagination
 		},
@@ -78,6 +80,10 @@
 					return {};
 				}
 			},
+			copyActive: {
+				type: Boolean,
+				default: false
+			}
 		},
 
 		data() {
@@ -88,6 +94,20 @@
 				},
 				params: this.extraParams,
 				filter: null,
+			}
+		},
+
+        computed: {
+			selectedTo() {
+				return this.$refs.table.selectedTo;
+            }
+        },
+
+		watch: {
+			fields() {
+				window.setTimeout(() => {
+					this.$refs.table.normalizeFields();
+				}, 100);
 			}
 		},
 
@@ -110,6 +130,14 @@
 			tableLoaded() {
 				this.css.tableClass = 'table is-fullwidth is-striped';
 			},
+
+			amplifyEvent(event) {
+				this.$emit(event.name, event);
+			},
+
+            refresh(){
+				this.$refs.table.refresh()
+            }
 		}
 
 	}

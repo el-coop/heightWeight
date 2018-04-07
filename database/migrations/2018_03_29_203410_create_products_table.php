@@ -15,6 +15,7 @@ class CreateProductsTable extends Migration {
 			$table->increments('id');
 			$table->integer('shop_id')->unsigned();
 			$table->string('shopify_id')->index();
+			$table->boolean('visible')->default(false);
 			$table->enum('measurement', ['metric', 'imperial'])->nullable();
 			$table->enum('type', ['t-shirt', 'shirt', 'pants', 'dress'])->nullable();
 			$table->enum('gender', ['male', 'female'])->nullable();

@@ -31,11 +31,21 @@
                            :fields="tableFields"
                            :inline-forms="false"
                            empty-text="<a href='https://{{$shop->shopify_domain}}/admin/collections/{{ $shop->collection_id }}'>Click here to add items to the Height & Weight collection</a>"
-                           class="mt-3">
-                    <div class="field" slot="extra-buttons">
-                        <div class="control">
-                            <a class="level-item"
-                               href="https://{{$shop->shopify_domain}}/admin/collections/{{ $shop->collection_id }}"
+                           class="mt-3"
+                           :copy-active="copyingFields"
+                           ref="table"
+                           @copying="startCopyingRow">
+                    <div class="level-right" slot="extra-buttons">
+                        <div class="control level-item" v-if="copyingFields">
+                            <button class="button is-primary"
+                                    :disabled="selectedTo.length == 0"
+                                    @click="copyFields"
+                                    :class="{ 'is-loading' : copying }">
+                                Copy Products
+                            </button>
+                        </div>
+                        <div class="control level-item">
+                            <a href="https://{{$shop->shopify_domain}}/admin/collections/{{ $shop->collection_id }}"
                                target="_blank">
                                 <button class="button is-dark">Add products</button>
                             </a>

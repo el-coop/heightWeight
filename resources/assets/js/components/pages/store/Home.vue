@@ -19,22 +19,34 @@
 					'Questions / Suggestions'
 				],
 
-				tableFields: [
+				copyingFields: false,
+				copyingId: null,
+				copying: false
+			}
+		},
+
+		computed: {
+			selectedTo() {
+				return this.$refs.table.selectedTo;
+			},
+
+			tableFields() {
+				return [
 					{
 						name: '__checkbox',
 						titleClass: 'has-text-centered',
 						dataClass: 'has-text-centered',
-						visible: false
+						visible: this.copyingFields
 					},
 					{
 						name: 'image',
-                        callback: this.productIcon
+						callback: this.productIcon
 					},
 					{
 						name: 'title'
 					},
 					{
-						name: '__component:product-actions',
+						name: '__slot:productactions',
 						title: 'Actions',
 						titleClass: 'has-text-centered',
 					}
@@ -52,16 +64,40 @@
 				alert('Failed to copy texts')
 			},
 
-            productIcon(value){
-				let src;
-				if(! value){
-					src = '/images/noimg.jpg';
-                } else {
-					src = value.src;
-                }
+			startCopyingRow(data) {
+				if (this.copyingFields) {
+					this.copyingFields = false;
+					return;
+				}
 
-                return "<img src='" + src +"' class='product-preview'/>"
-            }
+				this.copyingFields = true;
+				this.copyingId = data.id;
+			},
+
+			productIcon(value) {
+				let src;
+				if (!value) {
+					src = '/images/noimg.jpg';
+				} else {
+					src = value.src;
+				}
+
+				return "<img src='" + src + "' class='product-preview'/>"
+			},
+
+			copyFields() {
+				this.copying = true;
+				axios.put('/store/products/copy/' + this.copyingId, {
+					products: this.selectedTo
+				}).then(() => {
+					this.copying = false;
+					this.copyingFields = false;
+					this.$refs.table.refresh();
+				}).catch(() => {
+					this.copying = false;
+					alert('An error occurred, please try again');
+				})
+			}
 		}
 	}
 </script>

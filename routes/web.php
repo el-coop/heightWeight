@@ -13,11 +13,19 @@
 
 Route::group(['middleware' => ['auth.shop', 'billable']], function () {
 	Route::get('/', 'StoreController@home')->name('home');
+	\
+
 	Route::group(['prefix' => 'store'], function () {
-		Route::get('/products', 'StoreController@products');
-		Route::get('/products/{productId}', 'StoreController@productForm');
-		Route::post('/products/{productId}', 'StoreController@updateProduct');
-	});
+
+			Route::group(['prefix' => 'products'], function () {
+				Route::get('/', 'StoreController@products');
+				Route::get('/{productId}', 'ProductController@productForm');
+				Route::post('/{productId}', 'ProductController@updateProduct');
+				Route::put('/visible/{productId}', 'ProductController@toggleProductVisibility');
+				Route::put('/copy/{product}', 'ProductController@copyProduct');
+			});
+
+		});
 });
 
 Route::get('/billing/process', 'InstallController@ProcessBilling')->name('billing.process');
