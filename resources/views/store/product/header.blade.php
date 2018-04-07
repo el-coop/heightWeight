@@ -1,7 +1,7 @@
 <div class="level">
     <div class="level-left">
         <div class="level-item">
-            <img src="{{ $product->image->src }}" class="product-image">
+            <img src="{{ $product->image ? $product->image->src : '/images/noimg.jpg' }}" class="product-image">
             <h3 class="is-size-3 is-inline-block">
                 {{ $product->title }}
                 <a href="{{action('StoreController@home')}}" class="has-text-grey">| Products</a>
