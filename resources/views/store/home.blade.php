@@ -30,7 +30,7 @@
                 <datatable url="{{ action('StoreController@products') }}"
                            :fields="tableFields"
                            :inline-forms="false"
-                           empty-text="<a href='https://{{$shop->shopify_domain}}/admin/collections/{{ $shop->collection_id }}'>Click here to add items to the Height & Weight collection</a>"
+                           empty-text="<a target='_blank' href='https://{{$shop->shopify_domain}}/admin/collections/{{ $shop->collection_id }}'>Click here to add items to the Height & Weight collection</a>"
                            class="mt-3"
                            :copy-active="copyingFields"
                            ref="table"
