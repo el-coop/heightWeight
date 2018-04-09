@@ -29,3 +29,9 @@ Route::group(['middleware' => ['auth.shop', 'billable']], function () {
 });
 
 Route::get('/billing/process', 'InstallController@ProcessBilling')->name('billing.process');
+
+Route::group(['prefix' => 'client'], function () {
+	Route::get('/check/{productId}', 'ClientSideController@checkProduct');
+
+	Route::get('/{product}', 'ClientSideController@product');
+});
