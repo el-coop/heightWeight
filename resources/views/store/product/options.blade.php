@@ -1,17 +1,24 @@
 <div class="level">
-    <div class="level-item  has-text-centered">
+    <div class="level-item has-text-centered">
+        <div class="field">
+            <button v-tooltip="'Please fill these as needed (Instructions coming soon)'"
+                    class="button is-light is-rounded is-bold">i
+            </button>
+        </div>
+    </div>
+    <div class="level-item has-text-centered">
         <div class="field">
             <div class="control">
                 <label class="radio">
                     Metric
                     <input type="radio" name="measurement"
-                           value="metric" {{ old('measurement', $productModel->measurement) == 'metric' ? 'checked' : ''}}>
+                           value="metric" v-model="metric">
 
                 </label>
                 <span>/</span>
                 <label class="radio">
                     <input type="radio" name="measurement"
-                           value="imperial"{{ old('measurement', $productModel->measurement) == 'imperial' ? 'checked' : ''}}>
+                           value="imperial" v-model="metric">
                     Imperial
                 </label>
             </div>

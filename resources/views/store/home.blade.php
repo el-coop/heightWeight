@@ -11,6 +11,25 @@
                         <p>Total Products : {{ $shop->total_product_count }}</p>
                         <p>Products imported app : {{$shop->product_count}}</p>
                     </div>
+                    <div class="box">
+                        <form method="post" action="{{ action('StoreController@updateSizeName') }}">
+                            @csrf
+                            <div class="field">
+                                <label class="label">Please tell us the name of your size option</label>
+                            </div>
+                            <div class="field has-addons is-expanded">
+                                <p class="control">
+                                    <input class="input" name="size_name" required type="text"
+                                           value="{{ $shop->size_name }}">
+                                </p>
+                                <p class="control">
+                                    <button class="button is-success">
+                                        Update
+                                    </button>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <div class="column">
                     <div class="box">
@@ -49,6 +68,12 @@
                                target="_blank">
                                 <button class="button is-dark">Add products</button>
                             </a>
+                        </div>
+                        <div class="control level-item">
+                            <button class="button is-info"
+                                    v-tooltip="'After you add a product to the collection, you can click here to refresh the table'"
+                                    @click="$refs.table.refresh()">Refresh
+                            </button>
                         </div>
                     </div>
                 </datatable>

@@ -28,21 +28,21 @@ class UpdateProductRequest extends FormRequest {
 	public function rules() {
 		$this->shop = ShopifyApp::shop();
 		$this->product = $this->shop->api()->request('GET', "/admin/products/{$this->route('productId')}.json")->body->product;
-		$this->variants = $this->product->variants;
+		$this->variants = Product::getVariants($this->product);
 
 		$rules = [
 			'measurement' => 'required|in:metric,imperial',
 			'type' => 'required|in:t-shirt,shirt,pants,dress',
 			'gender' => 'required|in:male,female',
 		];
-		foreach ($this->variants as $variant) {
-			foreach (['height', 'weight', 'bust', 'waist', 'length', 'shoulders', 'sleeve'] as $part) {
-				$rules["{$variant->title}_{$part}_min"] = 'required|numeric';
-				$rules["{$variant->title}_{$part}_max"] = [
+		foreach ($this->variants as $key => $variant) {
+			foreach (['height', 'bust', 'waist', 'length', 'shoulders', 'sleeve'] as $part) {
+				$rules["{$key}_{$part}_min"] = 'required|numeric';
+				$rules["{$key}_{$part}_max"] = [
 					'required',
 					'numeric',
-					function ($attribute, $value, $fail) use($variant, $part) {
-						if ($value < $this->input("{$variant->title}_{$part}_min")) {
+					function ($attribute, $value, $fail) use ($key, $part) {
+						if ($value < $this->input("{$key}_{$part}_min")) {
 							return $fail($attribute . ' has to larger than min attribute.');
 						}
 					},
@@ -54,10 +54,10 @@ class UpdateProductRequest extends FormRequest {
 	}
 
 	public function commit() {
-		foreach ($this->variants as $variant) {
-			foreach (['height', 'weight', 'bust', 'waist', 'length', 'shoulders', 'sleeve'] as $part) {
-				$keys[] = "{$variant->title}_{$part}_min";
-				$keys[] = "{$variant->title}_{$part}_max";
+		foreach ($this->variants as $key => $variant) {
+			foreach (['height', 'bust', 'waist', 'length', 'shoulders', 'sleeve'] as $part) {
+				$keys[] = "{$key}_{$part}_min";
+				$keys[] = "{$key}_{$part}_max";
 			}
 		}
 

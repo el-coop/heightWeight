@@ -17,9 +17,11 @@ class ProductController extends Controller {
 		} catch (\Exception $exception) {
 			return redirect()->action('StoreController@home');
 		}
+
+		$variants = Product::getVariants($product);
 		$productModel = Product::firstOrCreate(['shopify_id' => $productId, 'shop_id' => $shop->id]);
 
-		return view('store.product', compact('shop', 'product', 'productModel'));
+		return view('store.product', compact('shop', 'product', 'productModel', 'variants'));
 	}
 
 	public function updateProduct(UpdateProductRequest $request, $productid) {

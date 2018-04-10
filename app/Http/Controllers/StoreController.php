@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Store\UpdateSizeNameRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use OhMyBrew\ShopifyApp\Facades\ShopifyApp;
@@ -14,6 +15,12 @@ class StoreController extends Controller {
 		return view('store.home', compact('shop', 'products'));
 	}
 
+	public function updateSizeName(UpdateSizeNameRequest $request) {
+		$request->commit();
+
+		return back()->with('notice', 'Success');
+	}
+
 	public function products(Request $request) {
 		$shop = ShopifyApp::shop();
 		$perPage = 25;
@@ -21,23 +28,21 @@ class StoreController extends Controller {
 		$totalProducts = $shop->product_count;
 		$pageCount = $request->filled('filter') ? 1 : ceil($totalProducts / $perPage);
 		$currentPage = (int)$request->input('page');
-		$products = $shop->api()->request('GET', "/admin/products.json", [
-			'collection_id' => $shop->collection_id,
-			'limit' => $perPage,
-			'page' => $currentPage,
-			'title' => $request->input('filter', null),
-		])->body->products;
+		$products = $shop->getProducts($perPage, $currentPage, $request->input('filter', null));
 		foreach ($products as $product) {
 			$product->visible = false;
 			$percent = 0;
 			if ($productModel = Product::where('shop_id', $shop->id)->where('shopify_id', $product->id)->first()) {
 				$product->visible = $productModel->visible;
-				foreach ($product->variants as $variant) {
-					if (isset($productModel->data["{$variant->title}_height_min"])) {
-						$percent++;
+				$variants = Product::getVariants($product);
+				if ($variants->count()) {
+					foreach ($variants as $key => $variant) {
+						if (isset($productModel->data["{$key}_height_min"])) {
+							$percent++;
+						}
 					}
+					$percent = $percent / count($variants) * 100;
 				}
-				$percent = $percent / count($product->variants) * 100;
 			}
 
 			$product->percentCompleted = $percent;

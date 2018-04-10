@@ -24,14 +24,8 @@ class CreateCollection {
 	 * @return void
 	 */
 	public function handle(ShopCreated $event) {
-		if (!$event->shop->collection_id) {
-			$response = $event->shop->api()->request('POST', '/admin/custom_collections.json', [
-				"custom_collection" => [
-					"title" => "Height & Weight",
-				],
-			]);
-			$event->shop->collection_id = $response->body->custom_collection->id;
-			$event->shop->save();
+		if (!$event->shop->getProducts()) {
+			$event->shop->createCollection();
 		}
 	}
 }

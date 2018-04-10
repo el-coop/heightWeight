@@ -12,7 +12,8 @@ class AddDataToShopsTable extends Migration {
 	 */
 	public function up() {
 		Schema::table('shops', function (Blueprint $table) {
-			$table->string('collection_id')->nullable()->after('shopify_token');
+			$table->string('size_name')->default('Size')->after('shopify_token');
+			$table->string('collection_id')->nullable()->after('size_name');
 			$table->timestamp('trial_end')->nullable()->after('collection_id');
 		});
 	}

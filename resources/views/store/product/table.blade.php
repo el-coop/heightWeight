@@ -2,42 +2,60 @@
     <thead>
     <tr>
         <th>Variant:</th>
-        @foreach($product->variants as $variant)
-            <th class="has-text-centered">{{ $variant->title }}</th>
-        @endforeach
+        @forelse($variants as $key => $products)
+            <th class="has-text-centered">{{ $key }}</th>
+        @empty
+            <th class="has-text-centered">We couldn't find any option with the name "{{ $shop->size_name }}" on this
+                                          product
+            </th>
+        @endforelse
     </tr>
     </thead>
     <tbody>
-    @foreach(['height','weight','bust','waist','length','shoulders','sleeve'] as $part)
+    @foreach(['height','bust','waist','length','shoulders','sleeve'] as $part)
         <tr>
             <td>
                 {{ ucfirst($part) }}
             </td>
-            @foreach($product->variants as $variant)
+            @foreach($variants as $key => $products)
                 <td>
-                    <div class="field-body">
-                        <div class="field">
-                            <p class="control">
-                                <input class="input{{ $errors->has("{$variant->title}_{$part}_min") ? ' is-danger' : ''}}"
-                                       name="{{ $variant->title }}_{{ $part }}_min"
-                                       value="{{ old("{$variant->title}_{$part}_min", $productModel->data[$variant->title . '_' . $part . '_min'] ?? '') }}">
-                            </p>
-                            @if ($errors->has("{$variant->title}_{$part}_min"))
-                                <p class="help is-danger">{{ $errors->first("{$variant->title}_{$part}_min") }}</p>
-                            @endif
+                    <min-max-fields inline-template
+                                    :metric="metric">
+                        <div>
+                            <a class="button is-warning is-block" style="margin-bottom: 5px" v-if="warning" href="#" v-tooltip="'Warning! The difference between min and max values is big.'">
+                                WARNING
+                            </a>
+                            <div class="field-body">
+                                <div class="field">
+                                    <metric-imperial-field
+                                            ref="min"
+                                            :metric="metric"
+                                            :has-error="{{ $errors->has("{$key}_{$part}_min") ? 'true' : 'false'}}"
+                                            name="{{ $key }}_{{ $part }}_min"
+                                            start-value="{{ old("{$key}_{$part}_min", $productModel->data[$key . '_' . $part . '_min'] ?? '') }}"
+                                            placeholder="Minimum">
+                                    </metric-imperial-field>
+                                    @if ($errors->has("{$key}_{$part}_min"))
+                                        <p class="help is-danger">{{ $errors->first("{$key}_{$part}_min") }}</p>
+                                    @endif
+                                </div>
+                                <label class="label">-&nbsp;&nbsp;</label>
+                                <div class="field">
+                                    <metric-imperial-field
+                                            ref="max"
+                                            :metric="metric"
+                                            :has-error="{{ $errors->has("{$key}_{$part}_max") ? 'true' : 'false'}}"
+                                            name="{{ $key }}_{{ $part }}_max"
+                                            start-value="{{ old("{$key}_{$part}_max", $productModel->data[$key . '_' . $part . '_max'] ?? '') }}"
+                                            placeholder="Maximum">
+                                    </metric-imperial-field>
+                                    @if ($errors->has("{$key}_{$part}_max"))
+                                        <p class="help is-danger">{{ $errors->first("{$key}_{$part}_max") }}</p>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
-                        <label class="label">-&nbsp;&nbsp;</label>
-                        <div class="field">
-                            <p class="control">
-                                <input class="input{{ $errors->has("{$variant->title}_{$part}_max") ? ' is-danger' : ''}}"
-                                       name="{{ $variant->title }}_{{ $part }}_max"
-                                       value="{{ old("{$variant->title}_{$part}_max", $productModel->data[$variant->title . '_' . $part . '_max'] ?? '') }}">
-                            </p>
-                            @if ($errors->has("{$variant->title}_{$part}_max"))
-                                <p class="help is-danger">{{ $errors->first("{$variant->title}_{$part}_max") }}</p>
-                            @endif
-                        </div>
-                    </div>
+                    </min-max-fields>
                 </td>
             @endforeach
         </tr>
