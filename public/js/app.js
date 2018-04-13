@@ -2463,7 +2463,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(57);
-module.exports = __webpack_require__(172);
+module.exports = __webpack_require__(174);
 
 
 /***/ }),
@@ -31817,8 +31817,8 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_2_vue_toasted___default.a);
 Vue.use(__WEBPACK_IMPORTED_MODULE_3_v_tooltip__["a" /* default */]);
 
 __webpack_require__(93);
-__webpack_require__(163);
-__webpack_require__(164);
+__webpack_require__(165);
+__webpack_require__(166);
 
 /***/ }),
 /* 84 */
@@ -38980,7 +38980,7 @@ if (GlobalVue) {
 
 Vue.component('Datatable', __webpack_require__(94));
 Vue.component('MetricImperialField', __webpack_require__(160));
-Vue.component('MinMaxFields', __webpack_require__(176));
+Vue.component('MinMaxFields', __webpack_require__(163));
 
 /***/ }),
 /* 94 */
@@ -43979,24 +43979,109 @@ if (false) {
 /* 163 */
 /***/ (function(module, exports, __webpack_require__) {
 
-Vue.component('product-actions', __webpack_require__(55));
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(164)
+/* template */
+var __vue_template__ = null
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\global\\MinMaxFields.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-37f4663d", Component.options)
+  } else {
+    hotAPI.reload("data-v-37f4663d", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
 
 /***/ }),
 /* 164 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-Vue.component('store-home-page', __webpack_require__(165));
-Vue.component('store-product-page', __webpack_require__(167));
-Vue.component('client-button', __webpack_require__(169));
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	name: "min-max-fields",
+
+	props: {
+		metric: {
+			type: String,
+			required: true
+		}
+	},
+
+	data: function data() {
+		return {
+			isMounted: false
+		};
+	},
+	mounted: function mounted() {
+		this.isMounted = true;
+	},
+
+
+	computed: {
+		warning: function warning() {
+			if (!this.isMounted) {
+				return false;
+			}
+
+			return this.$refs.max.value - this.$refs.min.value > 15;
+		}
+	}
+});
 
 /***/ }),
 /* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
+Vue.component('product-actions', __webpack_require__(55));
+
+/***/ }),
+/* 166 */
+/***/ (function(module, exports, __webpack_require__) {
+
+Vue.component('store-home-page', __webpack_require__(167));
+Vue.component('store-product-page', __webpack_require__(169));
+Vue.component('client-button', __webpack_require__(171));
+
+/***/ }),
+/* 167 */
+/***/ (function(module, exports, __webpack_require__) {
+
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(166)
+var __vue_script__ = __webpack_require__(168)
 /* template */
 var __vue_template__ = null
 /* template functional */
@@ -44037,7 +44122,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 166 */
+/* 168 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -44131,13 +44216,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 167 */
+/* 169 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(168)
+var __vue_script__ = __webpack_require__(170)
 /* template */
 var __vue_template__ = null
 /* template functional */
@@ -44178,7 +44263,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 168 */
+/* 170 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -44202,15 +44287,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 169 */
+/* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(170)
+var __vue_script__ = __webpack_require__(172)
 /* template */
-var __vue_template__ = __webpack_require__(171)
+var __vue_template__ = __webpack_require__(173)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -44249,7 +44334,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 170 */
+/* 172 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -44269,13 +44354,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 	methods: {
 		openWindow: function openWindow() {
-			window.open("https://heightweight.test" + '/client/' + this.productId, '_blank', 'status=1,toolbar=0,menubar=0,resizeable=0,scrollbars=0,location=0,dependent=1,width=400,height=200');
+			window.open(Object({"MIX_PUSHER_APP_CLUSTER":"mt1","MIX_PUSHER_APP_KEY":"","NODE_ENV":"development"}).MIX_APP_URL + '/client/' + this.productId, '_blank', 'status=1,toolbar=0,menubar=0,resizeable=0,scrollbars=0,location=0,dependent=1,width=400,height=200');
 		}
 	}
 });
 
 /***/ }),
-/* 171 */
+/* 173 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -44299,98 +44384,10 @@ if (false) {
 }
 
 /***/ }),
-/* 172 */
+/* 174 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 173 */,
-/* 174 */,
-/* 175 */,
-/* 176 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(2)
-/* script */
-var __vue_script__ = __webpack_require__(177)
-/* template */
-var __vue_template__ = null
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\global\\MinMaxFields.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-37f4663d", Component.options)
-  } else {
-    hotAPI.reload("data-v-37f4663d", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 177 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-	name: "min-max-fields",
-
-	props: {
-		metric: {
-			type: String,
-			required: true
-		}
-	},
-
-	data: function data() {
-		return {
-			isMounted: false
-		};
-	},
-	mounted: function mounted() {
-		this.isMounted = true;
-	},
-
-
-	computed: {
-		warning: function warning() {
-			if (!this.isMounted) {
-				return false;
-			}
-
-			return this.$refs.max.value - this.$refs.min.value > 15;
-		}
-	}
-});
 
 /***/ })
 /******/ ]);
