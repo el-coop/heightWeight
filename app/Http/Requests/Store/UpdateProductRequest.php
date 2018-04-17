@@ -10,7 +10,7 @@ class UpdateProductRequest extends FormRequest {
 	protected $variants;
 	protected $shop;
 	protected $product;
-
+	
 	/**
 	 * Determine if the user is authorized to make this request.
 	 *
@@ -19,7 +19,7 @@ class UpdateProductRequest extends FormRequest {
 	public function authorize() {
 		return true;
 	}
-
+	
 	/**
 	 * Get the validation rules that apply to the request.
 	 *
@@ -29,38 +29,37 @@ class UpdateProductRequest extends FormRequest {
 		$this->shop = ShopifyApp::shop();
 		$this->product = $this->shop->api()->request('GET', "/admin/products/{$this->route('productId')}.json")->body->product;
 		$this->variants = Product::getVariants($this->product);
-
+		
 		$rules = [
 			'measurement' => 'required|in:metric,imperial',
 			'type' => 'required|in:t-shirt,shirt,pants,dress',
 			'gender' => 'required|in:male,female',
 		];
 		foreach ($this->variants as $key => $variant) {
+			$rules[$key] = 'required|array';
 			foreach (['height', 'bust', 'waist', 'length', 'shoulders', 'sleeve'] as $part) {
-				$rules["{$key}_{$part}_min"] = 'required|numeric';
-				$rules["{$key}_{$part}_max"] = [
+				$rules["{$key}.{$part}"] = 'required|array';
+				$rules["{$key}.{$part}.min"] = 'required|numeric';
+				$rules["{$key}.{$part}.max"] = [
 					'required',
 					'numeric',
 					function ($attribute, $value, $fail) use ($key, $part) {
-						if ($value < $this->input("{$key}_{$part}_min")) {
-							return $fail($attribute . ' has to larger than min attribute.');
+						if ($value < $this->input("{$key}.{$part}.min")) {
+							return $fail($attribute . ' has to be larger than min attribute.');
 						}
 					},
 				];
 			}
 		}
-
+		
 		return $rules;
 	}
-
+	
 	public function commit() {
 		foreach ($this->variants as $key => $variant) {
-			foreach (['height', 'bust', 'waist', 'length', 'shoulders', 'sleeve'] as $part) {
-				$keys[] = "{$key}_{$part}_min";
-				$keys[] = "{$key}_{$part}_max";
-			}
+			$keys[] = $key;
 		}
-
+		
 		$product = Product::where('shop_id', $this->shop->id)->where('shopify_id', $this->route('productId'))->first();
 		$product->measurement = $this->input('measurement');
 		$product->gender = $this->input('gender');

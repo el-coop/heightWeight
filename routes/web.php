@@ -14,9 +14,9 @@
 Route::group(['middleware' => ['auth.shop', 'billable']], function () {
 	Route::get('/', 'StoreController@home')->name('home');
 	\
-
+	
 	Route::group(['prefix' => 'store'], function () {
-
+			
 			Route::group(['prefix' => 'products'], function () {
 				Route::get('/', 'StoreController@products');
 				Route::get('/{productId}', 'ProductController@productForm');
@@ -25,7 +25,7 @@ Route::group(['middleware' => ['auth.shop', 'billable']], function () {
 				Route::put('/visible/{productId}', 'ProductController@toggleProductVisibility');
 				Route::put('/copy/{product}', 'ProductController@copyProduct');
 			});
-
+			
 		});
 });
 
@@ -33,6 +33,7 @@ Route::get('/billing/process', 'InstallController@ProcessBilling')->name('billin
 
 Route::group(['prefix' => 'client'], function () {
 	Route::get('/check/{productId}', 'ClientSideController@checkProduct');
-
+	
 	Route::get('/{product}', 'ClientSideController@product');
+	Route::get('/calculator/{product}', 'ClientSideController@calculator');
 });

@@ -13,9 +13,9 @@
 
 		methods: {
 			openWindow() {
-				window.open(process.env.MIX_APP_URL + '/client/' + this.productId,
+				window.open('https://heightweight.test/client/calculator/' + this.productId,
 					'_blank',
-					'status=1,toolbar=0,menubar=0,resizeable=0,scrollbars=0,location=0,dependent=1,width=400,height=200');
+					'status=1,toolbar=0,menubar=0,resizeable=0,scrollbars=0,location=0,dependent=1,width=500,height=400');
 			}
 		}
 	}

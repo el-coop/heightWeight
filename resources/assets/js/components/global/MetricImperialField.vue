@@ -53,29 +53,56 @@
 			}
 		},
 
+        watch:{
+			value(val){
+				this.$emit('input',val);
+            }
+        },
+
 		computed: {
 			feetDisplay: {
 				get() {
-					return this.inches.toString().split(".")[0];
+					if (Number.isNaN(this.inches) || this.inches == '') {
+						return '';
+					}
+					return Math.floor(this.inches / 12);
 				},
 				set(val) {
-					this.inches = parseFloat(val + '.' + this.inchDisplay);
+					if (Number.isNaN(val)) {
+						this.inches = this.inchDisplay;
+						return;
+					}
+					this.inches = (parseFloat(val) * 12) + this.inchDisplay;
 				}
 			},
 			inchDisplay: {
 				get() {
-					return this.inches.toString().split(".")[1];
+					if (Number.isNaN(this.inches) || this.inches == '') {
+						return '';
+					}
+					return Math.floor(this.inches % 12);
 				},
 				set(val) {
-					this.inches = parseFloat(this.feetDisplay + '.' + val);
+					if (Number.isNaN(val) || val == '') {
+						this.inches = this.feetDisplay * 12;
+						return
+					}
+					this.inches = this.feetDisplay * 12 + parseFloat(val);
 				}
 			},
 			inches: {
 				get() {
-					return this.value * 0.032808;
+					if (Number.isNaN(this.value) || this.value == '') {
+						return '';
+					}
+					return this.value * 0.393701;
 				},
 				set(val) {
-					this.value = val / 0.032808;
+					if (Number.isNaN(val)) {
+						this.value = 0;
+						return;
+					}
+					this.value = val / 0.393701;
 				}
 			}
 		}

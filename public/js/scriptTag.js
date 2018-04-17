@@ -60,47 +60,47 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 175);
+/******/ 	return __webpack_require__(__webpack_require__.s = 199);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 175:
+/***/ 199:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(176);
+module.exports = __webpack_require__(200);
 
 
 /***/ }),
 
-/***/ 176:
+/***/ 200:
 /***/ (function(module, exports) {
 
 var checkoutForm = document.querySelector('.product-form.product-form-product-template');
 if (checkoutForm) {
 
-    var xhttp = new XMLHttpRequest();
+	var xhttp = new XMLHttpRequest();
 
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            var response = JSON.parse(this.responseText);
-            if (response.visible) {
-                buildElement(checkoutForm);
-            }
-        }
-    };
-    xhttp.open("GET", 'https://app.seezerapps.com/client/check/' + meta.product.id + '\?t=' + Date.now(), false);
-    xhttp.send();
+	xhttp.onreadystatechange = function () {
+		if (this.readyState == 4 && this.status == 200) {
+			var response = JSON.parse(this.responseText);
+			if (response.visible) {
+				buildElement(checkoutForm);
+			}
+		}
+	};
+	xhttp.open("GET", 'https://heightweight.test/client/check/' + meta.product.id + '\?t=' + Date.now(), false);
+	xhttp.send();
 }
 
 function buildElement(checkoutForm) {
-    var iframe = document.createElement('iframe');
-    iframe.src = 'https://app.seezerapps.com/client/' + meta.product.id;
-    iframe.style.height = '50px';
-    iframe.style.width = '100%';
-    iframe.style.border = 'none';
-    iframe.scrolling = 'no';
-    checkoutForm.insertAdjacentElement('afterend', iframe);
+	var iframe = document.createElement('iframe');
+	iframe.src = 'https://heightweight.test/client/' + meta.product.id;
+	iframe.style.height = '50px';
+	iframe.style.width = '100%';
+	iframe.style.border = 'none';
+	iframe.scrolling = 'no';
+	checkoutForm.insertAdjacentElement('afterend', iframe);
 }
 
 /***/ })
