@@ -45086,7 +45086,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 	methods: {
 		openWindow: function openWindow() {
-			window.open('https://heightweight.test/client/calculator/' + this.productId, '_blank', 'status=1,toolbar=0,menubar=0,resizeable=0,scrollbars=0,location=0,dependent=1,width=500,height=400');
+			window.open('https://app.seezerapps.com/client/calculator/' + this.productId, '_blank', 'status=1,toolbar=0,menubar=0,resizeable=0,scrollbars=0,location=0,dependent=1,width=500,height=400');
 		}
 	}
 });

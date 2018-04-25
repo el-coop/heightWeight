@@ -13,7 +13,7 @@
 
 		methods: {
 			openWindow() {
-				window.open('https://heightweight.test/client/calculator/' + this.productId,
+				window.open('https://app.seezerapps.com/client/calculator/' + this.productId,
 					'_blank',
 					'status=1,toolbar=0,menubar=0,resizeable=0,scrollbars=0,location=0,dependent=1,width=500,height=400');
 			}
