@@ -27,7 +27,7 @@
 		data() {
 			return {
 				metric: 'metric',
-				step: 2
+				step: 0
 			}
 		},
 
