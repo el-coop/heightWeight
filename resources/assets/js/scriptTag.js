@@ -11,7 +11,7 @@ if (checkoutForm) {
 			}
 		}
 	};
-	xhttp.open("GET", 'https://heightweight.test/client/check/' + meta.product.id + '\?t=' + Date.now(), false);
+	xhttp.open("GET", 'https://app.seezerapps.com/client/check/' + meta.product.id + '\?t=' + Date.now(), false);
 	xhttp.send();
 
 
@@ -19,7 +19,7 @@ if (checkoutForm) {
 
 function buildElement(checkoutForm) {
 	let iframe = document.createElement('iframe');
-	iframe.src = 'https://heightweight.test/client/' + meta.product.id;
+	iframe.src = 'https://app.seezerapps.com/client/' + meta.product.id;
 	iframe.style.height = '50px';
 	iframe.style.width = '100%';
 	iframe.style.border = 'none';
