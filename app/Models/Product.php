@@ -28,4 +28,8 @@ class Product extends Model {
 
 		return $variants;
 	}
+	
+	static public function productAttributes($product){
+		return ['bust','waist','length','shoulders','sleeve','height','weight'];
+	}
 }

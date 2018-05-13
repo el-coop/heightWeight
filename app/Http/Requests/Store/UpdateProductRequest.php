@@ -36,15 +36,15 @@ class UpdateProductRequest extends FormRequest {
 			'gender' => 'required|in:male,female',
 		];
 		foreach ($this->variants as $key => $variant) {
-			$rules[$key] = 'required|array';
-			foreach (['height', 'bust', 'waist', 'length', 'shoulders', 'sleeve'] as $part) {
+			$rules[$key] = 'array';
+			foreach (['bust', 'waist', 'length', 'shoulders', 'sleeve', 'height', 'weight'] as $part) {
 				$rules["{$key}.{$part}"] = 'required|array';
-				$rules["{$key}.{$part}.min"] = 'required|numeric';
+				$rules["{$key}.{$part}.min"] = 'numeric|nullable';
 				$rules["{$key}.{$part}.max"] = [
-					'required',
 					'numeric',
+					'nullable',
 					function ($attribute, $value, $fail) use ($key, $part) {
-						if ($value < $this->input("{$key}.{$part}.min")) {
+						if ($this->input("{$key}.{$part}.min") && $value < $this->input("{$key}.{$part}.min")) {
 							return $fail($attribute . ' has to be larger than min attribute.');
 						}
 					},

@@ -7,10 +7,6 @@ use Illuminate\Http\Request;
 
 class ClientSideController extends Controller {
 	public function product(Product $product) {
-		return view('client.button', compact('product'));
-	}
-	
-	public function calculator(Product $product) {
 		return view('client.calculator', compact('product'));
 	}
 	

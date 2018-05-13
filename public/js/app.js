@@ -44767,12 +44767,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		metric: {
 			type: String,
 			required: true
+		},
+		initMin: {
+			required: false,
+			default: 0
+		},
+
+		initMax: {
+			required: false,
+			default: 0
 		}
 	},
 
 	data: function data() {
 		return {
-			isMounted: false
+			isMounted: false,
+			min: this.initMin,
+			max: this.initMax
 		};
 	},
 	mounted: function mounted() {
@@ -44785,8 +44796,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			if (!this.isMounted) {
 				return false;
 			}
-
-			return this.$refs.max.value - this.$refs.min.value > 15;
+			if (this.$refs.max) {
+				return this.$refs.max.value - this.$refs.min.value > 15;
+			} else {
+				return this.max - this.min > 15;
+			}
 		}
 	}
 });
@@ -45201,7 +45215,7 @@ exports = module.exports = __webpack_require__(11)(false);
 
 
 // module
-exports.push([module.i, "\n.calculator[data-v-64f50534] {\n  padding-top: 10px;\n  height: 100vh;\n  width: 100vw;\n  background-color: whitesmoke;\n}\n", ""]);
+exports.push([module.i, "\n.calculator[data-v-64f50534] {\n  padding-top: 10px;\n  height: 100vh;\n  width: 100vw;\n}\n", ""]);
 
 // exports
 

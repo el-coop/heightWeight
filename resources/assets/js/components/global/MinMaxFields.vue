@@ -6,17 +6,28 @@
 			metric: {
 				type: String,
 				required: true
+			},
+			initMin: {
+				required: false,
+				default: 0
+			}
+			,
+			initMax: {
+				required: false,
+				default: 0
 			}
 		},
 
-        data(){
-		    return {
-		    	isMounted: false
-            }
-        },
+		data() {
+			return {
+				isMounted: false,
+				min: this.initMin,
+				max: this.initMax
+			}
+		},
 
 		mounted() {
-            this.isMounted = true;
+			this.isMounted = true;
 		},
 
 		computed: {
@@ -24,8 +35,11 @@
 				if (!this.isMounted) {
 					return false;
 				}
-
-				return (this.$refs.max.value - this.$refs.min.value) > 15;
+				if (this.$refs.max) {
+					return (this.$refs.max.value - this.$refs.min.value) > 15;
+				} else {
+					return (this.max - this.min) > 15;
+				}
 			}
 		}
 	}

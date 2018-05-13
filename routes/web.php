@@ -35,5 +35,4 @@ Route::group(['prefix' => 'client'], function () {
 	Route::get('/check/{productId}', 'ClientSideController@checkProduct');
 	
 	Route::get('/{product}', 'ClientSideController@product');
-	Route::get('/calculator/{product}', 'ClientSideController@calculator');
 });

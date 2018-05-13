@@ -12298,3 +12298,7 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
   margin-right: 1rem;
 }
 
+body.frame {
+  background-color: transparent;
+}
+

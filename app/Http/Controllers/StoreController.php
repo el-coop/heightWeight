@@ -8,23 +8,23 @@ use Illuminate\Http\Request;
 use OhMyBrew\ShopifyApp\Facades\ShopifyApp;
 
 class StoreController extends Controller {
-
+	
 	public function home() {
 		$shop = ShopifyApp::shop();
-
+		
 		return view('store.home', compact('shop', 'products'));
 	}
-
+	
 	public function updateSizeName(UpdateSizeNameRequest $request) {
 		$request->commit();
-
+		
 		return back()->with('notice', 'Success');
 	}
-
+	
 	public function products(Request $request) {
 		$shop = ShopifyApp::shop();
 		$perPage = 25;
-
+		
 		$totalProducts = $shop->product_count;
 		$pageCount = $request->filled('filter') ? 1 : ceil($totalProducts / $perPage);
 		$currentPage = (int)$request->input('page');
@@ -35,19 +35,25 @@ class StoreController extends Controller {
 			if ($productModel = Product::where('shop_id', $shop->id)->where('shopify_id', $product->id)->first()) {
 				$product->visible = $productModel->visible;
 				$variants = Product::getVariants($product);
+				$attributes = Product::productAttributes($product);
 				if ($variants->count()) {
 					foreach ($variants as $key => $variant) {
-						if (isset($productModel->data["{$key}_height_min"])) {
-							$percent++;
+						foreach ($attributes as $attribute) {
+							if (isset($productModel->data[$key][$attribute]['min'])) {
+								$percent++;
+							}
+							if (isset($productModel->data[$key][$attribute]['max'])) {
+								$percent++;
+							}
 						}
 					}
-					$percent = $percent / count($variants) * 100;
+					$percent = round($percent / (2 * count($variants) * count($attributes)) * 100);
 				}
 			}
-
+			
 			$product->percentCompleted = $percent;
 		}
-
+		
 		return response()->json([
 			'current_page' => $currentPage,
 			'data' => $products,
@@ -71,5 +77,5 @@ class StoreController extends Controller {
 			'total' => $totalProducts,
 		]);
 	}
-
+	
 }

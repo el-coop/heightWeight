@@ -48,7 +48,6 @@
         padding-top: 10px;
         height: 100vh;
         width: 100vw;
-        background-color: hsl(0, 0%, 96%);
     }
 </style>
 
