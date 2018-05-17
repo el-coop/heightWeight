@@ -45240,6 +45240,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -45261,7 +45262,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	data: function data() {
 		return {
 			metric: 'metric',
-			step: 0
+			step: 0,
+			height: 0
 		};
 	},
 
@@ -45272,6 +45274,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		},
 		resetSteps: function resetSteps() {
 			this.step = 0;
+		},
+		changeHeight: function changeHeight(value) {
+			this.height = value;
+		}
+	},
+
+	computed: {
+		result: function result() {
+			return this.height * 0.366;
 		}
 	}
 });
@@ -45430,6 +45441,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	computed: {
 		refresh: function refresh() {
 			return __WEBPACK_IMPORTED_MODULE_1__fortawesome_fontawesome_free_solid_faSync___default.a;
+		}
+	},
+
+	watch: {
+		height: function height() {
+			this.$emit('height', this.height);
 		}
 	}
 });
@@ -47915,13 +47932,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		product: {
 			type: Object,
 			required: true
+		},
+		result: {
+			type: Number,
+			required: true
 		}
 	},
 
 	data: function data() {
-		return {};
+		return {
+			displayedResult: ''
+		};
 	},
 
+
+	methods: {
+		displayResult: function displayResult(value) {
+			this.displayedResult = value;
+		}
+	},
 
 	computed: {
 		refresh: function refresh() {
@@ -48058,6 +48087,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		product: {
 			required: true,
 			type: Object
+		},
+		result: {
+			required: true,
+			type: Number
 		}
 	},
 
@@ -48078,11 +48111,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			});
 			return _.min(values);
 		},
-		findCategorySize: function findCategorySize(category, measurment) {
+		findCategorySize: function findCategorySize(category, measurement) {
 			var result = '';
 
 			for (var size in this.product.data) {
-				if (measurment <= this.product.data[size][category].max && measurment >= this.product.data[size][category].min) {
+				var min = 0;
+				var max = 10000000;
+				if (this.product.data[size][category].min) {
+					min = this.product.data[size][category].min;
+				}
+				if (this.product.data[size][category].max) {
+					max = this.product.data[size][category].max;
+				}
+				if (measurement <= max && measurement >= min) {
 					result = size;
 				}
 			}
@@ -48112,6 +48153,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		}
 	},
 
+	mounted: function mounted() {
+		this.$emit('calculated', this.findCategorySize('height', this.result));
+	},
+
+
 	computed: {
 		measuredCategory: function measuredCategory() {
 			var sleeveCategory = this.findCategorySize('sleeve', this.sleeve);
@@ -48119,7 +48165,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var lengthCategory = this.findCategorySize('length', this.length);
 			var waistCategory = this.findCategorySize('waist', this.waist);
 			return this.findMaxCategory(sleeveCategory, bustCategory, lengthCategory, waistCategory);
-			;
 		}
 	}
 
@@ -48317,7 +48362,18 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "columns is-mobile" }, [
-      _vm._m(1),
+      _c("div", { staticClass: "column is-two-fifths" }, [
+        _c("div", { staticClass: "title is-size-5" }, [
+          _vm._v("\n                Your recommended size is:\n            ")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "is-flex centered" }, [
+          _c("span", {
+            staticClass: "is-size-2",
+            domProps: { innerHTML: _vm._s(_vm.displayedResult) }
+          })
+        ])
+      ]),
       _vm._v(" "),
       _c(
         "div",
@@ -48327,7 +48383,10 @@ var render = function() {
             _vm._v("\n                Product sizes:\n            ")
           ]),
           _vm._v(" "),
-          _c("shirt-measurements", { attrs: { product: _vm.product } })
+          _c("shirt-measurements", {
+            attrs: { product: _vm.product, result: _vm.result },
+            on: { calculated: _vm.displayResult }
+          })
         ],
         1
       )
@@ -48341,20 +48400,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "column is-four-fifths" }, [
       _c("div", { staticClass: "subtitle is-size-6" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "column is-two-fifths" }, [
-      _c("div", { staticClass: "title is-size-5" }, [
-        _vm._v("\n                Your recommended size is:\n            ")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "is-flex centered" }, [
-        _c("span", { staticClass: "is-size-2" }, [_vm._v("M")])
-      ])
     ])
   }
 ]
@@ -48382,7 +48427,11 @@ var render = function() {
       _vm.step == 0
         ? _c("measurements", {
             attrs: { "start-metric": _vm.metric },
-            on: { next: _vm.incStep, reset: _vm.resetSteps }
+            on: {
+              next: _vm.incStep,
+              reset: _vm.resetSteps,
+              height: _vm.changeHeight
+            }
           })
         : _vm._e(),
       _vm._v(" "),
@@ -48395,7 +48444,7 @@ var render = function() {
       _vm._v(" "),
       _vm.step == 2
         ? _c("calculator-result", {
-            attrs: { product: _vm.product },
+            attrs: { product: _vm.product, result: _vm.result },
             on: { reset: _vm.resetSteps }
           })
         : _vm._e()

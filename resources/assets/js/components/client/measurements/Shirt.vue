@@ -29,6 +29,10 @@
 			product: {
 				required: true,
 				type: Object
+			},
+			result: {
+				required: true,
+				type: Number
 			}
 		},
 
@@ -49,11 +53,19 @@
 				return _.min(values);
 			},
 
-			findCategorySize(category, measurment) {
+			findCategorySize(category, measurement) {
 				let result = '';
 
 				for (let size in this.product.data) {
-					if (measurment <= this.product.data[size][category].max && measurment >= this.product.data[size][category].min) {
+					let min = 0;
+					let max = 10000000;
+					if (this.product.data[size][category].min) {
+						min = this.product.data[size][category].min;
+					}
+					if (this.product.data[size][category].max) {
+						max = this.product.data[size][category].max;
+					}
+					if (measurement <= max && measurement >= min) {
 						result = size;
 					}
 				}
@@ -77,6 +89,10 @@
 			}
 		},
 
+		mounted() {
+			this.$emit('calculated', this.findCategorySize('height', this.result));
+		},
+
 		computed: {
 			measuredCategory() {
 				let sleeveCategory = this.findCategorySize('sleeve', this.sleeve);
@@ -84,7 +100,6 @@
 				let lengthCategory = this.findCategorySize('length', this.length);
 				let waistCategory = this.findCategorySize('waist', this.waist);
 				return this.findMaxCategory(sleeveCategory, bustCategory, lengthCategory, waistCategory);
-				;
 			}
 		},
 

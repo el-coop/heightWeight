@@ -18,14 +18,14 @@
                     Your recommended size is:
                 </div>
                 <div class="is-flex centered">
-                    <span class="is-size-2">M</span>
+                    <span class="is-size-2" v-html="displayedResult"></span>
                 </div>
             </div>
             <div class="column bordered-left">
                 <div class="title is-size-5">
                     Product sizes:
                 </div>
-                <shirt-measurements :product="product">
+                <shirt-measurements :product="product" :result="result" @calculated="displayResult">
 
                 </shirt-measurements>
             </div>
@@ -50,11 +50,23 @@
 			product: {
 				type: Object,
 				required: true
+			},
+			result: {
+				type: Number,
+				required: true
 			}
 		},
 
 		data() {
-			return {}
+			return {
+				displayedResult: ''
+			}
+		},
+
+		methods: {
+			displayResult(value) {
+				this.displayedResult = value;
+			}
 		},
 
 		computed: {

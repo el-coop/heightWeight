@@ -12,7 +12,7 @@ if (checkoutForm) {
 			}
 		}
 	};
-	xhttp.open("GET", 'https://app.seezerapps.com/client/check/' + meta.product.id + '\?t=' + Date.now(), false);
+	xhttp.open("GET", 'https://heightweight.test/client/check/' + meta.product.id + '\?t=' + Date.now(), false);
 	xhttp.send();
 
 
@@ -37,7 +37,7 @@ function buildElements(checkoutForm) {
 	openButton.innerText = 'Calculate weight and height';
 	let iframe = document.createElement('iframe');
 	iframe.id = 'hw-frame';
-	iframe.src = 'https://app.seezerapps.com/client/' + meta.product.id;
+	iframe.src = 'https://heightweight.test/client/' + meta.product.id;
 	iframe.style.border = 'none';
 	iframe.scrolling = 'no';
 	iframe.allowtransparency = "true";

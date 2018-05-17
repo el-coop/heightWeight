@@ -96,5 +96,11 @@
 				return faSync;
 			},
 		},
+
+		watch: {
+			height() {
+				this.$emit('height', this.height);
+			}
+		}
 	}
 </script>

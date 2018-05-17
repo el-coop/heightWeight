@@ -1,8 +1,9 @@
 <template>
     <div class="section calculator">
-        <measurements :start-metric="metric" v-if="step == 0" @next="incStep" @reset="resetSteps"></measurements>
+        <measurements :start-metric="metric" v-if="step == 0" @next="incStep" @reset="resetSteps"
+                      @height="changeHeight"></measurements>
         <body-type v-if="step == 1" :product-gender="product.gender" @next="incStep" @reset="resetSteps"></body-type>
-        <calculator-result v-if="step == 2" :product="product" @reset="resetSteps"></calculator-result>
+        <calculator-result v-if="step == 2" :product="product" :result="result" @reset="resetSteps"></calculator-result>
     </div>
 </template>
 
@@ -27,7 +28,8 @@
 		data() {
 			return {
 				metric: 'metric',
-				step: 0
+				step: 0,
+				height: 0,
 			}
 		},
 
@@ -38,6 +40,17 @@
 
 			resetSteps() {
 				this.step = 0;
+			},
+
+			changeHeight(value) {
+				this.height = value;
+			},
+
+		},
+
+		computed: {
+			result() {
+				return this.height * 0.366;
 			}
 		}
 	}
