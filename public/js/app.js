@@ -48154,7 +48154,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	},
 
 	mounted: function mounted() {
-		this.$emit('calculated', this.findCategorySize('height', this.result));
+		this.$emit('calculated', this.findCategorySize('length', this.result));
 	},
 
 
