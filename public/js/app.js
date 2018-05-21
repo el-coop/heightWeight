@@ -45282,7 +45282,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 	computed: {
 		result: function result() {
-			return this.height * 0.366;
+			return Math.ceil(this.height * 0.366);
 		}
 	}
 });

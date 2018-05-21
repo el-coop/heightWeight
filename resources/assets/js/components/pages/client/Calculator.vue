@@ -50,7 +50,7 @@
 
 		computed: {
 			result() {
-				return this.height * 0.366;
+				return Math.ceil(this.height * 0.366);
 			}
 		}
 	}
