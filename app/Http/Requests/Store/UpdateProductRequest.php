@@ -42,12 +42,12 @@ class UpdateProductRequest extends FormRequest {
 				$rules["{$key}.{$part}.min"] = [
 					'numeric',
 					'nullable',
-					($part == 'height' || $part == 'bust') ? 'required' : '',
+					($part == 'length' || $part == 'bust') ? 'required' : '',
 				];
 				$rules["{$key}.{$part}.max"] = [
 					'numeric',
 					'nullable',
-					($part == 'height' || $part == 'bust') ? 'required' : '',
+					($part == 'length' || $part == 'bust') ? 'required' : '',
 					function ($attribute, $value, $fail) use ($key, $part) {
 						if ($this->input("{$key}.{$part}.min") && $value < $this->input("{$key}.{$part}.min")) {
 							return $fail($attribute . ' has to be larger than min attribute.');

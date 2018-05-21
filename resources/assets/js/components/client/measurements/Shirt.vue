@@ -90,7 +90,7 @@
 		},
 
 		mounted() {
-			this.$emit('calculated', this.findCategorySize('height', this.result));
+			this.$emit('calculated', this.findCategorySize('length', this.result));
 		},
 
 		computed: {
