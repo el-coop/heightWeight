@@ -12,7 +12,8 @@ if (checkoutForm) {
 			}
 		}
 	};
-	xhttp.open("GET", 'https://app.seezerapps.com//client/check/' + meta.product.id + '\?t=' + Date.now(), false);
+	xhttp.open("GET", 'https://app.seezerapps.com/client/check/' + meta.product.id + '\?t=' + Date.now(), false);
+	xhttp.withCredentials = true;
 	xhttp.send();
 
 
