@@ -60,22 +60,23 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 199);
+/******/ 	return __webpack_require__(__webpack_require__.s = 205);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 199:
+/***/ 205:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(200);
+module.exports = __webpack_require__(206);
 
 
 /***/ }),
 
-/***/ 200:
+/***/ 206:
 /***/ (function(module, exports) {
 
+var url = 'https://app.seezerapps.com';
 var checkoutForm = document.querySelector('.product-form.product-form-product-template');
 if (checkoutForm) {
 
@@ -90,7 +91,7 @@ if (checkoutForm) {
 			}
 		}
 	};
-	xhttp.open("GET", 'https://app.seezerapps.com/client/check/' + meta.product.id + '\?t=' + Date.now(), false);
+	xhttp.open("GET", url + '/client/check/meta.product.id?t=' + Date.now(), false);
 	xhttp.withCredentials = true;
 	xhttp.send();
 }
@@ -114,7 +115,7 @@ function buildElements(checkoutForm) {
 	openButton.innerText = 'Calculate weight and height';
 	var iframe = document.createElement('iframe');
 	iframe.id = 'hw-frame';
-	iframe.src = 'https://app.seezerapps.com/client/' + meta.product.id;
+	iframe.src = url + '/client/' + meta.product.id;
 	iframe.style.border = 'none';
 	iframe.scrolling = 'no';
 	iframe.allowtransparency = "true";

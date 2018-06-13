@@ -11,8 +11,8 @@ class StoreController extends Controller {
 	
 	public function home() {
 		$shop = ShopifyApp::shop();
-		
-		return view('store.home', compact('shop', 'products'));
+		$barButtons = true;
+		return view('store.home', compact('shop', 'products', 'barButtons'));
 	}
 	
 	public function updateSizeName(UpdateSizeNameRequest $request) {

@@ -1,3 +1,9 @@
+.button.has-tooltip.is-rounded {
+	border-radius: 100%;
+	padding-left: 0.75em;
+	padding-right: 0.75em;
+}
+
 .tooltip {
 	display: block !important;
 	z-index: 10000;

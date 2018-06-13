@@ -12,6 +12,11 @@
                         <p>Products imported app : {{$shop->product_count}}</p>
                     </div>
                     <div class="box">
+                        <div class="is-pulled-right">
+                            <button v-tooltip="'Insert here the way you call your ”size” variants in your store.'"
+                                    class="button is-rounded is-dark is-bold">?
+                            </button>
+                        </div>
                         <form method="post" action="{{ action('StoreController@updateSizeName') }}">
                             @csrf
                             <div class="field">
@@ -45,7 +50,7 @@
                     </div>
                 </div>
             </div>
-            <div class="box">
+            <div class="box" id="product-table">
                 <datatable url="{{ action('StoreController@products') }}"
                            :fields="tableFields"
                            :inline-forms="false"

@@ -25,7 +25,7 @@
                 <div class="title is-size-5">
                     Product sizes:
                 </div>
-                <shirt-measurements :product="product" :result="result" @calculated="displayResult">
+                <shirt-measurements :product="product" :user-data="userData" @calculated="displayResult">
 
                 </shirt-measurements>
             </div>
@@ -51,8 +51,8 @@
 				type: Object,
 				required: true
 			},
-			result: {
-				type: Number,
+			userData: {
+				type: Object,
 				required: true
 			}
 		},

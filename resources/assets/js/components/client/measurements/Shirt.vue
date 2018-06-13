@@ -30,67 +30,89 @@
 				required: true,
 				type: Object
 			},
-			result: {
+			userData: {
 				required: true,
-				type: Number
+				type: Object
 			}
 		},
 
 		data() {
 			return {
-				sleeve: this.findMin('sleeve'),
-				bust: this.findMin('bust'),
-				length: this.findMin('length'),
-				waist: this.findMin('waist')
+				sizes: this.sortSizes('length'),
+				sleeve: 0,
+				bust: 0,
+				length: 0,
+				waist: 0,
 			}
 		},
 
 		methods: {
-			findMin(category) {
-				let values = _.map(this.product.data, (size) => {
-					return size[category].min;
+			sortSizes(category) {
+				let result = _.keys(this.product.data);
+
+				result.sort((a, b) => {
+					if (parseFloat(this.product.data[a][category].min) < parseFloat(this.product.data[b][category].min)) {
+						return -1;
+					}
+
+					if (parseFloat(this.product.data[a][category].min) > parseFloat(this.product.data[b][category].min)) {
+						return 1;
+					}
+					return 0;
 				});
-				return _.min(values);
+
+				return result;
+			},
+
+			isDefined(category) {
+				return (this.product.data[this.sizes[0]][category].min || this.product.data[this.sizes[1]][category].min);
 			},
 
 			findCategorySize(category, measurement) {
-				let result = '';
 
-				for (let size in this.product.data) {
-					let min = 0;
-					let max = 10000000;
-					if (this.product.data[size][category].min) {
-						min = this.product.data[size][category].min;
-					}
-					if (this.product.data[size][category].max) {
-						max = this.product.data[size][category].max;
-					}
-					if (measurement <= max && measurement >= min) {
-						result = size;
-					}
+				let i = 0;
+
+				while ((i + 1) !== this.sizes.length && parseFloat(this.product.data[this.sizes[i + 1]][category].min) <= measurement) {
+					i++;
 				}
-
-				return result;
+				return i;
 			},
-
-			findMaxCategory(...categories) {
-				let result = '';
-				categories.forEach((category) => {
-					if (result === '') {
-						result = category;
-					} else if (category !== '') {
-						if (this.product.data[category].sleeve.min > this.product.data[result].sleeve.max) {
-							result = category;
-						}
-					}
-				});
-
-				return result;
-			}
 		},
 
 		mounted() {
-			this.$emit('calculated', this.findCategorySize('length', this.result));
+			let result = '';
+			if (this.isDefined('height') && this.isDefined('weight')) {
+				let resultCategory = this.findCategorySize('height', this.userData.height);
+				let weightCategory = this.findCategorySize('weight', this.userData.weight);
+				if (resultCategory !== weightCategory) {
+					if (resultCategory !== 0) {
+						if (this.userData.bmi < 18.5) {
+							resultCategory--;
+						}
+					}
+
+					if (resultCategory !== (this.sizes.length - 1)) {
+						if (this.userData.bmi > 24.9) {
+							resultCategory++;
+						}
+					}
+
+					if (resultCategory !== (this.sizes.length - 1)) {
+						if (this.userData.bmi > 29) {
+							resultCategory++;
+						}
+					}
+				}
+				result = this.sizes[resultCategory];
+			} else {
+				let resultCategory = this.findCategorySize('length', Math.ceil(this.userData.height * 0.366));
+				result = this.sizes[resultCategory];
+			}
+			this.$emit('calculated', result);
+			this.sleeve = parseFloat(this.product.data[result].sleeve.min);
+			this.bust = parseFloat(this.product.data[result].bust.min);
+			this.length = parseFloat(this.product.data[result].length.min);
+			this.waist = parseFloat(this.product.data[result].waist.min);
 		},
 
 		computed: {
@@ -99,7 +121,7 @@
 				let bustCategory = this.findCategorySize('bust', this.bust);
 				let lengthCategory = this.findCategorySize('length', this.length);
 				let waistCategory = this.findCategorySize('waist', this.waist);
-				return this.findMaxCategory(sleeveCategory, bustCategory, lengthCategory, waistCategory);
+				return this.sizes[Math.max(sleeveCategory, bustCategory, lengthCategory, waistCategory)];
 			}
 		},
 

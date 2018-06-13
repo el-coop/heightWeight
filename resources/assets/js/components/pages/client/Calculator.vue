@@ -1,9 +1,10 @@
 <template>
     <div class="section calculator">
         <measurements :start-metric="metric" v-if="step == 0" @next="incStep" @reset="resetSteps"
-                      @height="changeHeight"></measurements>
+                      @user-data="userData"></measurements>
         <body-type v-if="step == 1" :product-gender="product.gender" @next="incStep" @reset="resetSteps"></body-type>
-        <calculator-result v-if="step == 2" :product="product" :result="result" @reset="resetSteps"></calculator-result>
+        <calculator-result v-if="step == 2" :product="product" :user-data="user"
+                           @reset="resetSteps"></calculator-result>
     </div>
 </template>
 
@@ -29,7 +30,10 @@
 			return {
 				metric: 'metric',
 				step: 0,
-				height: 0,
+				user: {
+					height: 0,
+					bmi: 0
+				}
 			}
 		},
 
@@ -42,17 +46,11 @@
 				this.step = 0;
 			},
 
-			changeHeight(value) {
-				this.height = value;
+			userData(value) {
+				this.user = value;
 			},
 
 		},
-
-		computed: {
-			result() {
-				return Math.ceil(this.height * 0.366);
-			}
-		}
 	}
 </script>
 

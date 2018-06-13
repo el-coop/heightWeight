@@ -7,10 +7,7 @@
                :placeholder="placeholder + ' cm'">
         <span v-show="metric == 'imperial'">
             <input class="input" :class="{'is-danger': hasError}"
-                   v-model="feetDisplay"
-                   :placeholder="placeholder + ' Ft'">
-            <input class="input" :class="{'is-danger': hasError}"
-                   v-model="inchDisplay"
+                   v-model="inches"
                    :placeholder="placeholder + ' In'">
         </span>
     </p>
@@ -19,7 +16,7 @@
 
 <script>
 	export default {
-		name: "metric-imperial-field",
+		name: "cm-inch-field",
 
 		props: {
 			hasError: {
@@ -53,49 +50,20 @@
 			}
 		},
 
-        watch:{
-			value(val){
-				this.$emit('input',val);
-            }
-        },
+		watch: {
+			value(val) {
+				this.$emit('input', val);
+			}
+		},
 
 		computed: {
-			feetDisplay: {
-				get() {
-					if (Number.isNaN(this.inches) || this.inches == '') {
-						return '';
-					}
-					return Math.floor(this.inches / 12);
-				},
-				set(val) {
-					if (Number.isNaN(val)) {
-						this.inches = this.inchDisplay;
-						return;
-					}
-					this.inches = (parseFloat(val) * 12) + this.inchDisplay;
-				}
-			},
-			inchDisplay: {
-				get() {
-					if (Number.isNaN(this.inches) || this.inches == '') {
-						return '';
-					}
-					return Math.floor(this.inches % 12);
-				},
-				set(val) {
-					if (Number.isNaN(val) || val == '') {
-						this.inches = this.feetDisplay * 12;
-						return
-					}
-					this.inches = this.feetDisplay * 12 + parseFloat(val);
-				}
-			},
 			inches: {
 				get() {
 					if (Number.isNaN(this.value) || this.value == '') {
 						return '';
 					}
-					return this.value * 0.393701;
+					let value = this.value * 0.393701;
+					return (parseFloat(value.toFixed(2)));
 				},
 				set(val) {
 					if (Number.isNaN(val)) {

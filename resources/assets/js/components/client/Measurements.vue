@@ -57,7 +57,7 @@
             </div>
             <div class="level-right">
                 <div class="control level-item">
-                    <button class="button is-dark" @click="$emit('next')" :disabled="height == '' || weight == ''">Next
+                    <button class="button is-dark" @click="calculateBmi()" :disabled="height == '' || weight == ''">Next
                     </button>
                 </div>
             </div>
@@ -87,7 +87,8 @@
 			return {
 				metric: this.startMetric,
 				weight: '',
-				height: ''
+				height: '',
+				bmi: 0
 			}
 		},
 
@@ -97,10 +98,16 @@
 			},
 		},
 
-		watch: {
-			height() {
-				this.$emit('height', this.height);
+		methods: {
+			calculateBmi() {
+				this.bmi = this.weight / this.height / this.height * 10000;
+				this.$emit('user-data', {
+					height: this.height,
+					weight: this.weight,
+					bmi: this.bmi
+				});
+				this.$emit('next');
 			}
-		}
+		},
 	}
 </script>
