@@ -1,7 +1,6 @@
 let url = 'https://app.seezerapps.com';
 let checkoutForm = document.querySelector('.product-form.product-form-product-template');
 if (checkoutForm) {
-
 	let xhttp = new XMLHttpRequest();
 
 	xhttp.onreadystatechange = function () {
@@ -13,7 +12,7 @@ if (checkoutForm) {
 			}
 		}
 	};
-	xhttp.open("GET", `${url}/client/check/meta.product.id\?t=${Date.now()}`, false);
+	xhttp.open("GET", `${url}/client/check/${meta.product.id}\?t=${Date.now()}`, false);
 	xhttp.withCredentials = true;
 	xhttp.send();
 

@@ -79,7 +79,6 @@ module.exports = __webpack_require__(206);
 var url = 'https://app.seezerapps.com';
 var checkoutForm = document.querySelector('.product-form.product-form-product-template');
 if (checkoutForm) {
-
 	var xhttp = new XMLHttpRequest();
 
 	xhttp.onreadystatechange = function () {
@@ -91,7 +90,7 @@ if (checkoutForm) {
 			}
 		}
 	};
-	xhttp.open("GET", url + '/client/check/meta.product.id?t=' + Date.now(), false);
+	xhttp.open("GET", url + '/client/check/' + meta.product.id + '?t=' + Date.now(), false);
 	xhttp.withCredentials = true;
 	xhttp.send();
 }
