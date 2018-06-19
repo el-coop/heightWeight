@@ -13,7 +13,11 @@
         <div class="column is-3 is-flex" style="align-items: center">
             <div class="field">
                 <div class="control">
-                    <input type="text" class="input" v-model="measuredCategory">
+                    <div class="select">
+                        <select v-model="measuredCategory">
+                            <option v-for="size in sizes" :value="size" v-html="size"></option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
@@ -105,6 +109,10 @@
 				}
 				result = this.sizes[resultCategory];
 			} else {
+				let devisor = 0.358;
+				if (this.product.gender === 'make') {
+					devisor = 0.37;
+				}
 				let resultCategory = this.findCategorySize('length', Math.ceil(this.userData.height * 0.366));
 				result = this.sizes[resultCategory];
 			}

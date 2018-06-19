@@ -66,6 +66,7 @@
 		methods: {
 			displayResult(value) {
 				this.displayedResult = value;
+				window.parent.postMessage({'suggestedSize': this.displayedResult}, "*");
 			}
 		},
 

@@ -32,7 +32,8 @@
 				step: 0,
 				user: {
 					height: 0,
-					bmi: 0
+					bmi: 0,
+					weight: 0
 				}
 			}
 		},

@@ -1,6 +1,7 @@
 let url = 'https://app.seezerapps.com';
 let checkoutForm = document.querySelector('.product-form.product-form-product-template');
 if (checkoutForm) {
+	console.log(meta.product);
 	let xhttp = new XMLHttpRequest();
 
 	xhttp.onreadystatechange = function () {
@@ -15,7 +16,6 @@ if (checkoutForm) {
 	xhttp.open("GET", `${url}/client/check/${meta.product.id}\?t=${Date.now()}`, false);
 	xhttp.withCredentials = true;
 	xhttp.send();
-
 
 }
 
@@ -45,8 +45,14 @@ function buildElements(checkoutForm) {
 	openButton.addEventListener('click', toggleForm);
 	checkoutForm.insertAdjacentElement('afterend', openButton);
 	openButton.insertAdjacentElement('afterend', iframe);
+	window.addEventListener("message", sizeCalculated, false);
 }
 
 function toggleForm() {
 	document.querySelector('#hw-frame').classList.toggle('open');
+}
+
+function sizeCalculated(event) {
+	let suggestedSize = event.data.suggestedSize;
+	document.querySelector(`option[value='${suggestedSize}']`).parentElement.value = event.data.suggestedSize;
 }

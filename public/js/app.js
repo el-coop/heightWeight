@@ -45705,7 +45705,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			step: 0,
 			user: {
 				height: 0,
-				bmi: 0
+				bmi: 0,
+				weight: 0
 			}
 		};
 	},
@@ -47783,29 +47784,27 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "column" }, [
         _c("div", { staticClass: "field" }, [
-          _c("div", { staticClass: "control" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
+          _c(
+            "div",
+            { staticClass: "control" },
+            [
+              _c("kg-pound-field", {
+                attrs: {
+                  placeholder: "Weight",
+                  name: "weight",
+                  metric: _vm.metric
+                },
+                model: {
                   value: _vm.weight,
+                  callback: function($$v) {
+                    _vm.weight = $$v
+                  },
                   expression: "weight"
                 }
-              ],
-              staticClass: "input",
-              attrs: { type: "text", placeholder: "Weight" },
-              domProps: { value: _vm.weight },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.weight = $event.target.value
-                }
-              }
-            })
-          ])
+              })
+            ],
+            1
+          )
         ])
       ])
     ]),
@@ -48393,6 +48392,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	methods: {
 		displayResult: function displayResult(value) {
 			this.displayedResult = value;
+			window.parent.postMessage({ 'suggestedSize': this.displayedResult }, "*");
 		}
 	},
 
@@ -48522,6 +48522,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -48608,6 +48612,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			}
 			result = this.sizes[resultCategory];
 		} else {
+			var devisor = 0.358;
+			if (this.product.gender === 'make') {
+				devisor = 0.37;
+			}
 			var _resultCategory = this.findCategorySize('length', Math.ceil(this.userData.height * 0.366));
 			result = this.sizes[_resultCategory];
 		}
@@ -48741,27 +48749,41 @@ var render = function() {
       [
         _c("div", { staticClass: "field" }, [
           _c("div", { staticClass: "control" }, [
-            _c("input", {
-              directives: [
+            _c("div", { staticClass: "select" }, [
+              _c(
+                "select",
                 {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.measuredCategory,
-                  expression: "measuredCategory"
-                }
-              ],
-              staticClass: "input",
-              attrs: { type: "text" },
-              domProps: { value: _vm.measuredCategory },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.measuredCategory,
+                      expression: "measuredCategory"
+                    }
+                  ],
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.measuredCategory = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
                   }
-                  _vm.measuredCategory = $event.target.value
-                }
-              }
-            })
+                },
+                _vm._l(_vm.sizes, function(size) {
+                  return _c("option", {
+                    domProps: { value: size, innerHTML: _vm._s(size) }
+                  })
+                })
+              )
+            ])
           ])
         ])
       ]

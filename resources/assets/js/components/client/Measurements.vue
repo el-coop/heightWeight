@@ -32,7 +32,7 @@
             <div class="column">
                 <div class="field">
                     <div class="control">
-                        <input class="input" type="text" placeholder="Weight" v-model="weight">
+                        <kg-pound-field placeholder="Weight" v-model="weight" name="weight" :metric="metric"></kg-pound-field>
                     </div>
                 </div>
             </div>

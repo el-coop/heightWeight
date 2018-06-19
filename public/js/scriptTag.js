@@ -79,6 +79,7 @@ module.exports = __webpack_require__(206);
 var url = 'https://app.seezerapps.com';
 var checkoutForm = document.querySelector('.product-form.product-form-product-template');
 if (checkoutForm) {
+	console.log(meta.product);
 	var xhttp = new XMLHttpRequest();
 
 	xhttp.onreadystatechange = function () {
@@ -121,10 +122,16 @@ function buildElements(checkoutForm) {
 	openButton.addEventListener('click', toggleForm);
 	checkoutForm.insertAdjacentElement('afterend', openButton);
 	openButton.insertAdjacentElement('afterend', iframe);
+	window.addEventListener("message", sizeCalculated, false);
 }
 
 function toggleForm() {
 	document.querySelector('#hw-frame').classList.toggle('open');
+}
+
+function sizeCalculated(event) {
+	var suggestedSize = event.data.suggestedSize;
+	document.querySelector('option[value=\'' + suggestedSize + '\']').parentElement.value = event.data.suggestedSize;
 }
 
 /***/ })
