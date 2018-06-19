@@ -48653,6 +48653,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				this.bust = this.product.data[val].bust.min;
 				this.length = this.product.data[val].length.min;
 				this.waist = this.product.data[val].waist.min;
+				return val;
 			}
 		}
 	}
