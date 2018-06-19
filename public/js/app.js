@@ -48629,10 +48629,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 	computed: {
 		measuredCategory: function measuredCategory() {
-			var sleeveCategory = this.findCategorySize('sleeve', this.sleeve);
-			var bustCategory = this.findCategorySize('bust', this.bust);
-			var lengthCategory = this.findCategorySize('length', this.length);
-			var waistCategory = this.findCategorySize('waist', this.waist);
+			var sleeveCategory = -1;
+			if (this.sleeve) {
+				sleeveCategory = this.findCategorySize('sleeve', this.sleeve);
+			}
+			var bustCategory = -1;
+			if (this.bust) {
+				bustCategory = this.findCategorySize('bust', this.bust);
+			}
+			var lengthCategory = -1;
+			if (this.length) {
+				lengthCategory = this.findCategorySize('length', this.length);
+			}
+			var waistCategory = -1;
+			if (this.waist) {
+				waistCategory = this.findCategorySize('waist', this.waist);
+			}
 			return this.sizes[Math.max(sleeveCategory, bustCategory, lengthCategory, waistCategory)];
 		}
 	}

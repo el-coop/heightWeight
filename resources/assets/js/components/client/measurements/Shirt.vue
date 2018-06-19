@@ -125,10 +125,22 @@
 
 		computed: {
 			measuredCategory() {
-				let sleeveCategory = this.findCategorySize('sleeve', this.sleeve);
-				let bustCategory = this.findCategorySize('bust', this.bust);
-				let lengthCategory = this.findCategorySize('length', this.length);
-				let waistCategory = this.findCategorySize('waist', this.waist);
+				let sleeveCategory = -1;
+				if (this.sleeve) {
+					sleeveCategory = this.findCategorySize('sleeve', this.sleeve);
+				}
+				let bustCategory = -1;
+				if (this.bust) {
+					bustCategory = this.findCategorySize('bust', this.bust);
+				}
+				let lengthCategory = -1;
+				if (this.length) {
+					lengthCategory = this.findCategorySize('length', this.length);
+				}
+				let waistCategory = -1;
+				if (this.waist) {
+					waistCategory = this.findCategorySize('waist', this.waist);
+				}
 				return this.sizes[Math.max(sleeveCategory, bustCategory, lengthCategory, waistCategory)];
 			}
 		},
