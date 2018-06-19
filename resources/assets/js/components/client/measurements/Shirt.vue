@@ -124,24 +124,32 @@
 		},
 
 		computed: {
-			measuredCategory() {
-				let sleeveCategory = -1;
-				if (this.sleeve) {
-					sleeveCategory = this.findCategorySize('sleeve', this.sleeve);
+			measuredCategory: {
+				get() {
+					let sleeveCategory = -1;
+					if (this.sleeve) {
+						sleeveCategory = this.findCategorySize('sleeve', this.sleeve);
+					}
+					let bustCategory = -1;
+					if (this.bust) {
+						bustCategory = this.findCategorySize('bust', this.bust);
+					}
+					let lengthCategory = -1;
+					if (this.length) {
+						lengthCategory = this.findCategorySize('length', this.length);
+					}
+					let waistCategory = -1;
+					if (this.waist) {
+						waistCategory = this.findCategorySize('waist', this.waist);
+					}
+					return this.sizes[Math.max(sleeveCategory, bustCategory, lengthCategory, waistCategory)];
+				},
+				set(val) {
+					this.sleeve = this.product.data[val].sleeve.min;
+					this.bust = this.product.data[val].bust.min;
+					this.length = this.product.data[val].length.min;
+					this.waist = this.product.data[val].waist.min;
 				}
-				let bustCategory = -1;
-				if (this.bust) {
-					bustCategory = this.findCategorySize('bust', this.bust);
-				}
-				let lengthCategory = -1;
-				if (this.length) {
-					lengthCategory = this.findCategorySize('length', this.length);
-				}
-				let waistCategory = -1;
-				if (this.waist) {
-					waistCategory = this.findCategorySize('waist', this.waist);
-				}
-				return this.sizes[Math.max(sleeveCategory, bustCategory, lengthCategory, waistCategory)];
 			}
 		},
 
