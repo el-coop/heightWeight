@@ -145,10 +145,10 @@
 					return this.sizes[Math.max(sleeveCategory, bustCategory, lengthCategory, waistCategory)];
 				},
 				set(val) {
-					this.sleeve = this.product.data[val].sleeve.min;
-					this.bust = this.product.data[val].bust.min;
-					this.length = this.product.data[val].length.min;
-					this.waist = this.product.data[val].waist.min;
+					this.sleeve = this.product.data[val].sleeve.min || 0;
+					this.bust = this.product.data[val].bust.min || 0;
+					this.length = this.product.data[val].length.min || 0;
+					this.waist = this.product.data[val].waist.min || 0;
 					return val;
 				}
 			}
