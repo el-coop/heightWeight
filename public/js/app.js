@@ -45204,7 +45204,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			message: "&lt;div id=\"height_and_weight\"&gt;&lt;/div&gt;\n" + "{% assign height_and_weight_app_data = product.metafields.height_weight %}\n" + "&lt;input type=\"hidden\"\n" + "value='@{{ height_and_weight_app_data[\"height_and_weight_app_data\"] }}'\n" + "name=\"hidden_metafiled\"\n" + "class=\"height_weight_hide_meta\"&gt;",
 
 			activeInstructions: 0,
-			instructions: ['Installation instructions', 'Select app products', 'Edit your products', 'Questions / Suggestions'],
+			instructions: ['Installation instructions', 'Select app products', 'Edit your products', 'Questions / Suggestions', 'New features'],
 
 			copyingFields: false,
 			copyingId: null,

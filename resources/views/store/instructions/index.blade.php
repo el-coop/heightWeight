@@ -5,5 +5,6 @@
         @include('store.instructions.collections')
         @include('store.instructions.edit')
         @include('store.instructions.help')
+        @include('store.instructions.features')
     </transition>
 </div>

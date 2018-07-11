@@ -16,7 +16,8 @@
 					'Installation instructions',
 					'Select app products',
 					'Edit your products',
-					'Questions / Suggestions'
+					'Questions / Suggestions',
+					'New features',
 				],
 
 				copyingFields: false,

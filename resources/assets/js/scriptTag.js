@@ -1,4 +1,5 @@
-let url = 'https://heightweight.test';
+//let url = 'https://heightweight.test';
+let url = 'https://app.seezerapps.com';
 let checkoutForm = document.querySelector('.product-form.product-form-product-template');
 if (checkoutForm) {
 	console.log(meta.product);

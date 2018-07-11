@@ -76,7 +76,8 @@ module.exports = __webpack_require__(206);
 /***/ 206:
 /***/ (function(module, exports) {
 
-var url = 'https://heightweight.test';
+//let url = 'https://heightweight.test';
+var url = 'https://app.seezerapps.com';
 var checkoutForm = document.querySelector('.product-form.product-form-product-template');
 if (checkoutForm) {
 	console.log(meta.product);

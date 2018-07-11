@@ -38,7 +38,7 @@
                 </div>
                 <div class="column">
                     <div class="box">
-                        @include('store.features.index')
+                        @include('store.instructions.index')
                     </div>
                 </div>
             </div>
