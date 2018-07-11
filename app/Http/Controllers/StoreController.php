@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Store\ContactRequest;
 use App\Http\Requests\Store\UpdateSizeNameRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -13,6 +14,11 @@ class StoreController extends Controller {
 		$shop = ShopifyApp::shop();
 		$barButtons = true;
 		return view('store.home', compact('shop', 'products', 'barButtons'));
+	}
+	
+	public function contact(ContactRequest $request) {
+		$request->commit();
+		return back()->with('notice', 'Success');
 	}
 	
 	public function updateSizeName(UpdateSizeNameRequest $request) {

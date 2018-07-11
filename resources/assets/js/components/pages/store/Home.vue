@@ -21,7 +21,8 @@
 
 				copyingFields: false,
 				copyingId: null,
-				copying: false
+				copying: false,
+				submitting: false
 			}
 		},
 
