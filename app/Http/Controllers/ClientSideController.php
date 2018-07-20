@@ -26,6 +26,7 @@ class ClientSideController extends Controller {
 		return response()->json([
 			"visible" => false,
 		])->header('Access-Control-Allow-Origin', $request->header('origin'))
-			->header('Access-Control-Allow-Methods', 'GET');;
+			->header('Access-Control-Allow-Methods', 'GET')
+			->header('Access-Control-Allow-Credentials', 'true');
 	}
 }
