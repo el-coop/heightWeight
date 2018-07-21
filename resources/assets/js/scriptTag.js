@@ -2,7 +2,7 @@
 let url = 'https://app.seezerapps.com';
 let checkoutForm = document.querySelector('.product-form.product-form-product-template');
 if (checkoutForm) {
-	console.log(meta.product);
+	//console.log(meta.product);
 	let xhttp = new XMLHttpRequest();
 
 	xhttp.onreadystatechange = function () {

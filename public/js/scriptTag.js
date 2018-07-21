@@ -80,7 +80,7 @@ module.exports = __webpack_require__(206);
 var url = 'https://app.seezerapps.com';
 var checkoutForm = document.querySelector('.product-form.product-form-product-template');
 if (checkoutForm) {
-	console.log(meta.product);
+	//console.log(meta.product);
 	var xhttp = new XMLHttpRequest();
 
 	xhttp.onreadystatechange = function () {
