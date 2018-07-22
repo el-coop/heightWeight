@@ -70,6 +70,7 @@ class UpdateProductRequest extends FormRequest {
 		$product->gender = $this->input('gender');
 		$product->type = $this->input('type');
 		$product->data = $this->only($keys);
+		$product->visible = true;
 		$product->save();
 	}
 }

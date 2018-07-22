@@ -13,11 +13,11 @@
 
 				activeInstructions: 0,
 				instructions: [
-					'Installation instructions',
+					// 'Installation instructions',
+					'New features',
 					'Select app products',
 					'Edit your products',
 					'Questions / Suggestions',
-					'New features',
 				],
 
 				copyingFields: false,

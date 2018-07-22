@@ -1,6 +1,4 @@
-<div key="4" v-if="activeInstructions==4">
+<div key="0" v-if="activeInstructions==0">
     @include('store.instructions.features.completed')
     @include('store.instructions.features.incomplete')
-    <hr>
-    @include('store.instructions.features.contactForm')
 </div>

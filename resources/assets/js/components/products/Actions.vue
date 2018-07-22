@@ -4,7 +4,9 @@
         <button class="button" @click="copying" :disabled="rowData.percentCompleted == 0">
             {{ copyActive ? 'Cancel' : 'Copy'}}
         </button>
-        <button class="button" :class="{ 'is-loading' : togglingVisibility }" @click="toggleVisibility">
+        <button class="button"
+                :class="{ 'is-loading' : togglingVisibility, 'is-outlined is-primary': actualData.visible }"
+                @click="toggleVisibility">
             {{actualData.visible ? 'Hide' : 'Show'}}
         </button>
         <a class="button is-primary" :href="'/store/products/' + rowData.id">Edit</a>
