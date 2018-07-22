@@ -78,8 +78,9 @@ module.exports = __webpack_require__(206);
 
 //let url = 'https://heightweight.test';
 var url = 'https://app.seezerapps.com';
+var embedTag = document.querySelector('#height-weight');
 var checkoutForm = document.querySelector('.product-form.product-form-product-template');
-if (checkoutForm) {
+if (checkoutForm || embedTags) {
 	//console.log(meta.product);
 	var xhttp = new XMLHttpRequest();
 
@@ -121,8 +122,13 @@ function buildElements(checkoutForm) {
 	iframe.scrolling = 'no';
 	iframe.allowtransparency = "true";
 	openButton.addEventListener('click', toggleForm);
-	checkoutForm.insertAdjacentElement('afterend', openButton);
-	openButton.insertAdjacentElement('afterend', iframe);
+	if (embedTag) {
+		embedTag.appendChild(openButton);
+		embedTag.appendChild(iframe);
+	} else if (checkoutForm) {
+		checkoutForm.insertAdjacentElement('afterend', openButton);
+		openButton.insertAdjacentElement('afterend', iframe);
+	}
 	window.addEventListener("message", sizeCalculated, false);
 }
 
