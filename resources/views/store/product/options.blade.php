@@ -1,9 +1,9 @@
 <div class="level">
     <div class="level-item has-text-centered">
         <div class="field is-horizontal">
-            <button v-tooltip="'Please fill these as needed (Instructions coming soon)'"
-                    class="button is-light is-rounded is-bold">?
-            </button>
+            <a href="http://docs.heightandweight.co" target="_blank" v-tooltip="'http://docs.heightandweight.co'"
+               class="button is-light is-rounded is-bold">?
+            </a>
         </div>
     </div>
     <div class="level-item has-text-centered">

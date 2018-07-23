@@ -44148,7 +44148,7 @@ var render = function() {
       [
         _vm._v(
           "\n        " +
-            _vm._s(_vm.actualData.visible ? "Hide" : "Show") +
+            _vm._s(_vm.actualData.visible ? "Visible" : "Not Visible") +
             "\n    "
         )
       ]

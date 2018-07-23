@@ -7,7 +7,7 @@
         <button class="button"
                 :class="{ 'is-loading' : togglingVisibility, 'is-outlined is-primary': actualData.visible }"
                 @click="toggleVisibility">
-            {{actualData.visible ? 'Hide' : 'Show'}}
+            {{actualData.visible ? 'Visible' : 'Not Visible'}}
         </button>
         <a class="button is-primary" :href="'/store/products/' + rowData.id">Edit</a>
     </div>
