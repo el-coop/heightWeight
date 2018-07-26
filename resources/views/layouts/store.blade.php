@@ -4,32 +4,32 @@
     @if(config('shopify-app.esdk_enabled'))
         <script src="https://cdn.shopify.com/s/assets/external/app.js?{{ date('YmdH') }}"></script>
         <script type="text/javascript">
-			ShopifyApp.init({
-				apiKey: '{{ config('shopify-app.api_key') }}',
-				shopOrigin: 'https://{{ ShopifyApp::shop()->shopify_domain }}',
-				debug: false,
-				forceRedirect: true
-			});
+			{{--ShopifyApp.init({--}}
+				{{--apiKey: '{{ config('shopify-app.api_key') }}',--}}
+				{{--shopOrigin: 'https://{{ ShopifyApp::shop()->shopify_domain }}',--}}
+				{{--debug: false,--}}
+				{{--forceRedirect: true--}}
+			{{--});--}}
 
-			ShopifyApp.ready(function () {
-				ShopifyApp.Bar.initialize({
-					buttons: {
-						primary: {
-							label: "Edit your products",
-							callback: function () {
-								var element = document.getElementById("product-table");
-								console.log('element ' + element);
-								if (element) {
-									element.scrollIntoView();
-								} else {
-									window.location.href = '/#product-table';
-								}
-							},
-						},
-					},
-					title: 'Help documents',
-				})
-			});
+			{{--ShopifyApp.ready(function () {--}}
+				{{--ShopifyApp.Bar.initialize({--}}
+					{{--buttons: {--}}
+						{{--primary: {--}}
+							{{--label: "Edit your products",--}}
+							{{--callback: function () {--}}
+								{{--var element = document.getElementById("product-table");--}}
+								{{--console.log('element ' + element);--}}
+								{{--if (element) {--}}
+									{{--element.scrollIntoView();--}}
+								{{--} else {--}}
+									{{--window.location.href = '/#product-table';--}}
+								{{--}--}}
+							{{--},--}}
+						{{--},--}}
+					{{--},--}}
+					{{--title: 'Help documents',--}}
+				{{--})--}}
+			{{--});--}}
         </script>
 
         @include('shopify-app::partials.flash_messages')
