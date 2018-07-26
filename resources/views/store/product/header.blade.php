@@ -10,7 +10,7 @@
     </div>
     <div class="level-right">
         <div class="level-item">
-            <button class="button is-primary">SAVE</button>
+            <button class="button is-primary" @click="showMessage = false">SAVE</button>
         </div>
     </div>
 </div>

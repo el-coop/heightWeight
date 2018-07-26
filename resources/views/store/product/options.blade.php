@@ -1,7 +1,7 @@
 <div class="level">
     <div class="level-item has-text-centered">
         <div class="field is-horizontal">
-            <a href="http://docs.heightandweight.co" target="_blank" v-tooltip="'http://docs.heightandweight.co'"
+            <a href="https://www.heightandweight.co/docs" target="_blank" v-tooltip="'Please place the product measurement in the table below.<br> Be sure to select the product type and product gender.<br> There are further instructions for each parameter.<br> check this page for more information: https://www.heightandweight.co/docs'"
                class="button is-light is-rounded is-bold">?
             </a>
         </div>

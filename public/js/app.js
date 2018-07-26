@@ -45346,20 +45346,44 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "product",
+	name: "product",
 
-  props: {
-    startMetric: {
-      required: true,
-      type: String
-    }
-  },
+	props: {
+		startMetric: {
+			required: true,
+			type: String
+		}
+	},
 
-  data: function data() {
-    return {
-      metric: this.startMetric
-    };
-  }
+	data: function data() {
+		return {
+			metric: this.startMetric,
+			showMessage: false
+		};
+	},
+	mounted: function mounted() {
+		var _this = this;
+
+		this.addChangeListeners();
+		window.onbeforeunload = function () {
+			if (_this.showMessage) {
+				return "We detected you made some changes and didn't save. Are you sure you want to leave the page?";
+			}
+		};
+	},
+
+
+	methods: {
+		addChangeListeners: function addChangeListeners() {
+			var _this2 = this;
+
+			document.querySelectorAll('input, select').forEach(function (input) {
+				input.addEventListener('change', function () {
+					_this2.showMessage = true;
+				});
+			});
+		}
+	}
 });
 
 /***/ }),
