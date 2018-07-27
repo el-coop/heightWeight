@@ -1,11 +1,15 @@
 <template>
-    <button class="button is-dark" @click="openWindow">Calculate weight and height</button>
+    <button class="button is-dark" @click="openWindow" v-text="buttonText"></button>
 </template>
 
 <script>
 	export default {
 		props: {
 			productId: {
+				type: String,
+				required: true
+			},
+			buttonText: {
 				type: String,
 				required: true
 			}

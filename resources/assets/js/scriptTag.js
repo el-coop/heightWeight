@@ -11,7 +11,7 @@ if (checkoutForm || embedTags) {
 			let response = JSON.parse(this.responseText);
 			if (response.visible) {
 				buildStyles();
-				buildElements(checkoutForm);
+				buildElements(checkoutForm, response.buttonText);
 			}
 		}
 	};
@@ -34,10 +34,10 @@ function buildStyles() {
 	style.insertRule('#hw-frame.open {height: 400px;}', 3)
 }
 
-function buildElements(checkoutForm) {
+function buildElements(checkoutForm, buttonText) {
 	let openButton = document.createElement('button');
 	openButton.id = 'hw-button';
-	openButton.innerText = 'Calculate weight and height';
+	openButton.innerText = buttonText;
 	let iframe = document.createElement('iframe');
 	iframe.id = 'hw-frame';
 	iframe.src = `${url}/client/${meta.product.id}`;

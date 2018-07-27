@@ -2,7 +2,7 @@
     <div>
         <div class="columns is-mobile">
             <div class="column is-four-fifths">
-                <div class="subtitle is-size-6">Enter your height and weight to know your size</div>
+                <div class="subtitle is-size-6" v-text="translations.insert"></div>
             </div>
             <div class="column">
                 <button class="button is-pulled-right" @click="$emit('reset')">
@@ -23,7 +23,7 @@
                                 :has-error="false"
                                 name="height"
                                 start-value=""
-                                placeholder="Height">
+                                :placeholder="translations.height">
                         </metric-imperial-field>
 
                     </div>
@@ -32,7 +32,8 @@
             <div class="column">
                 <div class="field">
                     <div class="control">
-                        <kg-pound-field placeholder="Weight" v-model="weight" name="weight" :metric="metric"></kg-pound-field>
+                        <kg-pound-field :placeholder="translations.weight" v-model="weight" name="weight"
+                                        :metric="metric"></kg-pound-field>
                     </div>
                 </div>
             </div>
@@ -42,7 +43,7 @@
             <div class="level-left">
                 <div class="control level-item">
                     <label class="radio">
-                        Metric
+                        {{ translations.metric }}
                         <input type="radio" name="measurement"
                                value="metric" v-model="metric">
 
@@ -51,13 +52,14 @@
                     <label class="radio">
                         <input type="radio" name="measurement"
                                value="imperial" v-model="metric">
-                        Imperial
+                        {{ translations.imperial }}
                     </label>
                 </div>
             </div>
             <div class="level-right">
                 <div class="control level-item">
-                    <button class="button is-dark" @click="calculateBmi()" :disabled="height == '' || weight == ''">Next
+                    <button class="button is-dark" @click="calculateBmi()" :disabled="height == '' || weight == ''"
+                            v-text="translations.next">
                     </button>
                 </div>
             </div>
@@ -79,6 +81,10 @@
 		props: {
 			startMetric: {
 				type: String,
+				required: true
+			},
+			translations: {
+				type: Object,
 				required: true
 			}
 		},

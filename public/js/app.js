@@ -45449,6 +45449,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		productId: {
 			type: String,
 			required: true
+		},
+		buttonText: {
+			type: String,
+			required: true
 		}
 	},
 
@@ -45467,11 +45471,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "button",
-    { staticClass: "button is-dark", on: { click: _vm.openWindow } },
-    [_vm._v("Calculate weight and height")]
-  )
+  return _c("button", {
+    staticClass: "button is-dark",
+    domProps: { textContent: _vm._s(_vm.buttonText) },
+    on: { click: _vm.openWindow }
+  })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -45596,6 +45600,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -45609,6 +45615,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	},
 	props: {
 		product: {
+			type: Object,
+			required: true
+		},
+		translations: {
 			type: Object,
 			required: true
 		}
@@ -45764,6 +45774,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -45778,6 +45790,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	props: {
 		startMetric: {
 			type: String,
+			required: true
+		},
+		translations: {
+			type: Object,
 			required: true
 		}
 	},
@@ -47643,7 +47659,12 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "columns is-mobile" }, [
-      _vm._m(0),
+      _c("div", { staticClass: "column is-four-fifths" }, [
+        _c("div", {
+          staticClass: "subtitle is-size-6",
+          domProps: { textContent: _vm._s(_vm.translations.insert) }
+        })
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "column" }, [
         _c(
@@ -47681,7 +47702,7 @@ var render = function() {
                   "has-error": false,
                   name: "height",
                   "start-value": "",
-                  placeholder: "Height"
+                  placeholder: _vm.translations.height
                 },
                 model: {
                   value: _vm.height,
@@ -47705,7 +47726,7 @@ var render = function() {
             [
               _c("kg-pound-field", {
                 attrs: {
-                  placeholder: "Weight",
+                  placeholder: _vm.translations.weight,
                   name: "weight",
                   metric: _vm.metric
                 },
@@ -47728,7 +47749,11 @@ var render = function() {
       _c("div", { staticClass: "level-left" }, [
         _c("div", { staticClass: "control level-item" }, [
           _c("label", { staticClass: "radio" }, [
-            _vm._v("\n                    Metric\n                    "),
+            _vm._v(
+              "\n                    " +
+                _vm._s(_vm.translations.metric) +
+                "\n                    "
+            ),
             _c("input", {
               directives: [
                 {
@@ -47768,43 +47793,33 @@ var render = function() {
                 }
               }
             }),
-            _vm._v("\n                    Imperial\n                ")
+            _vm._v(
+              "\n                    " +
+                _vm._s(_vm.translations.imperial) +
+                "\n                "
+            )
           ])
         ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "level-right" }, [
         _c("div", { staticClass: "control level-item" }, [
-          _c(
-            "button",
-            {
-              staticClass: "button is-dark",
-              attrs: { disabled: _vm.height == "" || _vm.weight == "" },
-              on: {
-                click: function($event) {
-                  _vm.calculateBmi()
-                }
+          _c("button", {
+            staticClass: "button is-dark",
+            attrs: { disabled: _vm.height == "" || _vm.weight == "" },
+            domProps: { textContent: _vm._s(_vm.translations.next) },
+            on: {
+              click: function($event) {
+                _vm.calculateBmi()
               }
-            },
-            [_vm._v("Next\n                ")]
-          )
+            }
+          })
         ])
       ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "column is-four-fifths" }, [
-      _c("div", { staticClass: "subtitle is-size-6" }, [
-        _vm._v("Enter your height and weight to know your size")
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -47941,6 +47956,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		productGender: {
 			required: true,
 			type: String
+		},
+		translations: {
+			type: Object,
+			required: true
 		}
 	},
 
@@ -47976,7 +47995,12 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "columns is-mobile" }, [
-      _vm._m(0),
+      _c("div", { staticClass: "column is-four-fifths" }, [
+        _c("div", {
+          staticClass: "subtitle is-size-6",
+          domProps: { textContent: _vm._s(_vm.translations.accurate) }
+        })
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "column" }, [
         _c(
@@ -48003,7 +48027,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "columns is-mobile" }, [
       _c("div", { staticClass: "column is-two-thirds" }, [
-        _vm._m(1),
+        _vm._m(0),
         _vm._v(" "),
         _c("figure", { staticClass: "image is-5by4" }, [
           _c("img", { attrs: { src: _vm.imgSrc } })
@@ -48012,9 +48036,10 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "column" }, [
         _c("div", { staticClass: "field" }, [
-          _c("label", { staticClass: "label has-text-centered" }, [
-            _vm._v("Wide")
-          ]),
+          _c("label", {
+            staticClass: "label has-text-centered",
+            domProps: { textContent: _vm._s(_vm.translations.wide) }
+          }),
           _vm._v(" "),
           _c("div", { staticClass: "control" }, [
             _c("input", {
@@ -48039,9 +48064,10 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "field" }, [
-          _c("label", { staticClass: "label has-text-centered" }, [
-            _vm._v("Full")
-          ]),
+          _c("label", {
+            staticClass: "label has-text-centered",
+            domProps: { textContent: _vm._s(_vm.translations.full) }
+          }),
           _vm._v(" "),
           _c("div", { staticClass: "control" }, [
             _c("input", {
@@ -48070,18 +48096,15 @@ var render = function() {
           { staticClass: "field", staticStyle: { "margin-top": "75%" } },
           [
             _c("div", { staticClass: "control has-text-right" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "button is-dark",
-                  on: {
-                    click: function($event) {
-                      _vm.$emit("next")
-                    }
+              _c("button", {
+                staticClass: "button is-dark",
+                domProps: { textContent: _vm._s(_vm.translations.submit) },
+                on: {
+                  click: function($event) {
+                    _vm.$emit("next")
                   }
-                },
-                [_vm._v("Submit")]
-              )
+                }
+              })
             ])
           ]
         )
@@ -48090,16 +48113,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "column is-four-fifths" }, [
-      _c("div", { staticClass: "subtitle is-size-6" }, [
-        _vm._v("Make it accurate (optional)")
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -48292,6 +48305,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			required: true
 		},
 		userData: {
+			type: Object,
+			required: true
+		},
+		translations: {
 			type: Object,
 			required: true
 		}
@@ -48782,9 +48799,10 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "columns is-mobile" }, [
       _c("div", { staticClass: "column is-two-fifths" }, [
-        _c("div", { staticClass: "title is-size-5" }, [
-          _vm._v("\n                Your recommended size is:\n            ")
-        ]),
+        _c("div", {
+          staticClass: "title is-size-5",
+          domProps: { textContent: _vm._s(_vm.translations.recommendedSize) }
+        }),
         _vm._v(" "),
         _c("div", { staticClass: "is-flex centered" }, [
           _c("span", {
@@ -48798,9 +48816,10 @@ var render = function() {
         "div",
         { staticClass: "column bordered-left" },
         [
-          _c("div", { staticClass: "title is-size-5" }, [
-            _vm._v("\n                Product sizes:\n            ")
-          ]),
+          _c("div", {
+            staticClass: "title is-size-5",
+            domProps: { textContent: _vm._s(_vm.translations.productSizes) }
+          }),
           _vm._v(" "),
           _c("shirt-measurements", {
             attrs: { product: _vm.product, "user-data": _vm.userData },
@@ -48845,7 +48864,10 @@ var render = function() {
     [
       _vm.step == 0
         ? _c("measurements", {
-            attrs: { "start-metric": _vm.metric },
+            attrs: {
+              translations: _vm.translations,
+              "start-metric": _vm.metric
+            },
             on: {
               next: _vm.incStep,
               reset: _vm.resetSteps,
@@ -48856,14 +48878,21 @@ var render = function() {
       _vm._v(" "),
       _vm.step == 1
         ? _c("body-type", {
-            attrs: { "product-gender": _vm.product.gender },
+            attrs: {
+              translations: _vm.translations,
+              "product-gender": _vm.product.gender
+            },
             on: { next: _vm.incStep, reset: _vm.resetSteps }
           })
         : _vm._e(),
       _vm._v(" "),
       _vm.step == 2
         ? _c("calculator-result", {
-            attrs: { product: _vm.product, "user-data": _vm.user },
+            attrs: {
+              translations: _vm.translations,
+              product: _vm.product,
+              "user-data": _vm.user
+            },
             on: { reset: _vm.resetSteps }
           })
         : _vm._e()

@@ -1,9 +1,11 @@
 <template>
     <div class="section calculator">
-        <measurements :start-metric="metric" v-if="step == 0" @next="incStep" @reset="resetSteps"
+        <measurements :translations="translations" :start-metric="metric" v-if="step == 0" @next="incStep"
+                      @reset="resetSteps"
                       @user-data="userData"></measurements>
-        <body-type v-if="step == 1" :product-gender="product.gender" @next="incStep" @reset="resetSteps"></body-type>
-        <calculator-result v-if="step == 2" :product="product" :user-data="user"
+        <body-type :translations="translations" v-if="step == 1" :product-gender="product.gender" @next="incStep"
+                   @reset="resetSteps"></body-type>
+        <calculator-result :translations="translations" v-if="step == 2" :product="product" :user-data="user"
                            @reset="resetSteps"></calculator-result>
     </div>
 </template>
@@ -21,6 +23,10 @@
 		},
 		props: {
 			product: {
+				type: Object,
+				required: true
+			},
+			translations: {
 				type: Object,
 				required: true
 			}

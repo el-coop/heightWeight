@@ -72,4 +72,8 @@ class Shop extends BaseShop {
 		
 		return $plan;
 	}
+	
+	public function getLocale() {
+		return $this->api()->request('GET', '/admin/shop.json')->body->shop->primary_locale;
+	}
 }

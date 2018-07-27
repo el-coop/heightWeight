@@ -14,16 +14,16 @@
         </div>
         <div class="columns is-mobile">
             <div class="column is-two-fifths">
-                <div class="title is-size-5">
-                    Your recommended size is:
+                <div class="title is-size-5" v-text="translations.recommendedSize">
+
                 </div>
                 <div class="is-flex centered">
                     <span class="is-size-2" v-html="displayedResult"></span>
                 </div>
             </div>
             <div class="column bordered-left">
-                <div class="title is-size-5">
-                    Product sizes:
+                <div class="title is-size-5" v-text="translations.productSizes">
+
                 </div>
                 <shirt-measurements :product="product" :user-data="userData" @calculated="displayResult">
 
@@ -52,6 +52,10 @@
 				required: true
 			},
 			userData: {
+				type: Object,
+				required: true
+			},
+			translations: {
 				type: Object,
 				required: true
 			}

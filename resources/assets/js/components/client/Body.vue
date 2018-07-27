@@ -2,7 +2,7 @@
     <div>
         <div class="columns is-mobile">
             <div class="column is-four-fifths">
-                <div class="subtitle is-size-6">Make it accurate (optional)</div>
+                <div class="subtitle is-size-6" v-text="translations.accurate"></div>
             </div>
             <div class="column">
                 <button class="button is-pulled-right" @click="$emit('reset')">
@@ -32,20 +32,20 @@
             </div>
             <div class="column">
                 <div class="field">
-                    <label class="label has-text-centered">Wide</label>
+                    <label class="label has-text-centered" v-text="translations.wide"></label>
                     <div class="control">
                         <input class="slider is-fullwidth" step="25" min="0" max="100" v-model="wide" type="range">
                     </div>
                 </div>
                 <div class="field">
-                    <label class="label has-text-centered">Full</label>
+                    <label class="label has-text-centered" v-text="translations.full"></label>
                     <div class="control">
                         <input class="slider is-fullwidth" step="25" min="0" max="100" v-model="full" type="range">
                     </div>
                 </div>
                 <div class="field" style="margin-top: 75%">
                     <div class="control has-text-right">
-                        <button class="button is-dark" @click="$emit('next')">Submit</button>
+                        <button class="button is-dark" @click="$emit('next')" v-text="translations.submit"></button>
                     </div>
                 </div>
             </div>
@@ -68,6 +68,10 @@
 			productGender: {
 				required: true,
 				type: String
+			},
+			translations: {
+				type: Object,
+				required: true
 			}
 		},
 
