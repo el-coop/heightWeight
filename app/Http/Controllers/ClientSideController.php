@@ -9,7 +9,11 @@ use ShopifyApp;
 
 class ClientSideController extends Controller {
 	public function product(Product $product) {
-		$lang = $product->shop->getLocale();
+		if ($product->shop->language) {
+			$lang = $product->shop->language;
+		} else {
+			$lang = $product->shop->getLocale();
+		}
 		App::setLocale($lang);
 		return view('client.calculator', compact('product'));
 	}
