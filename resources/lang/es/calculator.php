@@ -1,8 +1,8 @@
 <?php
 
 return [
-	'calculate' => 'Calcular la altura y el peso',
-	'insert' => 'Ingrese su altura y peso para saber su tamaño',
+	'calculate' => 'Encuentre su talla',
+	'insert' => 'Encuentre su talla rellenando los siguientes parámetros',
 	'height' => 'Altura',
 	'weight' => 'Peso',
 	'metric' => 'Métrico ',
