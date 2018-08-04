@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Store\ContactRequest;
+use App\Http\Requests\Store\UpdateLanguageRequest;
 use App\Http\Requests\Store\UpdateSizeNameRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -22,6 +23,12 @@ class StoreController extends Controller {
 	}
 	
 	public function updateSizeName(UpdateSizeNameRequest $request) {
+		$request->commit();
+		
+		return back()->with('notice', 'Success');
+	}
+	
+	public function updateLanguage(UpdateLanguageRequest $request) {
 		$request->commit();
 		
 		return back()->with('notice', 'Success');

@@ -18,7 +18,11 @@ class ClientSideController extends Controller {
 	public function checkProduct(Request $request, $productId) {
 		if ($product = Product::where('shopify_id', $productId)->first()) {
 			if ($product->visible) {
-				$lang = $product->shop->getLocale();
+				if ($product->shop->language) {
+					$lang = $product->shop->language;
+				} else {
+					$lang = $product->shop->getLocale();
+				}
 				App::setLocale($lang);
 				
 				return response()->json([

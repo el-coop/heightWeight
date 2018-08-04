@@ -22,6 +22,7 @@ Route::group(['middleware' => ['auth.shop', 'billable']], function () {
 				Route::get('/{productId}', 'ProductController@productForm');
 				Route::post('/contact', 'StoreController@contact');
 				Route::post('/size-name', 'StoreController@updateSizeName');
+				Route::post('/language', 'StoreController@updateLanguage');
 				Route::post('/{productId}', 'ProductController@updateProduct');
 				Route::put('/visible/{productId}', 'ProductController@toggleProductVisibility');
 				Route::put('/copy/{product}', 'ProductController@copyProduct');

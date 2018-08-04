@@ -1,1 +1,147 @@
-!function(e){var t={};function n(r){if(t[r])return t[r].exports;var o=t[r]={i:r,l:!1,exports:{}};return e[r].call(o.exports,o,o.exports,n),o.l=!0,o.exports}n.m=e,n.c=t,n.d=function(e,t,r){n.o(e,t)||Object.defineProperty(e,t,{configurable:!1,enumerable:!0,get:r})},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,"a",t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p="/",n(n.s=205)}({205:function(e,t,n){e.exports=n(206)},206:function(e,t){var n="https://app.seezerapps.com",r=document.querySelector("#height-weight"),o=document.querySelector(".product-form, #AddToCartForm, .product__form");if(o||embedTags){var a=new XMLHttpRequest;a.onreadystatechange=function(){if(4==this.readyState&&200==this.status){var e=JSON.parse(this.responseText);e.visible&&(t=document.head,a=document.createElement("style"),t.appendChild(a),(a=a.sheet).type="text/css",a.insertRule("#hw-button {margin-bottom: .5rem; background-color: #363636; border-color: transparent; color: #f5f5f5; border-width: 1px; cursor: pointer; justify-content: center; padding-bottom: calc(.375em - 1px); padding-left: .75em; padding-right: .75em; padding-top: calc(.375em - 1px); text-align: center; white-space: nowrap; border-radius: 4px; box-shadow: none; display: inline-flex; font-size: 1rem; height: 2.25em; line-height: 1.5; position: relative; vertical-align: top; user-select: none;}",0),a.insertRule("#hw-button:hover {background-color: #2f2f2f; border-color: transparent; color: #f5f5f5;}",1),a.insertRule("#hw-frame {height: 0; width: 100%; transition: height 1s; display: block}",2),a.insertRule("#hw-frame.open {height: 400px;}",3),function(e,t){var o=document.createElement("button");o.id="hw-button",o.innerText=t;var a=document.createElement("iframe");a.id="hw-frame",a.src=n+"/client/"+meta.product.id,a.style.border="none",a.scrolling="no",a.allowtransparency="true",o.addEventListener("click",i),r?(r.appendChild(o),r.appendChild(a)):e&&(e.insertAdjacentElement("afterend",o),o.insertAdjacentElement("afterend",a));window.addEventListener("message",c,!1)}(o,e.buttonText))}var t,a},a.open("GET",n+"/client/check/"+meta.product.id+"?t="+Date.now(),!1),a.withCredentials=!0,a.send()}function i(){document.querySelector("#hw-frame").classList.toggle("open")}function c(e){var t=e.data.suggestedSize;document.querySelector("option[value='"+t+"']").parentElement.value=e.data.suggestedSize}}});
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "/";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 205);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ 205:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(206);
+
+
+/***/ }),
+
+/***/ 206:
+/***/ (function(module, exports) {
+
+//let url = 'https://heightweight.test';
+var url = 'https://app.seezerapps.com';
+var embedTag = document.querySelector('#height-weight');
+var checkoutForm = document.querySelector('.product-form, #AddToCartForm, .product__form');
+
+if (checkoutForm || embedTags) {
+	//console.log(meta.product);
+	var xhttp = new XMLHttpRequest();
+
+	xhttp.onreadystatechange = function () {
+		if (this.readyState == 4 && this.status == 200) {
+			var response = JSON.parse(this.responseText);
+			if (response.visible) {
+				buildStyles();
+				buildElements(checkoutForm, response.buttonText);
+			}
+		}
+	};
+	xhttp.open("GET", url + '/client/check/' + meta.product.id + '?t=' + Date.now(), false);
+	xhttp.withCredentials = true;
+	xhttp.send();
+}
+
+function buildStyles() {
+	var head = document.head;
+
+	var style = document.createElement('style');
+	head.appendChild(style);
+	style = style.sheet;
+	style.type = 'text/css';
+	style.insertRule('#hw-button {margin-bottom: .5rem; background-color: #363636; border-color: transparent; color: #f5f5f5; border-width: 1px; cursor: pointer; justify-content: center; padding-bottom: calc(.375em - 1px); padding-left: .75em; padding-right: .75em; padding-top: calc(.375em - 1px); text-align: center; white-space: nowrap; border-radius: 4px; box-shadow: none; display: inline-flex; font-size: 1rem; height: 2.25em; line-height: 1.5; position: relative; vertical-align: top; user-select: none;}', 0);
+	style.insertRule('#hw-button:hover {background-color: #2f2f2f; border-color: transparent; color: #f5f5f5;}', 1);
+	style.insertRule('#hw-frame {height: 0; width: 100%; transition: height 1s; display: block}', 2);
+	style.insertRule('#hw-frame.open {height: 400px;}', 3);
+}
+
+function buildElements(checkoutForm, buttonText) {
+	var openButton = document.createElement('button');
+	openButton.id = 'hw-button';
+	openButton.innerText = buttonText;
+	var iframe = document.createElement('iframe');
+	iframe.id = 'hw-frame';
+	iframe.src = url + '/client/' + meta.product.id;
+	iframe.style.border = 'none';
+	iframe.scrolling = 'no';
+	iframe.allowtransparency = "true";
+	openButton.addEventListener('click', toggleForm);
+	if (embedTag) {
+		embedTag.appendChild(openButton);
+		embedTag.appendChild(iframe);
+	} else if (checkoutForm) {
+		checkoutForm.insertAdjacentElement('afterend', openButton);
+		openButton.insertAdjacentElement('afterend', iframe);
+	}
+	window.addEventListener("message", sizeCalculated, false);
+}
+
+function toggleForm() {
+	document.querySelector('#hw-frame').classList.toggle('open');
+}
+
+function sizeCalculated(event) {
+	var suggestedSize = event.data.suggestedSize;
+	document.querySelector('option[value=\'' + suggestedSize + '\']').parentElement.value = event.data.suggestedSize;
+}
+
+/***/ })
+
+/******/ });
