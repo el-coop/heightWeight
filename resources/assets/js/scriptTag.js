@@ -66,7 +66,7 @@ function sizeCalculated(event) {
 	let element = document.querySelector(`option[value='${suggestedSize}']`);
 	if(element){
 		element.parentElement.value = suggestedSize;
-	} else if (element = document.querySelector(`option[value='${suggestedSize}']`)){
+	} else if (element = document.querySelector(`input[value='${suggestedSize}']`)){
 		console.log(element);
 		element.checked = true;
 	}
