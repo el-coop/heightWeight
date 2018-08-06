@@ -109,7 +109,7 @@ function buildStyles() {
 	style.insertRule('#hw-button {margin-bottom: .5rem; background-color: #363636; border-color: transparent; color: #f5f5f5; border-width: 1px; cursor: pointer; justify-content: center; padding-bottom: calc(.375em - 1px); padding-left: .75em; padding-right: .75em; padding-top: calc(.375em - 1px); text-align: center; white-space: nowrap; border-radius: 4px; box-shadow: none; display: inline-flex; font-size: 1rem; height: 2.25em; line-height: 1.5; position: relative; vertical-align: top; user-select: none;}', 0);
 	style.insertRule('#hw-button:hover {background-color: #2f2f2f; border-color: transparent; color: #f5f5f5;}', 1);
 	style.insertRule('#hw-frame {height: 0; width: 100%; transition: height 1s; display: block; max-width: 400px}', 2);
-	style.insertRule('#hw-frame.open {height: 355px;}', 3);
+	style.insertRule('#hw-frame.open {height: 320px;}', 3);
 }
 
 function buildElements(checkoutForm, buttonText) {
