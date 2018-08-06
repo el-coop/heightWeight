@@ -139,7 +139,12 @@ function toggleForm() {
 
 function sizeCalculated(event) {
 	var suggestedSize = event.data.suggestedSize;
-	document.querySelector('option[value=\'' + suggestedSize + '\']').parentElement.value = event.data.suggestedSize;
+	var element = document.querySelector('option[value=\'' + suggestedSize + '\']');
+	if (element) {
+		element.parentElement.value = suggestedSize;
+	} else if (element = document.querySelector('option[value=\'' + suggestedSize + '\']')) {
+		element.checked = true;
+	}
 }
 
 /***/ })
