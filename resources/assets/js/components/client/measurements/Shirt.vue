@@ -10,7 +10,7 @@
 			<input class="input waist is-small" v-model="waist"/>
 		</div>
 
-		<div class="column is-3 is-flex" style="align-items: center">
+		<div class="column is-3 is-flex" style="align-items: center; padding-left: 0">
 			<div class="field">
 				<div class="control">
 					<div class="select">
