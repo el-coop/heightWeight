@@ -68,8 +68,12 @@ function sizeCalculated(event) {
 	console.log(suggestedSize);
 	if(element){
 		element.parentElement.value = suggestedSize;
-	} else if (element = document.querySelector(`input[value='${suggestedSize}']`)){
+	} else {
+		element = document.querySelector(`input[value='${suggestedSize}']`);
 		console.log(element);
-		element.checked = true;
+		if (element) {
+			console.log(element);
+			element.checked = true;
+		}
 	}
 }
