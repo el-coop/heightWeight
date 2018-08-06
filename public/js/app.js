@@ -48698,7 +48698,7 @@ var render = function() {
       "div",
       {
         staticClass: "column is-3 is-flex",
-        staticStyle: { "align-items": "center" }
+        staticStyle: { "align-items": "center", "padding-left": "0" }
       },
       [
         _c("div", { staticClass: "field" }, [
