@@ -62,8 +62,10 @@ function toggleForm() {
 }
 
 function sizeCalculated(event) {
+	console.log('here');
 	let suggestedSize = event.data.suggestedSize;
 	let element = document.querySelector(`option[value='${suggestedSize}']`);
+	console.log(suggestedSize);
 	if(element){
 		element.parentElement.value = suggestedSize;
 	} else if (element = document.querySelector(`input[value='${suggestedSize}']`)){

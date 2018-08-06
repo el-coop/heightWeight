@@ -138,8 +138,10 @@ function toggleForm() {
 }
 
 function sizeCalculated(event) {
+	console.log('here');
 	var suggestedSize = event.data.suggestedSize;
 	var element = document.querySelector('option[value=\'' + suggestedSize + '\']');
+	console.log(suggestedSize);
 	if (element) {
 		element.parentElement.value = suggestedSize;
 	} else if (element = document.querySelector('input[value=\'' + suggestedSize + '\']')) {
