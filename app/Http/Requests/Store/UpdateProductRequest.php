@@ -33,7 +33,7 @@ class UpdateProductRequest extends FormRequest {
 		$rules = [
 			'measurement' => 'required|in:metric,imperial',
 			'type' => 'required|in:t-shirt,shirt,pants,dress',
-			'gender' => 'required|in:male,female',
+			'gender' => 'required|in:male,female,unisex',
 		];
 		foreach ($this->variants as $key => $variant) {
 			$rules[$key] = 'array';

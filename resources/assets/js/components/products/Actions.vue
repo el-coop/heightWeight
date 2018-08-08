@@ -5,6 +5,7 @@
             {{ copyActive ? 'Cancel' : 'Copy'}}
         </button>
         <button class="button"
+                :disabled="rowData.percentCompleted === 0"
                 :class="{ 'is-loading' : togglingVisibility, 'is-outlined is-primary': actualData.visible }"
                 @click="toggleVisibility">
             {{actualData.visible ? 'Visible' : 'Not Visible'}}

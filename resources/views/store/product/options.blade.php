@@ -65,6 +65,12 @@
                            value="female" {{ old('gender', $productModel->gender) == 'female' ? 'checked' : ''}}>
                     Female
                 </label>
+                <span>/</span>
+                <label class="radio">
+                    <input type="radio" name="gender"
+                           value="unisex" {{ old('gender', $productModel->gender) == 'unisex' || old('gender', $productModel->gender) == '' ? 'checked' : ''}}>
+                    Unisex
+                </label>
             </div>
             @if ($errors->has('gender'))
                 <p class="help is-danger">{{ $errors->first('gender') }}</p>
