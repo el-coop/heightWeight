@@ -1,4 +1,4 @@
-<div key="3" v-if="activeInstructions==3" class="content">
+<div key="3" v-if="activeInstructions==='Questions / Suggestions'" class="content">
     <p>
         Maybe you can find an answer in our Help docs at the top-right corner or via FAQ docs in our website: FAQ DocsM
         Feel

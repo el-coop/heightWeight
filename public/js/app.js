@@ -39908,6 +39908,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -39952,7 +39961,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				tableClass: 'table is-fullwidth is-striped'
 			},
 			params: this.extraParams,
-			filter: null
+			filter: null,
+			perPage: 50
 		};
 	},
 
@@ -39970,6 +39980,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			window.setTimeout(function () {
 				_this.$refs.table.normalizeFields();
 			}, 100);
+		},
+		perPage: function perPage() {
+			this.updateParams();
 		}
 	},
 
@@ -44193,6 +44206,48 @@ var render = function() {
           [
             _c("div", { staticClass: "level-left" }, [
               _c("div", { staticClass: "level-item" }, [
+                _c("div", { staticClass: "select" }, [
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.perPage,
+                          expression: "perPage"
+                        }
+                      ],
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.perPage = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    },
+                    [
+                      _c("option", { domProps: { value: 20 } }, [_vm._v("10")]),
+                      _vm._v(" "),
+                      _c("option", { domProps: { value: 50 } }, [_vm._v("50")]),
+                      _vm._v(" "),
+                      _c("option", { domProps: { value: 100 } }, [
+                        _vm._v("100")
+                      ])
+                    ]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "level-item" }, [
                 _c("div", { staticClass: "field has-addons" }, [
                   _c("div", { staticClass: "control" }, [
                     _c("input", {
@@ -44241,11 +44296,7 @@ var render = function() {
                         attrs: { type: "button" },
                         on: { click: _vm.updateParams }
                       },
-                      [
-                        _vm._v(
-                          "\n                                    Search\n                                "
-                        )
-                      ]
+                      [_vm._v("\n\t\t\t\t\t\t\t\t\tSearch\n\t\t\t\t\t\t\t\t")]
                     )
                   ])
                 ])
@@ -44269,7 +44320,7 @@ var render = function() {
               "pagination-path": "",
               css: _vm.css,
               fields: _vm.fields,
-              "per-page": 25,
+              "per-page": _vm.perPage,
               "append-params": _vm.params,
               "no-data-template": _vm.emptyText
             },
@@ -45210,10 +45261,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		return {
 			message: "&lt;div id=\"height_and_weight\"&gt;&lt;/div&gt;\n" + "{% assign height_and_weight_app_data = product.metafields.height_weight %}\n" + "&lt;input type=\"hidden\"\n" + "value='@{{ height_and_weight_app_data[\"height_and_weight_app_data\"] }}'\n" + "name=\"hidden_metafiled\"\n" + "class=\"height_weight_hide_meta\"&gt;",
 
-			activeInstructions: 0,
+			activeInstructions: 'New features',
 			instructions: [
 			// 'Installation instructions',
-			'New features', 'Select app products', 'Edit your products', 'Questions / Suggestions'],
+			'New features', 'Docs Library', 'Select app products', 'Edit your products', 'Questions / Suggestions'],
 
 			copyingFields: false,
 			copyingId: null,

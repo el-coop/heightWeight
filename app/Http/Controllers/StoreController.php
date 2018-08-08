@@ -36,7 +36,7 @@ class StoreController extends Controller {
 	
 	public function products(Request $request) {
 		$shop = ShopifyApp::shop();
-		$perPage = 25;
+		$perPage = $request->input('per_page',25);
 		
 		$totalProducts = $shop->product_count;
 		$pageCount = $request->filled('filter') ? 1 : ceil($totalProducts / $perPage);

@@ -1,4 +1,4 @@
-<div key="1" v-if="activeInstructions==1" class="content">
+<div key="1" v-if="activeInstructions==='Select app products'" class="content">
     <h4>
         Control which products are added to the app with the
         <a href="https://{{$shop->shopify_domain}}/admin/collections/{{ $shop->collection_id }}" target="_blank">

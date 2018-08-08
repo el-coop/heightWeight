@@ -1,4 +1,4 @@
-<div key="0" v-if="activeInstructions==0">
+<div key="0" v-if="activeInstructions==='New features'">
     @include('store.instructions.features.completed')
     @include('store.instructions.features.incomplete')
 </div>

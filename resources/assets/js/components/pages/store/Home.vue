@@ -11,10 +11,11 @@
 				"name=\"hidden_metafiled\"\n" +
 				"class=\"height_weight_hide_meta\"&gt;",
 
-				activeInstructions: 0,
+				activeInstructions: 'New features',
 				instructions: [
 					// 'Installation instructions',
 					'New features',
+					'Docs Library',
 					'Select app products',
 					'Edit your products',
 					'Questions / Suggestions',

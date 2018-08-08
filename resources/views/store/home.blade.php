@@ -29,9 +29,11 @@
 					</div>
 					<div class="box">
 						<div class="is-pulled-right">
-							<button v-tooltip="'Insert here the way you call your ”size” variants in your store.'"
-									class="button is-rounded is-dark is-bold">?
-							</button>
+							<a target="_blank" href="https://heightandweight.co/docs/the-name-of-your-size-variant/">
+								<button v-tooltip="'Click for details.'"
+										class="button is-rounded is-dark is-bold">?
+								</button>
+							</a>
 						</div>
 						<form method="post" action="{{ action('StoreController@updateSizeName') }}">
 							@csrf
@@ -60,7 +62,8 @@
 							<div class="field has-addons is-expanded">
 								<p class="select">
 									<select name="language">
-										<option disabled {{ $shop->language == null ? 'selected' : '' }}>Auto Detect</option>
+										<option disabled {{ $shop->language == null ? 'selected' : '' }}>Auto Detect
+										</option>
 										@foreach(['en' => 'English', 'fr' => 'French', 'de' => 'German', 'es' => 'Spanish'] as $code => $language)
 											<option value="{{ $code }}" {{ $shop->language == $code ? 'selected' : '' }}>{{ $language }}</option>
 										@endforeach
