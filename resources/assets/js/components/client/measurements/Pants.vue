@@ -2,12 +2,11 @@
 	<div class="columns is-mobile">
 		<div class="column" style="position: relative">
 			<figure class="image is-square">
-				<img src="/images/shirt-measurements.png">
+				<img src="/images/pants-measurements.jpg">
 			</figure>
-			<input class="input sleeve is-small" v-model="sleeve"/>
-			<input class="input bust is-small" v-model="bust"/>
-			<input class="input length is-small" v-model="length"/>
 			<input class="input waist is-small" v-model="waist"/>
+			<input class="input length is-small" v-model="length"/>
+			<input class="input inseam is-small" v-model="inseam"/>
 		</div>
 
 		<div class="column is-3 is-flex" style="align-items: center; padding-left: 0">
@@ -43,8 +42,7 @@
 		data() {
 			return {
 				sizes: this.sortSizes('length'),
-				sleeve: 0,
-				bust: 0,
+				inseam: 0,
 				length: 0,
 				waist: 0,
 			}
@@ -118,8 +116,7 @@
 				result = this.sizes[resultCategory];
 			}
 			this.$emit('calculated', result);
-			this.sleeve = parseFloat(this.product.data[result].sleeve.min);
-			this.bust = parseFloat(this.product.data[result].bust.min);
+			this.inseam = parseFloat(this.product.data[result].inseam.min);
 			this.length = parseFloat(this.product.data[result].length.min);
 			this.waist = parseFloat(this.product.data[result].waist.min);
 		},
@@ -127,13 +124,9 @@
 		computed: {
 			measuredCategory: {
 				get() {
-					let sleeveCategory = -1;
-					if (this.sleeve) {
-						sleeveCategory = this.findCategorySize('sleeve', this.sleeve);
-					}
-					let bustCategory = -1;
-					if (this.bust) {
-						bustCategory = this.findCategorySize('bust', this.bust);
+					let inseamCategory = -1;
+					if (this.inseam) {
+						inseamCategory = this.findCategorySize('inseam', this.inseam);
 					}
 					let lengthCategory = -1;
 					if (this.length) {
@@ -143,12 +136,11 @@
 					if (this.waist) {
 						waistCategory = this.findCategorySize('waist', this.waist);
 					}
-					return this.sizes[Math.max(sleeveCategory, bustCategory, lengthCategory, waistCategory)];
+					return this.sizes[Math.max(inseamCategory, lengthCategory, waistCategory)];
 				}
 				,
 				set(val) {
-					this.sleeve = parseFloat(this.product.data[val].sleeve.min || 0);
-					this.bust = parseFloat(this.product.data[val].bust.min || 0);
+					this.inseam = parseFloat(this.product.data[val].inseam.min || 0);
 					this.length = parseFloat(this.product.data[val].length.min || 0);
 					this.waist = parseFloat(this.product.data[val].waist.min || 0);
 					return val;
@@ -165,30 +157,24 @@
 		position: relative;
 	}
 
-	.sleeve {
+	.inseam {
 		position: absolute;
 		width: 4ch;
-		top: 23%;
-	}
-
-	.bust {
-		position: absolute;
-		width: 5ch;
-		top: 34%;
-		left: 40%;
+		top: 84%;
+		left: 71%;
 	}
 
 	.length {
 		position: absolute;
 		width: 5ch;
-		top: 65%;
-		left: 55%;
+		top: 50%;
+		left: 81%;
 	}
 
 	.waist {
 		position: absolute;
 		width: 5ch;
-		top: 80%;
+		top: 10%;
 		left: 38%;
 	}
 

@@ -24,6 +24,7 @@
                     <div class="field">
                         <component is="{{$data['field']}}"
                                    ref="min"
+                                   @focus="console.log('here')"
                                    :metric="metric"
                                    :has-error="{{ $errors->has("{$key}.{$part}.min") ? 'true' : 'false'}}"
                                    name="{{ $key }}[{{ $part }}][min]"

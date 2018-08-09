@@ -32,12 +32,12 @@ class UpdateProductRequest extends FormRequest {
 		
 		$rules = [
 			'measurement' => 'required|in:metric,imperial',
-			'type' => 'required|in:t-shirt,shirt,pants,dress',
+			'type' => 'required|in:t-shirt,pants,other',
 			'gender' => 'required|in:male,female,unisex',
 		];
 		foreach ($this->variants as $key => $variant) {
 			$rules[$key] = 'array';
-			foreach (['bust', 'waist', 'length', 'shoulders', 'sleeve', 'height', 'weight'] as $part) {
+			foreach ($this->getProductAttributes() as $part) {
 				$rules["{$key}.{$part}"] = 'required|array';
 				$rules["{$key}.{$part}.min"] = [
 					'numeric',
@@ -76,5 +76,16 @@ class UpdateProductRequest extends FormRequest {
 		$product->data = $this->only($keys);
 		$product->visible = true;
 		$product->save();
+	}
+	
+	protected function getProductAttributes() {
+		switch ($this->input('type', 'other')) {
+			case 't-shirt':
+				return ['bust', 'waist', 'length', 'shoulders', 'sleeve', 'height', 'weight'];
+			case 'pants':
+				return ['waist', 'length', 'inseam', 'height', 'weight'];
+			case 'other':
+				return ['height', 'weight'];
+		}
 	}
 }

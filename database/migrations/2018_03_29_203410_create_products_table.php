@@ -17,14 +17,14 @@ class CreateProductsTable extends Migration {
 			$table->string('shopify_id')->index();
 			$table->boolean('visible')->default(false);
 			$table->enum('measurement', ['metric', 'imperial'])->nullable();
-			$table->enum('type', ['t-shirt', 'shirt', 'pants', 'dress'])->nullable();
-			$table->enum('gender', ['male', 'female','unisex'])->nullable();
+			$table->enum('type', ['t-shirt', 'pants', 'other'])->nullable();
+			$table->enum('gender', ['male', 'female', 'unisex'])->nullable();
 			$table->json('data')->nullable();
 			$table->timestamps();
 			$table->foreign('shop_id')->references('id')->on('shops')->onDelete('cascade');
 		});
 	}
-
+	
 	/**
 	 * Reverse the migrations.
 	 *

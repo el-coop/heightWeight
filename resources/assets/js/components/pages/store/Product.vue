@@ -6,13 +6,18 @@
 			startMetric: {
 				required: true,
 				type: String
+			},
+			startType: {
+				required: true,
+				type: String
 			}
 		},
 
 		data() {
 			return {
 				metric: this.startMetric,
-				showMessage: false
+				showMessage: false,
+				type: this.startType
 			}
 		},
 
@@ -32,6 +37,10 @@
 						this.showMessage = true;
 					})
 				});
+			},
+
+			minFocus(){
+				console.log('focus');
 			}
 		}
 	}

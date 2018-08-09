@@ -1,16 +1,18 @@
 <template>
-    <p class="control">
-        <input v-show="metric == 'metric'"
-               class="input" :class="{'is-danger': hasError}"
-               :name="name"
-               v-model="value"
-               :placeholder="placeholder + ' cm'">
-        <span v-show="metric == 'imperial'">
+	<p class="control">
+		<input v-show="metric == 'metric'"
+			   class="input" :class="{'is-danger': hasError}"
+			   :name="name"
+			   onfocus="console.log('here')"
+			   v-model="value"
+			   :placeholder="placeholder + ' cm'">
+		<span v-show="metric == 'imperial'">
             <input class="input" :class="{'is-danger': hasError}"
-                   v-model="inches"
-                   :placeholder="placeholder + ' In'">
+				   v-model="inches"
+				   @focus="$emit('focus')"
+				   :placeholder="placeholder + ' In'">
         </span>
-    </p>
+	</p>
 
 </template>
 

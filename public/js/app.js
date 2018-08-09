@@ -44718,6 +44718,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	name: "cm-inch-field",
@@ -44807,7 +44809,11 @@ var render = function() {
       ],
       staticClass: "input",
       class: { "is-danger": _vm.hasError },
-      attrs: { name: _vm.name, placeholder: _vm.placeholder + " cm" },
+      attrs: {
+        name: _vm.name,
+        onfocus: "console.log('here')",
+        placeholder: _vm.placeholder + " cm"
+      },
       domProps: { value: _vm.value },
       on: {
         input: function($event) {
@@ -44846,6 +44852,9 @@ var render = function() {
           attrs: { placeholder: _vm.placeholder + " In" },
           domProps: { value: _vm.inches },
           on: {
+            focus: function($event) {
+              _vm.$emit("focus")
+            },
             input: function($event) {
               if ($event.target.composing) {
                 return
@@ -45405,13 +45414,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		startMetric: {
 			required: true,
 			type: String
+		},
+		startType: {
+			required: true,
+			type: String
 		}
 	},
 
 	data: function data() {
 		return {
 			metric: this.startMetric,
-			showMessage: false
+			showMessage: false,
+			type: this.startType
 		};
 	},
 	mounted: function mounted() {
@@ -45435,6 +45449,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 					_this2.showMessage = true;
 				});
 			});
+		},
+		minFocus: function minFocus() {
+			console.log('focus');
 		}
 	}
 });
@@ -48304,6 +48321,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__fortawesome_fontawesome_free_solid_faSync___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__fortawesome_fontawesome_free_solid_faSync__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__measurements_Shirt__ = __webpack_require__(197);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__measurements_Shirt___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__measurements_Shirt__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__measurements_Pants__ = __webpack_require__(208);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__measurements_Pants___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__measurements_Pants__);
 //
 //
 //
@@ -48339,6 +48358,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+
 
 
 
@@ -48349,7 +48370,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 	components: {
 		FontAwesomeIcon: __WEBPACK_IMPORTED_MODULE_0__fortawesome_vue_fontawesome___default.a,
-		ShirtMeasurements: __WEBPACK_IMPORTED_MODULE_2__measurements_Shirt___default.a
+		TShirt: __WEBPACK_IMPORTED_MODULE_2__measurements_Shirt___default.a,
+		Pants: __WEBPACK_IMPORTED_MODULE_3__measurements_Pants___default.a
 	},
 
 	props: {
@@ -48474,7 +48496,7 @@ exports = module.exports = __webpack_require__(11)(false);
 
 
 // module
-exports.push([module.i, "\ndiv[data-v-465d815b] {\n  position: relative;\n}\n.sleeve[data-v-465d815b] {\n  position: absolute;\n  width: 4ch;\n  top: 42%;\n}\n.bust[data-v-465d815b] {\n  position: absolute;\n  width: 5ch;\n  top: 44%;\n  left: 40%;\n}\n.length[data-v-465d815b] {\n  position: absolute;\n  width: 5ch;\n  top: 65%;\n  left: 55%;\n}\n.waist[data-v-465d815b] {\n  position: absolute;\n  width: 5ch;\n  top: 73%;\n  left: 38%;\n}\n", ""]);
+exports.push([module.i, "\ndiv[data-v-465d815b] {\n  position: relative;\n}\n.sleeve[data-v-465d815b] {\n  position: absolute;\n  width: 4ch;\n  top: 23%;\n}\n.bust[data-v-465d815b] {\n  position: absolute;\n  width: 5ch;\n  top: 34%;\n  left: 40%;\n}\n.length[data-v-465d815b] {\n  position: absolute;\n  width: 5ch;\n  top: 65%;\n  left: 55%;\n}\n.waist[data-v-465d815b] {\n  position: absolute;\n  width: 5ch;\n  top: 80%;\n  left: 38%;\n}\n", ""]);
 
 // exports
 
@@ -48803,7 +48825,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("figure", { staticClass: "image is-square" }, [
-      _c("img", { attrs: { src: "/images/shirt-measurments.jpg" } })
+      _c("img", { attrs: { src: "/images/shirt-measurements.png" } })
     ])
   }
 ]
@@ -48852,36 +48874,46 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "columns is-mobile" }, [
-      _c("div", { staticClass: "column is-two-fifths" }, [
-        _c("div", {
-          staticClass: "title is-size-5",
-          domProps: { textContent: _vm._s(_vm.translations.recommendedSize) }
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "is-flex centered" }, [
-          _c("span", {
-            staticClass: "is-size-2",
-            domProps: { innerHTML: _vm._s(_vm.displayedResult) }
-          })
-        ])
-      ]),
-      _vm._v(" "),
       _c(
         "div",
-        { staticClass: "column bordered-left" },
+        {
+          staticClass: "column",
+          class: { "is-two-fifths": _vm.product.type !== "other" }
+        },
         [
           _c("div", {
             staticClass: "title is-size-5",
-            domProps: { textContent: _vm._s(_vm.translations.productSizes) }
+            domProps: { textContent: _vm._s(_vm.translations.recommendedSize) }
           }),
           _vm._v(" "),
-          _c("shirt-measurements", {
-            attrs: { product: _vm.product, "user-data": _vm.userData },
-            on: { calculated: _vm.displayResult }
-          })
-        ],
-        1
-      )
+          _c("div", { staticClass: "is-flex centered" }, [
+            _c("span", {
+              staticClass: "is-size-2",
+              domProps: { innerHTML: _vm._s(_vm.displayedResult) }
+            })
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _vm.product.type !== "other"
+        ? _c(
+            "div",
+            { staticClass: "column bordered-left" },
+            [
+              _c("div", {
+                staticClass: "title is-size-5",
+                domProps: { textContent: _vm._s(_vm.translations.productSizes) }
+              }),
+              _vm._v(" "),
+              _c(_vm.product.type, {
+                tag: "component",
+                attrs: { product: _vm.product, "user-data": _vm.userData },
+                on: { calculated: _vm.displayResult }
+              })
+            ],
+            1
+          )
+        : _vm._e()
     ])
   ])
 }
@@ -48969,6 +49001,408 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 205 */,
+/* 206 */,
+/* 207 */,
+/* 208 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(209)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(211)
+/* template */
+var __vue_template__ = __webpack_require__(212)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-837a877e"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\client\\measurements\\Pants.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-837a877e", Component.options)
+  } else {
+    hotAPI.reload("data-v-837a877e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 209 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(210);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(13)("8f39c4ae", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-837a877e\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Pants.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-837a877e\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Pants.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 210 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(11)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\ndiv[data-v-837a877e] {\n  position: relative;\n}\n.inseam[data-v-837a877e] {\n  position: absolute;\n  width: 4ch;\n  top: 84%;\n  left: 71%;\n}\n.length[data-v-837a877e] {\n  position: absolute;\n  width: 5ch;\n  top: 50%;\n  left: 81%;\n}\n.waist[data-v-837a877e] {\n  position: absolute;\n  width: 5ch;\n  top: 10%;\n  left: 38%;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 211 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	name: "measurements",
+
+	props: {
+		product: {
+			required: true,
+			type: Object
+		},
+		userData: {
+			required: true,
+			type: Object
+		}
+	},
+
+	data: function data() {
+		return {
+			sizes: this.sortSizes('length'),
+			inseam: 0,
+			length: 0,
+			waist: 0
+		};
+	},
+
+
+	methods: {
+		sortSizes: function sortSizes(category) {
+			var _this = this;
+
+			var result = _.keys(this.product.data);
+
+			result.sort(function (a, b) {
+				if (parseFloat(_this.product.data[a][category].min) < parseFloat(_this.product.data[b][category].min)) {
+					return -1;
+				}
+
+				if (parseFloat(_this.product.data[a][category].min) > parseFloat(_this.product.data[b][category].min)) {
+					return 1;
+				}
+				return 0;
+			});
+
+			return result;
+		},
+		isDefined: function isDefined(category) {
+			return this.product.data[this.sizes[0]][category].min || this.product.data[this.sizes[1]][category].min;
+		},
+		findCategorySize: function findCategorySize(category, measurement) {
+
+			var i = 0;
+
+			while (i + 1 !== this.sizes.length && parseFloat(this.product.data[this.sizes[i + 1]][category].min) <= measurement) {
+				i++;
+			}
+			return i;
+		}
+	},
+
+	mounted: function mounted() {
+		var result = '';
+		if (this.isDefined('height') && this.isDefined('weight')) {
+			var resultCategory = this.findCategorySize('height', this.userData.height);
+			var weightCategory = this.findCategorySize('weight', this.userData.weight);
+			if (resultCategory !== weightCategory) {
+				resultCategory = Math.max(resultCategory, weightCategory);
+				if (resultCategory !== 0) {
+					if (this.userData.bmi < 18.5) {
+						resultCategory--;
+					}
+				}
+
+				if (resultCategory !== this.sizes.length - 1) {
+					if (this.userData.bmi > 24.9) {
+						resultCategory++;
+					}
+				}
+
+				if (resultCategory !== this.sizes.length - 1) {
+					if (this.userData.bmi > 29) {
+						resultCategory++;
+					}
+				}
+			}
+			result = this.sizes[resultCategory];
+		} else {
+			var devisor = 0.358;
+			if (this.product.gender === 'make') {
+				devisor = 0.37;
+			}
+			var _resultCategory = this.findCategorySize('length', Math.ceil(this.userData.height * 0.366));
+			result = this.sizes[_resultCategory];
+		}
+		this.$emit('calculated', result);
+		this.inseam = parseFloat(this.product.data[result].inseam.min);
+		this.length = parseFloat(this.product.data[result].length.min);
+		this.waist = parseFloat(this.product.data[result].waist.min);
+	},
+
+
+	computed: {
+		measuredCategory: {
+			get: function get() {
+				var inseamCategory = -1;
+				if (this.inseam) {
+					inseamCategory = this.findCategorySize('inseam', this.inseam);
+				}
+				var lengthCategory = -1;
+				if (this.length) {
+					lengthCategory = this.findCategorySize('length', this.length);
+				}
+				var waistCategory = -1;
+				if (this.waist) {
+					waistCategory = this.findCategorySize('waist', this.waist);
+				}
+				return this.sizes[Math.max(inseamCategory, lengthCategory, waistCategory)];
+			},
+			set: function set(val) {
+				this.inseam = parseFloat(this.product.data[val].inseam.min || 0);
+				this.length = parseFloat(this.product.data[val].length.min || 0);
+				this.waist = parseFloat(this.product.data[val].waist.min || 0);
+				return val;
+			}
+		}
+	}
+
+});
+
+/***/ }),
+/* 212 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "columns is-mobile" }, [
+    _c(
+      "div",
+      { staticClass: "column", staticStyle: { position: "relative" } },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.waist,
+              expression: "waist"
+            }
+          ],
+          staticClass: "input waist is-small",
+          domProps: { value: _vm.waist },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.waist = $event.target.value
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.length,
+              expression: "length"
+            }
+          ],
+          staticClass: "input length is-small",
+          domProps: { value: _vm.length },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.length = $event.target.value
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.inseam,
+              expression: "inseam"
+            }
+          ],
+          staticClass: "input inseam is-small",
+          domProps: { value: _vm.inseam },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.inseam = $event.target.value
+            }
+          }
+        })
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "column is-3 is-flex",
+        staticStyle: { "align-items": "center", "padding-left": "0" }
+      },
+      [
+        _c("div", { staticClass: "field" }, [
+          _c("div", { staticClass: "control" }, [
+            _c("div", { staticClass: "select" }, [
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.measuredCategory,
+                      expression: "measuredCategory"
+                    }
+                  ],
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.measuredCategory = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
+                  }
+                },
+                _vm._l(_vm.sizes, function(size) {
+                  return _c("option", {
+                    domProps: { value: size, innerHTML: _vm._s(size) }
+                  })
+                })
+              )
+            ])
+          ])
+        ])
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("figure", { staticClass: "image is-square" }, [
+      _c("img", { attrs: { src: "/images/pants-measurements.jpg" } })
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-837a877e", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
