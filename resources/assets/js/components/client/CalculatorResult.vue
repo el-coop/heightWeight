@@ -11,17 +11,21 @@
                     </span>
 				</button>
 			</div>
+
 		</div>
 		<div class="columns is-mobile">
-			<div class="column" :class="{'is-two-fifths': product.type !== 'other'}">
+			<div class="column" :class="{'is-two-fifths': showMeasurements}">
 				<div class="title is-size-5" v-text="translations.recommendedSize">
 
 				</div>
 				<div class="is-flex centered">
 					<span class="is-size-2" v-html="displayedResult"></span>
 				</div>
+				<div style="margin-top: 30px">
+					<span class="help is-danger" v-if="showWarning">It seems you are between sizes, please contact out store for your size before you place an order</span>
+				</div>
 			</div>
-			<div class="column bordered-left" v-if="product.type !== 'other'">
+			<div class="column bordered-left" v-show="showMeasurements">
 				<div class="title is-size-5" v-text="translations.productSizes">
 
 				</div>
@@ -81,6 +85,24 @@
 			refresh() {
 				return faSync;
 			},
+			showMeasurements() {
+				let count = 0;
+				for (let size in this.product.data) {
+					for (let category in this.product.data[size]) {
+						if (category !== 'height' && category !== 'weight' && this.product.data[size][category]['min'] !== null) {
+							count++;
+						}
+					}
+				}
+
+				return count > 0;
+			},
+			showWarning() {
+				if (this.userData.bmi < 19 || this.userData.bmi >= 35) {
+					return true;
+				}
+				return false;
+			}
 		},
 	}
 </script>

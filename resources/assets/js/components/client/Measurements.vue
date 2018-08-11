@@ -106,7 +106,7 @@
 
 		methods: {
 			calculateBmi() {
-				this.bmi = this.weight / this.height / this.height * 10000;
+				this.bmi = this.weight / (this.height-2) / this.height * 10000;
 				this.$emit('user-data', {
 					height: this.height,
 					weight: this.weight,

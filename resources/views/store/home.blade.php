@@ -28,59 +28,26 @@
 						<p>Products imported app : {{$shop->product_count}}</p>
 					</div>
 					<div class="box">
-						<div class="is-pulled-right">
-							<a target="_blank" href="https://heightandweight.co/docs/the-name-of-your-size-variant/">
-								<button v-tooltip="'Click for details.'"
-										class="button is-rounded is-dark is-bold">?
-								</button>
-							</a>
-						</div>
-						<form method="post" action="{{ action('StoreController@updateSizeName') }}">
-							@csrf
-							<div class="field">
-								<label class="label">Please tell us the name of your size option</label>
-							</div>
-							<div class="field has-addons is-expanded">
-								<p class="control">
-									<input class="input" name="size_name" required type="text"
-										   value="{{ $shop->size_name }}">
-								</p>
-								<p class="control">
-									<button class="button is-success">
-										Update
-									</button>
-								</p>
-							</div>
-						</form>
-					</div>
-					<div class="box">
-						<form method="post" action="{{ action('StoreController@updateLanguage') }}">
-							@csrf
-							<div class="field">
-								<label class="label">Choose the calculator's language</label>
-							</div>
-							<div class="field has-addons is-expanded">
-								<p class="select">
-									<select name="language">
-										<option disabled {{ $shop->language == null ? 'selected' : '' }}>Auto Detect
-										</option>
-										@foreach(['en' => 'English', 'fr' => 'French', 'de' => 'German', 'es' => 'Spanish'] as $code => $language)
-											<option value="{{ $code }}" {{ $shop->language == $code ? 'selected' : '' }}>{{ $language }}</option>
-										@endforeach
-									</select>
-								</p>
-								<p class="control">
-									<button class="button is-success">
-										Update
-									</button>
-								</p>
-							</div>
-						</form>
+						@include('store.home.buttonField')
 					</div>
 				</div>
 				<div class="column">
-					<div class="box">
-						@include('store.instructions.index')
+					<div class="columns is-multiline">
+						<div class="column is-full">
+							<div class="box">
+								@include('store.instructions.index')
+							</div>
+						</div>
+						<div class="column is-half">
+							<div class="box">
+								@include('store.home.sizeField')
+							</div>
+						</div>
+						<div class="column is-half">
+							<div class="box">
+								@include('store.home.languageField')
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

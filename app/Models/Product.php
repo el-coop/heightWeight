@@ -17,6 +17,13 @@ class Product extends Model {
 		return 'shopify_id';
 	}
 	
+	public function getLinkAttribute() {
+		$shop = ShopifyApp::shop();
+		$domain = $shop->shopify_domain;
+		$handle = $shop->api()->request('GET', "/admin/products/{$this->shopify_id}.json")->body->product->handle;
+		return "https://{$domain}/products/{$handle}";
+	}
+	
 	static public function getVariants($product) {
 		$shop = ShopifyApp::shop();
 		$option = collect($product->options)->firstWhere('name', $shop->size_name)->position ?? null;

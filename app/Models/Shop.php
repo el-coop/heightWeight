@@ -43,7 +43,22 @@ class Shop extends BaseShop {
 		}
 		
 		return false;
-		
+	}
+	
+	public function button() {
+		return $this->hasOne(Button::class);
+	}
+	
+	public function getButtonAttribute() {
+		$button = $this->button()->first();
+		if (!$button) {
+			$button = new Button;
+			$button->text = __('calculator.calculate',[], $this->language);
+			$button->color = '#f5f5f5';
+			$button->background = '#363636';
+			$button->border = 'black';
+		}
+		return $button;
 	}
 	
 	public function getProductCountAttribute() {

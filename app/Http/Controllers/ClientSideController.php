@@ -31,7 +31,7 @@ class ClientSideController extends Controller {
 				
 				return response()->json([
 					"visible" => true,
-					"buttonText" => __('calculator.calculate')
+					"button" => $product->shop->button
 				])->header('Access-Control-Allow-Origin', $request->header('origin'))
 					->header('Access-Control-Allow-Methods', 'GET')
 					->header('Access-Control-Allow-Credentials', 'true');

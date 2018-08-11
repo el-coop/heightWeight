@@ -13,7 +13,6 @@
 
 Route::group(['middleware' => ['auth.shop', 'billable']], function () {
 	Route::get('/', 'StoreController@home')->name('home');
-	\
 	
 	Route::group(['prefix' => 'store'], function () {
 			
@@ -23,6 +22,7 @@ Route::group(['middleware' => ['auth.shop', 'billable']], function () {
 				Route::post('/contact', 'StoreController@contact');
 				Route::post('/size-name', 'StoreController@updateSizeName');
 				Route::post('/language', 'StoreController@updateLanguage');
+				Route::post('/button', 'StoreController@updateButton');
 				Route::post('/{productId}', 'ProductController@updateProduct');
 				Route::put('/visible/{productId}', 'ProductController@toggleProductVisibility');
 				Route::put('/copy/{product}', 'ProductController@copyProduct');

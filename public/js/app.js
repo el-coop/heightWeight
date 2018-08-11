@@ -839,81 +839,6 @@ module.exports = function (it, key) {
 
 /***/ }),
 /* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var dP = __webpack_require__(7);
-var createDesc = __webpack_require__(16);
-module.exports = __webpack_require__(8) ? function (object, key, value) {
-  return dP.f(object, key, createDesc(1, value));
-} : function (object, key, value) {
-  object[key] = value;
-  return object;
-};
-
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var anObject = __webpack_require__(14);
-var IE8_DOM_DEFINE = __webpack_require__(45);
-var toPrimitive = __webpack_require__(24);
-var dP = Object.defineProperty;
-
-exports.f = __webpack_require__(8) ? Object.defineProperty : function defineProperty(O, P, Attributes) {
-  anObject(O);
-  P = toPrimitive(P, true);
-  anObject(Attributes);
-  if (IE8_DOM_DEFINE) try {
-    return dP(O, P, Attributes);
-  } catch (e) { /* empty */ }
-  if ('get' in Attributes || 'set' in Attributes) throw TypeError('Accessors not supported!');
-  if ('value' in Attributes) O[P] = Attributes.value;
-  return O;
-};
-
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// Thank's IE8 for his funny defineProperty
-module.exports = !__webpack_require__(15)(function () {
-  return Object.defineProperty({}, 'a', { get: function () { return 7; } }).a != 7;
-});
-
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// to indexed object, toObject with fallback for non-array-like ES3 strings
-var IObject = __webpack_require__(113);
-var defined = __webpack_require__(21);
-module.exports = function (it) {
-  return IObject(defined(it));
-};
-
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var store = __webpack_require__(28)('wks');
-var uid = __webpack_require__(17);
-var Symbol = __webpack_require__(3).Symbol;
-var USE_SYMBOL = typeof Symbol == 'function';
-
-var $exports = module.exports = function (name) {
-  return store[name] || (store[name] =
-    USE_SYMBOL && Symbol[name] || (USE_SYMBOL ? Symbol : uid)('Symbol.' + name));
-};
-
-$exports.store = store;
-
-
-/***/ }),
-/* 11 */
 /***/ (function(module, exports) {
 
 /*
@@ -995,16 +920,82 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 12 */
-/***/ (function(module, exports) {
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = function (it) {
-  return typeof it === 'object' ? it !== null : typeof it === 'function';
+var dP = __webpack_require__(8);
+var createDesc = __webpack_require__(16);
+module.exports = __webpack_require__(9) ? function (object, key, value) {
+  return dP.f(object, key, createDesc(1, value));
+} : function (object, key, value) {
+  object[key] = value;
+  return object;
 };
 
 
 /***/ }),
-/* 13 */
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var anObject = __webpack_require__(14);
+var IE8_DOM_DEFINE = __webpack_require__(45);
+var toPrimitive = __webpack_require__(24);
+var dP = Object.defineProperty;
+
+exports.f = __webpack_require__(9) ? Object.defineProperty : function defineProperty(O, P, Attributes) {
+  anObject(O);
+  P = toPrimitive(P, true);
+  anObject(Attributes);
+  if (IE8_DOM_DEFINE) try {
+    return dP(O, P, Attributes);
+  } catch (e) { /* empty */ }
+  if ('get' in Attributes || 'set' in Attributes) throw TypeError('Accessors not supported!');
+  if ('value' in Attributes) O[P] = Attributes.value;
+  return O;
+};
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Thank's IE8 for his funny defineProperty
+module.exports = !__webpack_require__(15)(function () {
+  return Object.defineProperty({}, 'a', { get: function () { return 7; } }).a != 7;
+});
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// to indexed object, toObject with fallback for non-array-like ES3 strings
+var IObject = __webpack_require__(113);
+var defined = __webpack_require__(21);
+module.exports = function (it) {
+  return IObject(defined(it));
+};
+
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var store = __webpack_require__(28)('wks');
+var uid = __webpack_require__(17);
+var Symbol = __webpack_require__(3).Symbol;
+var USE_SYMBOL = typeof Symbol == 'function';
+
+var $exports = module.exports = function (name) {
+  return store[name] || (store[name] =
+    USE_SYMBOL && Symbol[name] || (USE_SYMBOL ? Symbol : uid)('Symbol.' + name));
+};
+
+$exports.store = store;
+
+
+/***/ }),
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -1232,10 +1223,19 @@ function applyToTag (styleElement, obj) {
 
 
 /***/ }),
+/* 13 */
+/***/ (function(module, exports) {
+
+module.exports = function (it) {
+  return typeof it === 'object' ? it !== null : typeof it === 'function';
+};
+
+
+/***/ }),
 /* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isObject = __webpack_require__(12);
+var isObject = __webpack_require__(13);
 module.exports = function (it) {
   if (!isObject(it)) throw TypeError(it + ' is not an object!');
   return it;
@@ -1617,7 +1617,7 @@ if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.1.1 ToPrimitive(input [, PreferredType])
-var isObject = __webpack_require__(12);
+var isObject = __webpack_require__(13);
 // instead of the ES6 spec version, we didn't implement @@toPrimitive case
 // and the second argument - flag - preferred type is a string
 module.exports = function (it, S) {
@@ -1687,9 +1687,9 @@ module.exports = (
 /* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var def = __webpack_require__(7).f;
+var def = __webpack_require__(8).f;
 var has = __webpack_require__(5);
-var TAG = __webpack_require__(10)('toStringTag');
+var TAG = __webpack_require__(11)('toStringTag');
 
 module.exports = function (it, tag, stat) {
   if (it && !has(it = stat ? it : it.prototype, TAG)) def(it, TAG, { configurable: true, value: tag });
@@ -1700,7 +1700,7 @@ module.exports = function (it, tag, stat) {
 /* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports.f = __webpack_require__(10);
+exports.f = __webpack_require__(11);
 
 
 /***/ }),
@@ -1711,7 +1711,7 @@ var global = __webpack_require__(3);
 var core = __webpack_require__(23);
 var LIBRARY = __webpack_require__(22);
 var wksExt = __webpack_require__(31);
-var defineProperty = __webpack_require__(7).f;
+var defineProperty = __webpack_require__(8).f;
 module.exports = function (name) {
   var $Symbol = core.Symbol || (core.Symbol = LIBRARY ? {} : global.Symbol || {});
   if (name.charAt(0) != '_' && !(name in $Symbol)) defineProperty($Symbol, name, { value: wksExt.f(name) });
@@ -2814,12 +2814,12 @@ module.exports = Cancel;
 var LIBRARY = __webpack_require__(22);
 var $export = __webpack_require__(44);
 var redefine = __webpack_require__(47);
-var hide = __webpack_require__(6);
+var hide = __webpack_require__(7);
 var Iterators = __webpack_require__(25);
 var $iterCreate = __webpack_require__(111);
 var setToStringTag = __webpack_require__(30);
 var getPrototypeOf = __webpack_require__(118);
-var ITERATOR = __webpack_require__(10)('iterator');
+var ITERATOR = __webpack_require__(11)('iterator');
 var BUGGY = !([].keys && 'next' in [].keys()); // Safari has buggy iterators w/o `next`
 var FF_ITERATOR = '@@iterator';
 var KEYS = 'keys';
@@ -2888,7 +2888,7 @@ module.exports = function (Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCE
 var global = __webpack_require__(3);
 var core = __webpack_require__(23);
 var ctx = __webpack_require__(109);
-var hide = __webpack_require__(6);
+var hide = __webpack_require__(7);
 var has = __webpack_require__(5);
 var PROTOTYPE = 'prototype';
 
@@ -2953,7 +2953,7 @@ module.exports = $export;
 /* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = !__webpack_require__(8) && !__webpack_require__(15)(function () {
+module.exports = !__webpack_require__(9) && !__webpack_require__(15)(function () {
   return Object.defineProperty(__webpack_require__(46)('div'), 'a', { get: function () { return 7; } }).a != 7;
 });
 
@@ -2962,7 +2962,7 @@ module.exports = !__webpack_require__(8) && !__webpack_require__(15)(function ()
 /* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isObject = __webpack_require__(12);
+var isObject = __webpack_require__(13);
 var document = __webpack_require__(3).document;
 // typeof document.createElement is 'object' in old IE
 var is = isObject(document) && isObject(document.createElement);
@@ -2975,7 +2975,7 @@ module.exports = function (it) {
 /* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(6);
+module.exports = __webpack_require__(7);
 
 
 /***/ }),
@@ -3030,7 +3030,7 @@ module.exports = Object.create || function create(O, Properties) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var has = __webpack_require__(5);
-var toIObject = __webpack_require__(9);
+var toIObject = __webpack_require__(10);
 var arrayIndexOf = __webpack_require__(114)(false);
 var IE_PROTO = __webpack_require__(27)('IE_PROTO');
 
@@ -3395,7 +3395,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(60);
-module.exports = __webpack_require__(204);
+module.exports = __webpack_require__(209);
 
 
 /***/ }),
@@ -32812,7 +32812,7 @@ if(false) {
 /* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(11)(false);
+exports = module.exports = __webpack_require__(6)(false);
 // imports
 
 
@@ -40079,7 +40079,7 @@ var content = __webpack_require__(101);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(13)("4ca94fae", content, false, {});
+var update = __webpack_require__(12)("4ca94fae", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -40098,7 +40098,7 @@ if(false) {
 /* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(11)(false);
+exports = module.exports = __webpack_require__(6)(false);
 // imports
 
 
@@ -41227,7 +41227,7 @@ var setToStringTag = __webpack_require__(30);
 var IteratorPrototype = {};
 
 // 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
-__webpack_require__(6)(IteratorPrototype, __webpack_require__(10)('iterator'), function () { return this; });
+__webpack_require__(7)(IteratorPrototype, __webpack_require__(11)('iterator'), function () { return this; });
 
 module.exports = function (Constructor, NAME, next) {
   Constructor.prototype = create(IteratorPrototype, { next: descriptor(1, next) });
@@ -41239,11 +41239,11 @@ module.exports = function (Constructor, NAME, next) {
 /* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var dP = __webpack_require__(7);
+var dP = __webpack_require__(8);
 var anObject = __webpack_require__(14);
 var getKeys = __webpack_require__(26);
 
-module.exports = __webpack_require__(8) ? Object.defineProperties : function defineProperties(O, Properties) {
+module.exports = __webpack_require__(9) ? Object.defineProperties : function defineProperties(O, Properties) {
   anObject(O);
   var keys = getKeys(Properties);
   var length = keys.length;
@@ -41272,7 +41272,7 @@ module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
 
 // false -> Array#indexOf
 // true  -> Array#includes
-var toIObject = __webpack_require__(9);
+var toIObject = __webpack_require__(10);
 var toLength = __webpack_require__(115);
 var toAbsoluteIndex = __webpack_require__(116);
 module.exports = function (IS_INCLUDES) {
@@ -41364,9 +41364,9 @@ module.exports = function (it) {
 
 __webpack_require__(121);
 var global = __webpack_require__(3);
-var hide = __webpack_require__(6);
+var hide = __webpack_require__(7);
 var Iterators = __webpack_require__(25);
-var TO_STRING_TAG = __webpack_require__(10)('toStringTag');
+var TO_STRING_TAG = __webpack_require__(11)('toStringTag');
 
 var DOMIterables = ('CSSRuleList,CSSStyleDeclaration,CSSValueList,ClientRectList,DOMRectList,DOMStringList,' +
   'DOMTokenList,DataTransferItemList,FileList,HTMLAllCollection,HTMLCollection,HTMLFormElement,HTMLSelectElement,' +
@@ -41392,7 +41392,7 @@ for (var i = 0; i < DOMIterables.length; i++) {
 var addToUnscopables = __webpack_require__(122);
 var step = __webpack_require__(123);
 var Iterators = __webpack_require__(25);
-var toIObject = __webpack_require__(9);
+var toIObject = __webpack_require__(10);
 
 // 22.1.3.4 Array.prototype.entries()
 // 22.1.3.13 Array.prototype.keys()
@@ -41466,7 +41466,7 @@ module.exports = __webpack_require__(23).Symbol;
 // ECMAScript 6 symbols shim
 var global = __webpack_require__(3);
 var has = __webpack_require__(5);
-var DESCRIPTORS = __webpack_require__(8);
+var DESCRIPTORS = __webpack_require__(9);
 var $export = __webpack_require__(44);
 var redefine = __webpack_require__(47);
 var META = __webpack_require__(127).KEY;
@@ -41474,20 +41474,20 @@ var $fails = __webpack_require__(15);
 var shared = __webpack_require__(28);
 var setToStringTag = __webpack_require__(30);
 var uid = __webpack_require__(17);
-var wks = __webpack_require__(10);
+var wks = __webpack_require__(11);
 var wksExt = __webpack_require__(31);
 var wksDefine = __webpack_require__(32);
 var enumKeys = __webpack_require__(128);
 var isArray = __webpack_require__(129);
 var anObject = __webpack_require__(14);
-var isObject = __webpack_require__(12);
-var toIObject = __webpack_require__(9);
+var isObject = __webpack_require__(13);
+var toIObject = __webpack_require__(10);
 var toPrimitive = __webpack_require__(24);
 var createDesc = __webpack_require__(16);
 var _create = __webpack_require__(48);
 var gOPNExt = __webpack_require__(130);
 var $GOPD = __webpack_require__(131);
-var $DP = __webpack_require__(7);
+var $DP = __webpack_require__(8);
 var $keys = __webpack_require__(26);
 var gOPD = $GOPD.f;
 var dP = $DP.f;
@@ -41689,7 +41689,7 @@ $JSON && $export($export.S + $export.F * (!USE_NATIVE || $fails(function () {
 });
 
 // 19.4.3.4 Symbol.prototype[@@toPrimitive](hint)
-$Symbol[PROTOTYPE][TO_PRIMITIVE] || __webpack_require__(6)($Symbol[PROTOTYPE], TO_PRIMITIVE, $Symbol[PROTOTYPE].valueOf);
+$Symbol[PROTOTYPE][TO_PRIMITIVE] || __webpack_require__(7)($Symbol[PROTOTYPE], TO_PRIMITIVE, $Symbol[PROTOTYPE].valueOf);
 // 19.4.3.5 Symbol.prototype[@@toStringTag]
 setToStringTag($Symbol, 'Symbol');
 // 20.2.1.9 Math[@@toStringTag]
@@ -41703,9 +41703,9 @@ setToStringTag(global.JSON, 'JSON', true);
 /***/ (function(module, exports, __webpack_require__) {
 
 var META = __webpack_require__(17)('meta');
-var isObject = __webpack_require__(12);
+var isObject = __webpack_require__(13);
 var has = __webpack_require__(5);
-var setDesc = __webpack_require__(7).f;
+var setDesc = __webpack_require__(8).f;
 var id = 0;
 var isExtensible = Object.isExtensible || function () {
   return true;
@@ -41794,7 +41794,7 @@ module.exports = Array.isArray || function isArray(arg) {
 /***/ (function(module, exports, __webpack_require__) {
 
 // fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
-var toIObject = __webpack_require__(9);
+var toIObject = __webpack_require__(10);
 var gOPN = __webpack_require__(52).f;
 var toString = {}.toString;
 
@@ -41820,13 +41820,13 @@ module.exports.f = function getOwnPropertyNames(it) {
 
 var pIE = __webpack_require__(33);
 var createDesc = __webpack_require__(16);
-var toIObject = __webpack_require__(9);
+var toIObject = __webpack_require__(10);
 var toPrimitive = __webpack_require__(24);
 var has = __webpack_require__(5);
 var IE8_DOM_DEFINE = __webpack_require__(45);
 var gOPD = Object.getOwnPropertyDescriptor;
 
-exports.f = __webpack_require__(8) ? gOPD : function getOwnPropertyDescriptor(O, P) {
+exports.f = __webpack_require__(9) ? gOPD : function getOwnPropertyDescriptor(O, P) {
   O = toIObject(O);
   P = toPrimitive(P, true);
   if (IE8_DOM_DEFINE) try {
@@ -45570,7 +45570,7 @@ var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = __webpack_require__(185)
 /* template */
-var __vue_template__ = __webpack_require__(203)
+var __vue_template__ = __webpack_require__(208)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -45619,7 +45619,7 @@ var content = __webpack_require__(184);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(13)("60ca07d6", content, false, {});
+var update = __webpack_require__(12)("60ca07d6", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -45638,7 +45638,7 @@ if(false) {
 /* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(11)(false);
+exports = module.exports = __webpack_require__(6)(false);
 // imports
 
 
@@ -45886,7 +45886,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 	methods: {
 		calculateBmi: function calculateBmi() {
-			this.bmi = this.weight / this.height / this.height * 10000;
+			this.bmi = this.weight / (this.height - 2) / this.height * 10000;
 			this.$emit('user-data', {
 				height: this.height,
 				weight: this.weight,
@@ -48231,7 +48231,7 @@ var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = __webpack_require__(196)
 /* template */
-var __vue_template__ = __webpack_require__(202)
+var __vue_template__ = __webpack_require__(207)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -48280,7 +48280,7 @@ var content = __webpack_require__(195);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(13)("4511a39a", content, false, {});
+var update = __webpack_require__(12)("4511a39a", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -48299,7 +48299,7 @@ if(false) {
 /* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(11)(false);
+exports = module.exports = __webpack_require__(6)(false);
 // imports
 
 
@@ -48321,8 +48321,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__fortawesome_fontawesome_free_solid_faSync___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__fortawesome_fontawesome_free_solid_faSync__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__measurements_Shirt__ = __webpack_require__(197);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__measurements_Shirt___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__measurements_Shirt__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__measurements_Pants__ = __webpack_require__(208);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__measurements_Pants__ = __webpack_require__(202);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__measurements_Pants___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__measurements_Pants__);
+//
+//
+//
+//
 //
 //
 //
@@ -48406,6 +48410,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	computed: {
 		refresh: function refresh() {
 			return __WEBPACK_IMPORTED_MODULE_1__fortawesome_fontawesome_free_solid_faSync___default.a;
+		},
+		showMeasurements: function showMeasurements() {
+			var count = 0;
+			for (var size in this.product.data) {
+				for (var category in this.product.data[size]) {
+					if (category !== 'height' && category !== 'weight' && this.product.data[size][category]['min'] !== null) {
+						count++;
+					}
+				}
+			}
+
+			return count > 0;
+		},
+		showWarning: function showWarning() {
+			if (this.userData.bmi < 19 || this.userData.bmi >= 35) {
+				return true;
+			}
+			return false;
 		}
 	}
 });
@@ -48472,7 +48494,7 @@ var content = __webpack_require__(199);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(13)("4b674224", content, false, {});
+var update = __webpack_require__(12)("4b674224", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -48491,7 +48513,7 @@ if(false) {
 /* 199 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(11)(false);
+exports = module.exports = __webpack_require__(6)(false);
 // imports
 
 
@@ -48551,7 +48573,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 	data: function data() {
 		return {
-			sizes: this.sortSizes('length'),
+			sizes: [],
 			sleeve: 0,
 			bust: 0,
 			length: 0,
@@ -48590,43 +48612,79 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				i++;
 			}
 			return i;
+		},
+		calculateByHeightWeight: function calculateByHeightWeight() {
+			var resultCategory = 0;
+			var heightCategory = this.findCategorySize('height', this.userData.height);
+			var weightCategory = this.findCategorySize('weight', this.userData.weight);
+			if (heightCategory === weightCategory) {
+				resultCategory = heightCategory;
+			} else {
+				if (this.userData.bmi < 22) {
+					resultCategory = Math.min(heightCategory, weightCategory);
+				} else if (this.userData.bmi < 25 || Math.abs(heightCategory, weightCategory) > 1) {
+					resultCategory = Math.max(heightCategory, weightCategory);
+				} else {
+					resultCategory = Math.max(heightCategory, weightCategory);
+					if (resultCategory + 1 < this.sizes.length) {
+						resultCategory++;
+					}
+				}
+			}
+			return this.sizes[resultCategory];
+		},
+		calculateByProductLength: function calculateByProductLength() {
+			var divisor = 0.35856;
+			if (this.product.gender === 'male') {
+				divisor = 0.3686;
+			}
+			if (this.product.gender === 'unisex') {
+				divisor = 0.36548;
+			}
+			if (this.userData.bmi > 31) {
+				divisor += 0.02;
+			}
+			if (this.userData.bmi > 35) {
+				divisor += 0.01;
+			}
+			var resultCategory = this.findCategorySize('length', Math.ceil(this.userData.height * divisor));
+			return this.sizes[resultCategory];
+		},
+		calculateByLengthAndHeight: function calculateByLengthAndHeight() {
+			var resultCategory = 0;
+			var heightCategory = this.findCategorySize('height', this.userData.height);
+			var weightCategory = this.findCategorySize('weight', this.userData.weight);
+			if (heightCategory === weightCategory) {
+				resultCategory = heightCategory;
+			} else {
+				if (this.userData.bmi < 22) {
+					resultCategory = Math.min(heightCategory, weightCategory);
+				} else if (this.userData.bmi < 26.5) {
+					if (Math.abs(heightCategory, weightCategory) > 1) {
+						resultCategory = this.calculateByProductLength();
+					} else {
+						resultCategory = Math.max(heightCategory, weightCategory);
+					}
+				} else {
+					resultCategory = Math.max(heightCategory, weightCategory);
+					if (resultCategory + 1 < this.sizes.length) {
+						resultCategory++;
+					}
+				}
+			}
+			return this.sizes[resultCategory];
 		}
 	},
 
 	mounted: function mounted() {
 		var result = '';
-		if (this.isDefined('height') && this.isDefined('weight')) {
-			var resultCategory = this.findCategorySize('height', this.userData.height);
-			var weightCategory = this.findCategorySize('weight', this.userData.weight);
-			if (resultCategory !== weightCategory) {
-				resultCategory = Math.max(resultCategory, weightCategory);
-				if (resultCategory !== 0) {
-					if (this.userData.bmi < 18.5) {
-						resultCategory--;
-					}
-				}
-
-				if (resultCategory !== this.sizes.length - 1) {
-					if (this.userData.bmi > 24.9) {
-						resultCategory++;
-					}
-				}
-
-				if (resultCategory !== this.sizes.length - 1) {
-					if (this.userData.bmi > 29) {
-						resultCategory++;
-					}
-				}
-			}
-			result = this.sizes[resultCategory];
-		} else {
-			var devisor = 0.358;
-			if (this.product.gender === 'make') {
-				devisor = 0.37;
-			}
-			var _resultCategory = this.findCategorySize('length', Math.ceil(this.userData.height * 0.366));
-			result = this.sizes[_resultCategory];
-		}
+		if (this.isDefined('height') && this.isDefined('weight') && !this.isDefined('length')) {
+			this.sizes = this.sortSizes('height');
+			result = this.calculateByHeightWeight();
+		} else if (!this.isDefined('height') && this.isDefined('length')) {
+			this.sizes = this.sortSizes('length');
+			result = this.calculateByProductLength();
+		} else if (this.isDefined('height') && this.isDefined('length')) {}
 		this.$emit('calculated', result);
 		this.sleeve = parseFloat(this.product.data[result].sleeve.min);
 		this.bust = parseFloat(this.product.data[result].bust.min);
@@ -48842,183 +48900,16 @@ if (false) {
 /* 202 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "columns is-mobile" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c("div", { staticClass: "column" }, [
-        _c(
-          "button",
-          {
-            staticClass: "button is-pulled-right",
-            on: {
-              click: function($event) {
-                _vm.$emit("reset")
-              }
-            }
-          },
-          [
-            _c(
-              "span",
-              { staticClass: "icon is-small" },
-              [_c("font-awesome-icon", { attrs: { icon: _vm.refresh } })],
-              1
-            )
-          ]
-        )
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "columns is-mobile" }, [
-      _c(
-        "div",
-        {
-          staticClass: "column",
-          class: { "is-two-fifths": _vm.product.type !== "other" }
-        },
-        [
-          _c("div", {
-            staticClass: "title is-size-5",
-            domProps: { textContent: _vm._s(_vm.translations.recommendedSize) }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "is-flex centered" }, [
-            _c("span", {
-              staticClass: "is-size-2",
-              domProps: { innerHTML: _vm._s(_vm.displayedResult) }
-            })
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _vm.product.type !== "other"
-        ? _c(
-            "div",
-            { staticClass: "column bordered-left" },
-            [
-              _c("div", {
-                staticClass: "title is-size-5",
-                domProps: { textContent: _vm._s(_vm.translations.productSizes) }
-              }),
-              _vm._v(" "),
-              _c(_vm.product.type, {
-                tag: "component",
-                attrs: { product: _vm.product, "user-data": _vm.userData },
-                on: { calculated: _vm.displayResult }
-              })
-            ],
-            1
-          )
-        : _vm._e()
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "column is-four-fifths" }, [
-      _c("div", { staticClass: "subtitle is-size-6" })
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-51adf2c9", module.exports)
-  }
-}
-
-/***/ }),
-/* 203 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "section calculator" },
-    [
-      _vm.step == 0
-        ? _c("measurements", {
-            attrs: {
-              translations: _vm.translations,
-              "start-metric": _vm.metric
-            },
-            on: {
-              next: _vm.incStep,
-              reset: _vm.resetSteps,
-              "user-data": _vm.userData
-            }
-          })
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.step == 1
-        ? _c("body-type", {
-            attrs: {
-              translations: _vm.translations,
-              "product-gender": _vm.product.gender
-            },
-            on: { next: _vm.incStep, reset: _vm.resetSteps }
-          })
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.step == 2
-        ? _c("calculator-result", {
-            attrs: {
-              translations: _vm.translations,
-              product: _vm.product,
-              "user-data": _vm.user
-            },
-            on: { reset: _vm.resetSteps }
-          })
-        : _vm._e()
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-64f50534", module.exports)
-  }
-}
-
-/***/ }),
-/* 204 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 205 */,
-/* 206 */,
-/* 207 */,
-/* 208 */
-/***/ (function(module, exports, __webpack_require__) {
-
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(209)
+  __webpack_require__(203)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(211)
+var __vue_script__ = __webpack_require__(205)
 /* template */
-var __vue_template__ = __webpack_require__(212)
+var __vue_template__ = __webpack_require__(206)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -49057,17 +48948,17 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 209 */
+/* 203 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(210);
+var content = __webpack_require__(204);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(13)("8f39c4ae", content, false, {});
+var update = __webpack_require__(12)("8f39c4ae", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -49083,10 +48974,10 @@ if(false) {
 }
 
 /***/ }),
-/* 210 */
+/* 204 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(11)(false);
+exports = module.exports = __webpack_require__(6)(false);
 // imports
 
 
@@ -49097,7 +48988,7 @@ exports.push([module.i, "\ndiv[data-v-837a877e] {\n  position: relative;\n}\n.in
 
 
 /***/ }),
-/* 211 */
+/* 205 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -49256,7 +49147,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 212 */
+/* 206 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -49403,6 +49294,188 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-837a877e", module.exports)
   }
 }
+
+/***/ }),
+/* 207 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "columns is-mobile" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "column" }, [
+        _c(
+          "button",
+          {
+            staticClass: "button is-pulled-right",
+            on: {
+              click: function($event) {
+                _vm.$emit("reset")
+              }
+            }
+          },
+          [
+            _c(
+              "span",
+              { staticClass: "icon is-small" },
+              [_c("font-awesome-icon", { attrs: { icon: _vm.refresh } })],
+              1
+            )
+          ]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "columns is-mobile" }, [
+      _c(
+        "div",
+        {
+          staticClass: "column",
+          class: { "is-two-fifths": _vm.showMeasurements }
+        },
+        [
+          _c("div", {
+            staticClass: "title is-size-5",
+            domProps: { textContent: _vm._s(_vm.translations.recommendedSize) }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "is-flex centered" }, [
+            _c("span", {
+              staticClass: "is-size-2",
+              domProps: { innerHTML: _vm._s(_vm.displayedResult) }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticStyle: { "margin-top": "30px" } }, [
+            _vm.showWarning
+              ? _c("span", { staticClass: "help is-danger" }, [
+                  _vm._v(
+                    "It seems you are between sizes, please contact out store for your size before you place an order"
+                  )
+                ])
+              : _vm._e()
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.showMeasurements,
+              expression: "showMeasurements"
+            }
+          ],
+          staticClass: "column bordered-left"
+        },
+        [
+          _c("div", {
+            staticClass: "title is-size-5",
+            domProps: { textContent: _vm._s(_vm.translations.productSizes) }
+          }),
+          _vm._v(" "),
+          _c(_vm.product.type, {
+            tag: "component",
+            attrs: { product: _vm.product, "user-data": _vm.userData },
+            on: { calculated: _vm.displayResult }
+          })
+        ],
+        1
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "column is-four-fifths" }, [
+      _c("div", { staticClass: "subtitle is-size-6" })
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-51adf2c9", module.exports)
+  }
+}
+
+/***/ }),
+/* 208 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "section calculator" },
+    [
+      _vm.step == 0
+        ? _c("measurements", {
+            attrs: {
+              translations: _vm.translations,
+              "start-metric": _vm.metric
+            },
+            on: {
+              next: _vm.incStep,
+              reset: _vm.resetSteps,
+              "user-data": _vm.userData
+            }
+          })
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.step == 1
+        ? _c("body-type", {
+            attrs: {
+              translations: _vm.translations,
+              "product-gender": _vm.product.gender
+            },
+            on: { next: _vm.incStep, reset: _vm.resetSteps }
+          })
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.step == 2
+        ? _c("calculator-result", {
+            attrs: {
+              translations: _vm.translations,
+              product: _vm.product,
+              "user-data": _vm.user
+            },
+            on: { reset: _vm.resetSteps }
+          })
+        : _vm._e()
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-64f50534", module.exports)
+  }
+}
+
+/***/ }),
+/* 209 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

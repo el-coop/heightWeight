@@ -42,7 +42,7 @@
 
 		data() {
 			return {
-				sizes: this.sortSizes('length'),
+				sizes: [],
 				sleeve: 0,
 				bust: 0,
 				length: 0,
@@ -81,41 +81,82 @@
 				}
 				return i;
 			},
+
+			calculateByHeightWeight() {
+				let resultCategory = 0;
+				let heightCategory = this.findCategorySize('height', this.userData.height);
+				let weightCategory = this.findCategorySize('weight', this.userData.weight);
+				if (heightCategory === weightCategory) {
+					resultCategory = heightCategory;
+				} else {
+					if (this.userData.bmi < 22) {
+						resultCategory = Math.min(heightCategory, weightCategory);
+					} else if (this.userData.bmi < 25 || Math.abs(heightCategory, weightCategory) > 1) {
+						resultCategory = Math.max(heightCategory, weightCategory);
+					} else {
+						resultCategory = Math.max(heightCategory, weightCategory);
+						if (resultCategory + 1 < this.sizes.length) {
+							resultCategory++;
+						}
+					}
+				}
+				return this.sizes[resultCategory];
+			},
+
+			calculateByProductLength() {
+				let divisor = 0.35856;
+				if (this.product.gender === 'male') {
+					divisor = 0.3686;
+				}
+				if (this.product.gender === 'unisex') {
+					divisor = 0.36548;
+				}
+				if (this.userData.bmi > 31) {
+					divisor += 0.02;
+				}
+				if (this.userData.bmi > 35) {
+					divisor += 0.01;
+				}
+				let resultCategory = this.findCategorySize('length', Math.ceil(this.userData.height * divisor));
+				return this.sizes[resultCategory];
+			},
+
+			calculateByLengthAndHeight() {
+				let resultCategory = 0;
+				let heightCategory = this.findCategorySize('height', this.userData.height);
+				let weightCategory = this.findCategorySize('weight', this.userData.weight);
+				if (heightCategory === weightCategory) {
+					resultCategory = heightCategory;
+				} else {
+					if (this.userData.bmi < 22) {
+						resultCategory = Math.min(heightCategory, weightCategory);
+					} else if (this.userData.bmi < 26.5) {
+						if (Math.abs(heightCategory, weightCategory) > 1) {
+							resultCategory = this.calculateByProductLength();
+						} else {
+							resultCategory = Math.max(heightCategory, weightCategory);
+						}
+					} else {
+						resultCategory = Math.max(heightCategory, weightCategory);
+						if (resultCategory + 1 < this.sizes.length) {
+							resultCategory++;
+						}
+					}
+				}
+				return this.sizes[resultCategory];
+			}
 		},
 
 		mounted() {
 			let result = '';
-			if (this.isDefined('height') && this.isDefined('weight')) {
-				let resultCategory = this.findCategorySize('height', this.userData.height);
-				let weightCategory = this.findCategorySize('weight', this.userData.weight);
-				if (resultCategory !== weightCategory) {
-					resultCategory = Math.max(resultCategory, weightCategory);
-					if (resultCategory !== 0) {
-						if (this.userData.bmi < 18.5) {
-							resultCategory--;
-						}
-					}
+			if (this.isDefined('height') && this.isDefined('weight') && !this.isDefined('length')) {
+				this.sizes = this.sortSizes('height');
+				result = this.calculateByHeightWeight();
+			} else if (!this.isDefined('height') && this.isDefined('length')) {
+				this.sizes = this.sortSizes('length');
+				result = this.calculateByProductLength();
+			} else if (this.isDefined('height') && this.isDefined('length')) {
 
-					if (resultCategory !== (this.sizes.length - 1)) {
-						if (this.userData.bmi > 24.9) {
-							resultCategory++;
-						}
-					}
-
-					if (resultCategory !== (this.sizes.length - 1)) {
-						if (this.userData.bmi > 29) {
-							resultCategory++;
-						}
-					}
-				}
-				result = this.sizes[resultCategory];
-			} else {
-				let devisor = 0.358;
-				if (this.product.gender === 'make') {
-					devisor = 0.37;
-				}
-				let resultCategory = this.findCategorySize('length', Math.ceil(this.userData.height * 0.366));
-				result = this.sizes[resultCategory];
 			}
 			this.$emit('calculated', result);
 			this.sleeve = parseFloat(this.product.data[result].sleeve.min);

@@ -3,7 +3,7 @@
 		<div class="level-item">
 			<img src="{{ $product->image ? $product->image->src : '/images/noimg.jpg' }}" class="product-image">
 			<h3 class="is-size-3 is-inline-block">
-				<a href="" class="has-text-black" target="_blank">{{ $product->title }}</a>
+				<a href="{{ $productModel->link }}" class="has-text-black" target="_blank">{{ $product->title }}</a>
 				<a href="{{action('StoreController@home')}}" class="has-text-grey">| Products</a>
 			</h3>
 		</div>

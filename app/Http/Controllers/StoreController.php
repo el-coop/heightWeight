@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Store\ContactRequest;
+use App\Http\Requests\Store\UpdateButtonRequest;
 use App\Http\Requests\Store\UpdateLanguageRequest;
 use App\Http\Requests\Store\UpdateSizeNameRequest;
+use App\Models\Button;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use OhMyBrew\ShopifyApp\Facades\ShopifyApp;
@@ -13,8 +15,9 @@ class StoreController extends Controller {
 	
 	public function home() {
 		$shop = ShopifyApp::shop();
+		$button = $shop->button;
 		$barButtons = true;
-		return view('store.home', compact('shop', 'products', 'barButtons'));
+		return view('store.home', compact('shop', 'products', 'barButtons', 'button'));
 	}
 	
 	public function contact(ContactRequest $request) {
@@ -34,9 +37,15 @@ class StoreController extends Controller {
 		return back()->with('notice', 'Success');
 	}
 	
+	public function updateButton(UpdateButtonRequest $request) {
+		$request->commit();
+		
+		return back()->with('notice', 'Success');
+	}
+	
 	public function products(Request $request) {
 		$shop = ShopifyApp::shop();
-		$perPage = $request->input('per_page',25);
+		$perPage = $request->input('per_page', 25);
 		
 		$totalProducts = $shop->product_count;
 		$pageCount = $request->filled('filter') ? 1 : ceil($totalProducts / $perPage);

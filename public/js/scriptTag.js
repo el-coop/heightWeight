@@ -60,20 +60,20 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 205);
+/******/ 	return __webpack_require__(__webpack_require__.s = 210);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 205:
+/***/ 210:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(206);
+module.exports = __webpack_require__(211);
 
 
 /***/ }),
 
-/***/ 206:
+/***/ 211:
 /***/ (function(module, exports) {
 
 var url = 'https://heightweight.test';
@@ -82,15 +82,14 @@ var embedTag = document.querySelector('#height-weight');
 var checkoutForm = document.querySelector('.product-form, #AddToCartForm, .product__form');
 
 if (checkoutForm || embedTags) {
-	//console.log(meta.product);
 	var xhttp = new XMLHttpRequest();
 
 	xhttp.onreadystatechange = function () {
 		if (this.readyState == 4 && this.status == 200) {
 			var response = JSON.parse(this.responseText);
 			if (response.visible) {
-				buildStyles();
-				buildElements(checkoutForm, response.buttonText);
+				buildStyles(response.button);
+				buildElements(checkoutForm, response.button);
 			}
 		}
 	};
@@ -99,23 +98,23 @@ if (checkoutForm || embedTags) {
 	xhttp.send();
 }
 
-function buildStyles() {
+function buildStyles(button) {
 	var head = document.head;
 
 	var style = document.createElement('style');
 	head.appendChild(style);
 	style = style.sheet;
 	style.type = 'text/css';
-	style.insertRule('#hw-button {margin-bottom: .5rem; background-color: #363636; border-color: transparent; color: #f5f5f5; border-width: 1px; cursor: pointer; justify-content: center; padding-bottom: calc(.375em - 1px); padding-left: .75em; padding-right: .75em; padding-top: calc(.375em - 1px); text-align: center; white-space: nowrap; border-radius: 4px; box-shadow: none; display: inline-flex; font-size: 1rem; height: 2.25em; line-height: 1.5; position: relative; vertical-align: top; user-select: none;}', 0);
-	style.insertRule('#hw-button:hover {background-color: #2f2f2f; border-color: transparent; color: #f5f5f5;}', 1);
+	style.insertRule('#hw-button {margin-bottom: .5rem; background-color: ' + button.background + '; border-color: transparent; color: ' + button.color + '; border-width: 2px; cursor: pointer; justify-content: center; padding-bottom: calc(.375em - 1px); padding-left: .75em; padding-right: .75em; padding-top: calc(.375em - 1px); text-align: center; white-space: nowrap; border-radius: 8px; box-shadow: none; display: inline-flex; font-size: 1rem; height: 2.25em; line-height: 1.5; position: relative; vertical-align: top; user-select: none;}', 0);
+	style.insertRule('#hw-button:hover {background-color: ' + button.background + '; border-color: ' + button.border + '; color: ' + button.color + ';}', 1);
 	style.insertRule('#hw-frame {height: 0; width: 100%; transition: height 1s; display: block; max-width: 480px}', 2);
 	style.insertRule('#hw-frame.open {height: 340px;}', 3);
 }
 
-function buildElements(checkoutForm, buttonText) {
+function buildElements(checkoutForm, button) {
 	var openButton = document.createElement('button');
 	openButton.id = 'hw-button';
-	openButton.innerText = buttonText;
+	openButton.innerText = button.text;
 	var iframe = document.createElement('iframe');
 	iframe.id = 'hw-frame';
 	iframe.src = url + '/client/' + meta.product.id;
