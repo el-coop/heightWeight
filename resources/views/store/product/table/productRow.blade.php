@@ -4,7 +4,7 @@
 			{{ ucfirst($part) }}
 		</div>
 		<div class="level-item">
-			<button v-tooltip="{html: true, content: `<div><p>{{ $data['description'] }}</p><img style='height: 400px' src='/images/product-tooltips/{{ $part }}.png' /></div>`}"
+			<button v-tooltip="{html: true, content: `<div><p>{{ $data['description'] }}</p><img style='height: 400px' src='/images/product-tooltips/{{ $imagePrefix }}{{ $part }}.png' /></div>`}"
 					class="button is-light is-rounded is-bold">i
 			</button>
 		</div>

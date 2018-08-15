@@ -11,7 +11,7 @@
 		@endforelse
 	</tr>
 	</thead>
-	@include('store.product.table.tshirt')
-	@include('store.product.table.pants')
+	@include('store.product.table.tshirt', ['imagePrefix' => ''])
+	@include('store.product.table.pants',  ['imagePrefix' => 'pants-'])
 	@include('store.product.table.other')
 </table>

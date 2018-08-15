@@ -49074,42 +49074,61 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				i++;
 			}
 			return i;
+		},
+		calculateByHeightWeight: function calculateByHeightWeight() {
+			var resultCategory = 0;
+			var heightCategory = this.findCategorySize('height', this.userData.height);
+			var weightCategory = this.findCategorySize('weight', this.userData.weight);
+			console.log('height category', heightCategory);
+			console.log('weight category', weightCategory);
+			if (heightCategory === weightCategory) {
+				resultCategory = heightCategory;
+			} else {
+				if (this.userData.bmi < 22) {
+					resultCategory = Math.min(heightCategory, weightCategory);
+				} else if (this.userData.bmi < 25) {
+					if (heightCategory > weightCategory) {
+						var minHigh = this.product.data[this.sizes[heightCategory]]['height'].min;
+						var maxLow = this.product.data[this.sizes[weightCategory]]['weight'].max;
+						if (this.userData.height - minHigh > maxLow - this.userData.weight) {
+							resultCategory = heightCategory;
+						} else {
+							resultCategory = weightCategory;
+						}
+					} else {
+						var _maxLow = this.product.data[heightCategory]['height'].max;
+						var _minHigh = this.product.data[weightCategory]['weight'].min;
+						if (this.userData.weight - _minHigh > _maxLow - this.userData.height) {
+							resultCategory = weightCategory;
+						} else {
+							resultCategory = heightCategory;
+						}
+					}
+				} else if (this.userData.bmi < 28.5) {
+					resultCategory = Math.max(heightCategory, weightCategory);
+				} else if (this.userData.bmi < 35) {
+					resultCategory = Math.max(heightCategory, weightCategory);
+					if (resultCategory + 1 < this.sizes.length && Math.abs(heightCategory - weightCategory) === 1) {
+						resultCategory++;
+					}
+				} else {
+					resultCategory = Math.max(heightCategory, weightCategory);
+					if (resultCategory + 1 < this.sizes.length) {
+						resultCategory++;
+					}
+				}
+			}
+			return this.sizes[resultCategory];
 		}
 	},
 
 	mounted: function mounted() {
 		var result = '';
-		if (this.isDefined('height') && this.isDefined('weight')) {
-			var resultCategory = this.findCategorySize('height', this.userData.height);
-			var weightCategory = this.findCategorySize('weight', this.userData.weight);
-			if (resultCategory !== weightCategory) {
-				resultCategory = Math.max(resultCategory, weightCategory);
-				if (resultCategory !== 0) {
-					if (this.userData.bmi < 18.5) {
-						resultCategory--;
-					}
-				}
-
-				if (resultCategory !== this.sizes.length - 1) {
-					if (this.userData.bmi > 24.9) {
-						resultCategory++;
-					}
-				}
-
-				if (resultCategory !== this.sizes.length - 1) {
-					if (this.userData.bmi > 29) {
-						resultCategory++;
-					}
-				}
-			}
-			result = this.sizes[resultCategory];
+		if (this.isDefined('height') && this.isDefined('weight') && !this.isDefined('length')) {
+			this.sizes = this.sortSizes('height');
+			result = this.calculateByHeightWeight();
 		} else {
-			var devisor = 0.358;
-			if (this.product.gender === 'make') {
-				devisor = 0.37;
-			}
-			var _resultCategory = this.findCategorySize('length', Math.ceil(this.userData.height * 0.366));
-			result = this.sizes[_resultCategory];
+			console.log('calculation missing');
 		}
 		this.$emit('calculated', result);
 		this.inseam = parseFloat(this.product.data[result].inseam.min);
