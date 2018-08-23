@@ -1,7 +1,7 @@
 let url = 'https://heightweight.test';
 //let url = 'https://app.seezerapps.com';
 let embedTag = document.querySelector('#height-weight');
-let checkoutForm = document.querySelector('.product-form, #AddToCartForm, .product__form');
+let checkoutForm = document.querySelector('.product-form, #AddToCartForm, .product__form, .product-form-inline');
 
 
 if (checkoutForm || embedTags) {
