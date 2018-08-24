@@ -41,7 +41,7 @@
 
 		data() {
 			return {
-				sizes: this.sortSizes('length'),
+				sizes: _.keys(this.product.data),
 				inseam: 0,
 				length: 0,
 				waist: 0,
@@ -135,9 +135,9 @@
 				console.log('calculation missing');
 			}
 			this.$emit('calculated', result);
-			this.inseam = parseFloat(this.product.data[result].inseam.min);
-			this.length = parseFloat(this.product.data[result].length.min);
-			this.waist = parseFloat(this.product.data[result].waist.min);
+			this.inseam = parseFloat(this.product.data[result].inseam.min || 0);
+			this.length = parseFloat(this.product.data[result].length.min || 0);
+			this.waist = parseFloat(this.product.data[result].waist.min || 0);
 		},
 
 		computed: {

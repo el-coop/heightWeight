@@ -48573,7 +48573,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 	data: function data() {
 		return {
-			sizes: [],
+			sizes: _.keys(this.product.data),
 			sleeve: 0,
 			bust: 0,
 			length: 0,
@@ -48651,11 +48651,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			return this.sizes[resultCategory];
 		},
 		calculateByLengthAndHeight: function calculateByLengthAndHeight() {
+			console.log('calculate');
 			var resultCategory = 0;
 			var heightCategory = this.findCategorySize('height', this.userData.height);
 			var weightCategory = this.findCategorySize('weight', this.userData.weight);
 			if (heightCategory === weightCategory) {
 				resultCategory = heightCategory;
+				console.log('height == weight', resultCategory);
 			} else {
 				if (this.userData.bmi < 22) {
 					resultCategory = Math.min(heightCategory, weightCategory);
@@ -48685,13 +48687,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			this.sizes = this.sortSizes('length');
 			result = this.calculateByProductLength();
 		} else if (this.isDefined('height') && this.isDefined('length')) {
+			this.sizes = this.sortSizes('height');
 			result = this.calculateByLengthAndHeight();
 		}
 		this.$emit('calculated', result);
-		this.sleeve = parseFloat(this.product.data[result].sleeve.min);
-		this.bust = parseFloat(this.product.data[result].bust.min);
-		this.length = parseFloat(this.product.data[result].length.min);
-		this.waist = parseFloat(this.product.data[result].waist.min);
+		this.sleeve = parseFloat(this.product.data[result].sleeve.min || 0);
+		this.bust = parseFloat(this.product.data[result].bust.min || 0);
+		this.length = parseFloat(this.product.data[result].length.min || 0);
+		this.waist = parseFloat(this.product.data[result].waist.min || 0);
 	},
 
 
@@ -49038,7 +49041,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 	data: function data() {
 		return {
-			sizes: this.sortSizes('length'),
+			sizes: _.keys(this.product.data),
 			inseam: 0,
 			length: 0,
 			waist: 0
@@ -49133,9 +49136,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			console.log('calculation missing');
 		}
 		this.$emit('calculated', result);
-		this.inseam = parseFloat(this.product.data[result].inseam.min);
-		this.length = parseFloat(this.product.data[result].length.min);
-		this.waist = parseFloat(this.product.data[result].waist.min);
+		this.inseam = parseFloat(this.product.data[result].inseam.min || 0);
+		this.length = parseFloat(this.product.data[result].length.min || 0);
+		this.waist = parseFloat(this.product.data[result].waist.min || 0);
 	},
 
 
