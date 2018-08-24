@@ -48668,10 +48668,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 					if (Math.abs(heightCategory, weightCategory) > 1) {
 						console.log('> 1');
 						resultCategory = this.calculateByProductLength();
-						console.log('calculated');
-						console.log('calculated');
 					} else {
-						console.log('=1');
 						resultCategory = Math.max(heightCategory, weightCategory);
 					}
 				} else {
@@ -48681,6 +48678,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 					}
 				}
 			}
+
+			console.log('calculated', resultCategory, this.sizes[resultCategory]);
 			return this.sizes[resultCategory];
 		}
 	},

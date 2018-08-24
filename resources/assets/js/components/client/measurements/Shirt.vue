@@ -140,10 +140,7 @@
 						if (Math.abs(heightCategory, weightCategory) > 1) {
 							console.log('> 1');
 							resultCategory = this.calculateByProductLength();
-							console.log('calculated');
-							console.log('calculated');
 						} else {
-							console.log('=1');
 							resultCategory = Math.max(heightCategory, weightCategory);
 						}
 					} else {
@@ -153,6 +150,8 @@
 						}
 					}
 				}
+
+				console.log('calculated', resultCategory, this.sizes[resultCategory]);
 				return this.sizes[resultCategory];
 			}
 		},
