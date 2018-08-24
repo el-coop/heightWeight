@@ -1,5 +1,7 @@
 @extends('layouts.store')
 
+@section('title','Home')
+
 @section('head')
 	<!--Start of Tawk.to Script-->
 	<script type="text/javascript">

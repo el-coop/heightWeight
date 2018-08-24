@@ -65,6 +65,7 @@ class UpdateProductRequest extends FormRequest {
 	}
 	
 	public function commit() {
+		$keys = [];
 		foreach ($this->variants as $key => $variant) {
 			$keys[] = $key;
 		}

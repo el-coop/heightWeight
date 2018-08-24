@@ -1,4 +1,6 @@
 @extends('layouts.store')
+@section('title','Edit product')
+
 @section('head')
 	<!--Start of Tawk.to Script-->
 	<script type="text/javascript">

@@ -27,7 +27,7 @@
 							},
 						},
 					},
-					title: 'Help documents',
+					title: '@yield('title')',
 				})
 			});
         </script>
