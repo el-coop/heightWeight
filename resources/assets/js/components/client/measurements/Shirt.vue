@@ -118,8 +118,9 @@
 				if (this.userData.bmi > 35) {
 					divisor += 0.01;
 				}
+				console.log('height for finding', Math.ceil(this.userData.height * divisor));
 				let resultCategory = this.findCategorySize('length', Math.ceil(this.userData.height * divisor));
-				console.log('calculated but prod length');
+				console.log('calculated but prod length', resultCategory);
 				return this.sizes[resultCategory];
 			},
 
