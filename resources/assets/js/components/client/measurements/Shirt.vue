@@ -152,13 +152,17 @@
 
 		mounted() {
 			let result = '';
+			console.log('here');
 			if (this.isDefined('height') && this.isDefined('weight') && !this.isDefined('length')) {
+				console.log('here1');
 				this.sizes = this.sortSizes('height');
 				result = this.calculateByHeightWeight();
 			} else if (!this.isDefined('height') && this.isDefined('length')) {
+				console.log('here2');
 				this.sizes = this.sortSizes('length');
 				result = this.calculateByProductLength();
 			} else if (this.isDefined('height') && this.isDefined('length')) {
+				console.log('here3');
 				this.sizes = this.sortSizes('height');
 				result = this.calculateByLengthAndHeight();
 			}
