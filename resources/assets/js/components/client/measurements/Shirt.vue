@@ -139,7 +139,7 @@
 						console.log('bmi < 26.5', heightCategory, weightCategory);
 						if (Math.abs(heightCategory, weightCategory) > 1) {
 							console.log('> 1');
-							resultCategory = this.calculateByProductLength();
+							resultCategory = this.sizes.indexOf(this.calculateByProductLength());
 						} else {
 							resultCategory = Math.max(heightCategory, weightCategory);
 						}
