@@ -156,7 +156,7 @@
 				this.sizes = this.sortSizes('length');
 				result = this.calculateByProductLength();
 			} else if (this.isDefined('height') && this.isDefined('length')) {
-
+				result = this.calculateByLengthAndHeight();
 			}
 			this.$emit('calculated', result);
 			this.sleeve = parseFloat(this.product.data[result].sleeve.min);
