@@ -48634,7 +48634,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			return this.sizes[resultCategory];
 		},
 		calculateByProductLength: function calculateByProductLength() {
-			console.log('calculing by length');
 			var divisor = 0.35856;
 			if (this.product.gender === 'male') {
 				divisor = 0.3686;
@@ -48648,9 +48647,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			if (this.userData.bmi > 35) {
 				divisor += 0.01;
 			}
-			console.log('height for finding', Math.ceil(this.userData.height * divisor));
 			var resultCategory = this.findCategorySize('length', Math.ceil(this.userData.height * divisor));
-			console.log('calculated but prod length', resultCategory);
 			return this.sizes[resultCategory];
 		},
 		calculateByLengthAndHeight: function calculateByLengthAndHeight() {
@@ -48658,15 +48655,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var heightCategory = this.findCategorySize('height', this.userData.height);
 			var weightCategory = this.findCategorySize('weight', this.userData.weight);
 			if (heightCategory === weightCategory) {
-				console.log('height == weight', resultCategory);
 				resultCategory = heightCategory;
 			} else {
 				if (this.userData.bmi < 22) {
 					resultCategory = Math.min(heightCategory, weightCategory);
 				} else if (this.userData.bmi < 26.5) {
-					console.log('bmi < 26.5', heightCategory, weightCategory);
 					if (Math.abs(heightCategory, weightCategory) > 1) {
-						console.log('> 1');
 						resultCategory = this.sizes.indexOf(this.calculateByProductLength());
 					} else {
 						resultCategory = Math.max(heightCategory, weightCategory);
@@ -48679,7 +48673,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				}
 			}
 
-			console.log('calculated', resultCategory, this.sizes[resultCategory]);
 			return this.sizes[resultCategory];
 		}
 	},
@@ -48696,7 +48689,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			this.sizes = this.sortSizes('height');
 			result = this.calculateByLengthAndHeight();
 		}
-		console.log('result', result);
 		this.$emit('calculated', result);
 		this.sleeve = parseFloat(this.product.data[result].sleeve.min || 0);
 		this.bust = parseFloat(this.product.data[result].bust.min || 0);
