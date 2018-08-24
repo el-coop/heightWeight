@@ -48634,6 +48634,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			return this.sizes[resultCategory];
 		},
 		calculateByProductLength: function calculateByProductLength() {
+			console.log('calculing by length');
 			var divisor = 0.35856;
 			if (this.product.gender === 'male') {
 				divisor = 0.3686;
@@ -48648,6 +48649,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				divisor += 0.01;
 			}
 			var resultCategory = this.findCategorySize('length', Math.ceil(this.userData.height * divisor));
+			console.log('calculated but prod length');
 			return this.sizes[resultCategory];
 		},
 		calculateByLengthAndHeight: function calculateByLengthAndHeight() {
@@ -48665,6 +48667,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 					if (Math.abs(heightCategory, weightCategory) > 1) {
 						console.log('> 1');
 						resultCategory = this.calculateByProductLength();
+						console.log('calculated');
+						console.log('calculated');
 					} else {
 						console.log('=1');
 						resultCategory = Math.max(heightCategory, weightCategory);
@@ -48692,6 +48696,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			this.sizes = this.sortSizes('height');
 			result = this.calculateByLengthAndHeight();
 		}
+		console.log('result', result);
 		this.$emit('calculated', result);
 		this.sleeve = parseFloat(this.product.data[result].sleeve.min || 0);
 		this.bust = parseFloat(this.product.data[result].bust.min || 0);

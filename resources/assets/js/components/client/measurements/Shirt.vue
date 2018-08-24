@@ -140,6 +140,7 @@
 							console.log('> 1');
 							resultCategory = this.calculateByProductLength();
 							console.log('calculated');
+							console.log('calculated');
 						} else {
 							console.log('=1');
 							resultCategory = Math.max(heightCategory, weightCategory);
