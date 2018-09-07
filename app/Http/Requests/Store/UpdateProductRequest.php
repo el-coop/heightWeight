@@ -36,6 +36,7 @@ class UpdateProductRequest extends FormRequest {
 			'gender' => 'required|in:male,female,unisex',
 		];
 		foreach ($this->variants as $key => $variant) {
+			$key = str_replace(' ', '_', $key);
 			$rules[$key] = 'array';
 			foreach ($this->getProductAttributes() as $part) {
 				$rules["{$key}.{$part}"] = 'required|array';
@@ -67,6 +68,7 @@ class UpdateProductRequest extends FormRequest {
 	public function commit() {
 		$keys = [];
 		foreach ($this->variants as $key => $variant) {
+			$key = str_replace(' ', '_', $key);
 			$keys[] = $key;
 		}
 		
