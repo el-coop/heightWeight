@@ -12,6 +12,7 @@
 </td>
 
 @foreach($variants as $key => $products)
+    <?php $key = str_replace(' ','_',$key); ?>
     <td>
         <min-max-fields inline-template
                         :metric="metric">

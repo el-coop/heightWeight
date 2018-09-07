@@ -1,6 +1,6 @@
 <div class="level">
 	<div class="level-item has-text-centered">
-		<div class="field is-horizontal">
+		<div class="field">
 			<a href="https://www.heightandweight.co/docs" target="_blank"
 			   v-tooltip="'Please place the product measurement in the table below.<br> Be sure to select the product type and product gender.<br> There are further instructions for each parameter.<br> check this page for more information: https://www.heightandweight.co/docs'"
 			   class="button is-light is-rounded is-bold">?
@@ -8,7 +8,8 @@
 		</div>
 	</div>
 	<div class="level-item has-text-centered">
-		<div class="field is-horizontal">
+		<div class="field">
+			<label class="field-label label  has-text-centered">Measurement:</label>
 			<div class="control">
 				<label class="radio">
 					Metric
@@ -29,8 +30,8 @@
 		</div>
 	</div>
 	<div class="level-item has-text-centered">
-		<div class="field is-horizontal">
-			<label class="field-label label" style="white-space: nowrap">Product Type:</label>
+		<div class="field">
+			<label class="field-label label has-text-centered">Product Type:</label>
 			<div class="field-body">
 				<div class="select">
 					<select name="type" v-model="type">
@@ -50,8 +51,8 @@
 		</div>
 	</div>
 	<div class="level-item has-text-centered">
-		<div class="field is-horizontal">
-			<label class="field-label label">Product Age:</label>
+		<div class="field">
+			<label class="field-label label  has-text-centered">Product Age:</label>
 			<div class="field-body">
 				<div class="select">
 					<select>
@@ -62,8 +63,8 @@
 		</div>
 	</div>
 	<div class="level-item has-text-centered">
-		<div class="field is-horizontal">
-			<label class="field-label label">Product Gender:</label>
+		<div class="field">
+			<label class="field-label label has-text-centered">Product Gender:</label>
 			<div class="control">
 				<label class="radio">
 					Male

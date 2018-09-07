@@ -79,7 +79,7 @@ module.exports = __webpack_require__(211);
 //let url = 'https://heightweight.test';
 var url = 'https://app.seezerapps.com';
 var embedTag = document.querySelector('#height-weight');
-var checkoutForm = document.querySelector('.product-form, #AddToCartForm, .product__form, .product-form-inline');
+var checkoutForm = document.querySelector('.product-form, #AddToCartForm, .product__form, .product-form-inline, .shopify-product-form');
 
 if (checkoutForm || embedTags) {
 	var xhttp = new XMLHttpRequest();
