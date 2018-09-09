@@ -58,7 +58,7 @@
 	import faSync from '@fortawesome/fontawesome-free-solid/faSync'
 
 	export default {
-		name: "body",
+		name: "body-type",
 
 		components: {
 			FontAwesomeIcon

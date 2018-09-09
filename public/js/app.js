@@ -48016,7 +48016,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	name: "body",
+	name: "body-type",
 
 	components: {
 		FontAwesomeIcon: __WEBPACK_IMPORTED_MODULE_0__fortawesome_vue_fontawesome___default.a
@@ -49424,26 +49424,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -49462,10 +49442,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 	data: function data() {
 		return {
-			sizes: this.sortSizes('height'),
-			inseam: 0,
-			length: 0,
-			waist: 0
+			sizes: this.sortSizes('height')
 		};
 	},
 
@@ -49552,38 +49529,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		this.sizes = this.sortSizes('height');
 		var result = this.calculateByHeightWeight();
 		this.$emit('calculated', result);
-		this.inseam = parseFloat(this.product.data[result].inseam.min || 0);
-		this.length = parseFloat(this.product.data[result].length.min || 0);
-		this.waist = parseFloat(this.product.data[result].waist.min || 0);
-	},
-
-
-	computed: {
-		measuredCategory: {
-			get: function get() {
-				var inseamCategory = -1;
-				if (this.inseam) {
-					inseamCategory = this.findCategorySize('inseam', this.inseam);
-				}
-				var lengthCategory = -1;
-				if (this.length) {
-					lengthCategory = this.findCategorySize('length', this.length);
-				}
-				var waistCategory = -1;
-				if (this.waist) {
-					waistCategory = this.findCategorySize('waist', this.waist);
-				}
-				return this.sizes[Math.max(inseamCategory, lengthCategory, waistCategory)];
-			},
-			set: function set(val) {
-				this.inseam = parseFloat(this.product.data[val].inseam.min || 0);
-				this.length = parseFloat(this.product.data[val].length.min || 0);
-				this.waist = parseFloat(this.product.data[val].waist.min || 0);
-				return val;
-			}
-		}
 	}
-
 });
 
 /***/ }),
@@ -49594,138 +49540,9 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "columns is-mobile" }, [
-    _c(
-      "div",
-      { staticClass: "column", staticStyle: { position: "relative" } },
-      [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.waist,
-              expression: "waist"
-            }
-          ],
-          staticClass: "input waist is-small",
-          domProps: { value: _vm.waist },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.waist = $event.target.value
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.length,
-              expression: "length"
-            }
-          ],
-          staticClass: "input length is-small",
-          domProps: { value: _vm.length },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.length = $event.target.value
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.inseam,
-              expression: "inseam"
-            }
-          ],
-          staticClass: "input inseam is-small",
-          domProps: { value: _vm.inseam },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.inseam = $event.target.value
-            }
-          }
-        })
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "column is-3 is-flex",
-        staticStyle: { "align-items": "center", "padding-left": "0" }
-      },
-      [
-        _c("div", { staticClass: "field" }, [
-          _c("div", { staticClass: "control" }, [
-            _c("div", { staticClass: "select" }, [
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.measuredCategory,
-                      expression: "measuredCategory"
-                    }
-                  ],
-                  on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.measuredCategory = $event.target.multiple
-                        ? $$selectedVal
-                        : $$selectedVal[0]
-                    }
-                  }
-                },
-                _vm._l(_vm.sizes, function(size) {
-                  return _c("option", {
-                    domProps: { value: size, innerHTML: _vm._s(size) }
-                  })
-                })
-              )
-            ])
-          ])
-        ])
-      ]
-    )
-  ])
+  return _c("div", { staticClass: "columns is-mobile" })
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("figure", { staticClass: "image is-square" }, [
-      _c("img", { attrs: { src: "/images/pants-measurements.jpg" } })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

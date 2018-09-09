@@ -1,25 +1,5 @@
 <template>
 	<div class="columns is-mobile">
-		<div class="column" style="position: relative">
-			<figure class="image is-square">
-				<img src="/images/pants-measurements.jpg">
-			</figure>
-			<input class="input waist is-small" v-model="waist"/>
-			<input class="input length is-small" v-model="length"/>
-			<input class="input inseam is-small" v-model="inseam"/>
-		</div>
-
-		<div class="column is-3 is-flex" style="align-items: center; padding-left: 0">
-			<div class="field">
-				<div class="control">
-					<div class="select">
-						<select v-model="measuredCategory">
-							<option v-for="size in sizes" :value="size" v-html="size"></option>
-						</select>
-					</div>
-				</div>
-			</div>
-		</div>
 	</div>
 </template>
 
@@ -42,9 +22,6 @@
 		data() {
 			return {
 				sizes: this.sortSizes('height'),
-				inseam: 0,
-				length: 0,
-				waist: 0,
 			}
 		},
 
@@ -130,39 +107,7 @@
 			this.sizes = this.sortSizes('height');
 			let result = this.calculateByHeightWeight();
 			this.$emit('calculated', result);
-			this.inseam = parseFloat(this.product.data[result].inseam.min || 0);
-			this.length = parseFloat(this.product.data[result].length.min || 0);
-			this.waist = parseFloat(this.product.data[result].waist.min || 0);
 		},
-
-		computed: {
-			measuredCategory: {
-				get() {
-					let inseamCategory = -1;
-					if (this.inseam) {
-						inseamCategory = this.findCategorySize('inseam', this.inseam);
-					}
-					let lengthCategory = -1;
-					if (this.length) {
-						lengthCategory = this.findCategorySize('length', this.length);
-					}
-					let waistCategory = -1;
-					if (this.waist) {
-						waistCategory = this.findCategorySize('waist', this.waist);
-					}
-					return this.sizes[Math.max(inseamCategory, lengthCategory, waistCategory)];
-				}
-				,
-				set(val) {
-					this.inseam = parseFloat(this.product.data[val].inseam.min || 0);
-					this.length = parseFloat(this.product.data[val].length.min || 0);
-					this.waist = parseFloat(this.product.data[val].waist.min || 0);
-					return val;
-				}
-			}
-		}
-		,
-
 	}
 </script>
 
