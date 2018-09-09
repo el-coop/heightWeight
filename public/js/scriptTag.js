@@ -1,1 +1,149 @@
-!function(e){var t={};function n(r){if(t[r])return t[r].exports;var o=t[r]={i:r,l:!1,exports:{}};return e[r].call(o.exports,o,o.exports,n),o.l=!0,o.exports}n.m=e,n.c=t,n.d=function(e,t,r){n.o(e,t)||Object.defineProperty(e,t,{configurable:!1,enumerable:!0,get:r})},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,"a",t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p="/",n(n.s=215)}({215:function(e,t,n){e.exports=n(216)},216:function(e,t){var n="https://app.seezerapps.com",r=document.querySelector("#height-weight"),o=document.querySelector(".product-form, #AddToCartForm, .product__form, .product-form-inline, .shopify-product-form");if(o||embedTags){var i=new XMLHttpRequest;i.onreadystatechange=function(){if(4==this.readyState&&200==this.status){var e=JSON.parse(this.responseText);e.visible&&(t=e.button,i=document.head,d=document.createElement("style"),i.appendChild(d),(d=d.sheet).type="text/css",d.insertRule("#hw-button {margin-bottom: .5rem; background-color: "+t.background+"; border-color: transparent; color: "+t.color+"; border-width: 2px; cursor: pointer; justify-content: center; padding-bottom: calc(.375em - 1px); padding-left: .75em; padding-right: .75em; padding-top: calc(.375em - 1px); text-align: center; white-space: nowrap; border-radius: 8px; box-shadow: none; display: inline-flex; font-size: 1rem; height: 2.25em; line-height: 1.5; position: relative; vertical-align: top; user-select: none;}",0),d.insertRule("#hw-button:hover {background-color: "+t.background+"; border-color: "+t.border+"; color: "+t.color+";}",1),d.insertRule("#hw-frame {height: 0; width: 100%; transition: height 1s; display: block; max-width: 480px}",2),d.insertRule("#hw-frame.open {height: 340px;}",3),function(e,t){var o=document.createElement("button");o.id="hw-button",o.innerText=t.text;var i=document.createElement("iframe");i.id="hw-frame",i.src=n+"/client/"+meta.product.id,i.style.border="none",i.scrolling="no",i.allowtransparency="true",o.addEventListener("click",a),r?(r.appendChild(o),r.appendChild(i)):e&&(e.insertAdjacentElement("afterend",o),o.insertAdjacentElement("afterend",i));window.addEventListener("message",c,!1)}(o,e.button))}var t,i,d},i.open("GET",n+"/client/check/"+meta.product.id+"?t="+Date.now(),!1),i.withCredentials=!0,i.send()}function a(){document.querySelector("#hw-frame").classList.toggle("open")}function c(e){var t=e.data.suggestedSize,n=document.querySelector("option[value='"+t+"']");n.parentElement.value=t,(n=document.querySelector("input[value='"+t+"']")).checked=!0}}});
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "/";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 215);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ 215:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(216);
+
+
+/***/ }),
+
+/***/ 216:
+/***/ (function(module, exports) {
+
+//let url = 'https://heightweight.test';
+var url = 'https://app.seezerapps.com';
+var embedTag = document.querySelector('#height-weight');
+var checkoutForm = document.querySelector('.product-form, #AddToCartForm, .product__form, .product-form-inline, .shopify-product-form');
+
+if (checkoutForm || embedTags) {
+	var xhttp = new XMLHttpRequest();
+
+	xhttp.onreadystatechange = function () {
+		if (this.readyState == 4 && this.status == 200) {
+			var response = JSON.parse(this.responseText);
+			if (response.visible) {
+				buildStyles(response.button);
+				buildElements(checkoutForm, response.button);
+			}
+		}
+	};
+	xhttp.open("GET", url + '/client/check/' + meta.product.id + '?t=' + Date.now(), false);
+	xhttp.withCredentials = true;
+	xhttp.send();
+}
+
+function buildStyles(button) {
+	var head = document.head;
+
+	var style = document.createElement('style');
+	head.appendChild(style);
+	style = style.sheet;
+	style.type = 'text/css';
+	style.insertRule('#hw-button {margin-bottom: .5rem; background-color: ' + button.background + '; border-color: transparent; color: ' + button.color + '; border-width: 2px; cursor: pointer; justify-content: center; padding-bottom: calc(.375em - 1px); padding-left: .75em; padding-right: .75em; padding-top: calc(.375em - 1px); text-align: center; white-space: nowrap; border-radius: 8px; box-shadow: none; display: inline-flex; font-size: 1rem; height: 2.25em; line-height: 1.5; position: relative; vertical-align: top; user-select: none;}', 0);
+	style.insertRule('#hw-button:hover {background-color: ' + button.background + '; border-color: ' + button.border + '; color: ' + button.color + ';}', 1);
+	style.insertRule('#hw-frame {height: 0; width: 100%; transition: height 1s; display: block; max-width: 480px}', 2);
+	style.insertRule('#hw-frame.open {height: 340px;}', 3);
+}
+
+function buildElements(checkoutForm, button) {
+	var openButton = document.createElement('button');
+	openButton.id = 'hw-button';
+	openButton.innerText = button.text;
+	var iframe = document.createElement('iframe');
+	iframe.id = 'hw-frame';
+	iframe.src = url + '/client/' + meta.product.id;
+	iframe.style.border = 'none';
+	iframe.scrolling = 'no';
+	iframe.allowtransparency = "true";
+	openButton.addEventListener('click', toggleForm);
+	if (embedTag) {
+		embedTag.appendChild(openButton);
+		embedTag.appendChild(iframe);
+	} else if (checkoutForm) {
+		checkoutForm.insertAdjacentElement('afterend', openButton);
+		openButton.insertAdjacentElement('afterend', iframe);
+	}
+	window.addEventListener("message", sizeCalculated, false);
+}
+
+function toggleForm() {
+	document.querySelector('#hw-frame').classList.toggle('open');
+}
+
+function sizeCalculated(event) {
+	var suggestedSize = event.data.suggestedSize;
+	var element = document.querySelector('option[value=\'' + suggestedSize + '\']');
+	element.parentElement.value = suggestedSize;
+	element = document.querySelector('input[value=\'' + suggestedSize + '\']');
+	element.checked = true;
+}
+
+/***/ })
+
+/******/ });
