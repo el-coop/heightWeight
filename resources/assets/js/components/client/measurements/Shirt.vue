@@ -27,7 +27,7 @@
 <script>
 
 	export default {
-		name: "measurements",
+		name: "shirt",
 
 		props: {
 			product: {

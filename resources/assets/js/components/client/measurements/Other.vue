@@ -26,7 +26,7 @@
 <script>
 
 	export default {
-		name: "measurements",
+		name: "other",
 
 		props: {
 			product: {

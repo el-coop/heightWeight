@@ -46,7 +46,7 @@
 	import Other from './measurements/Other';
 
 	export default {
-		name: "measurements",
+		name: "calculator-result",
 
 		components: {
 			FontAwesomeIcon,
