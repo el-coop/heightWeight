@@ -43,6 +43,7 @@
 	import faSync from '@fortawesome/fontawesome-free-solid/faSync'
 	import TShirt from './measurements/Shirt';
 	import Pants from './measurements/Pants';
+	import Other from './measurements/Other';
 
 	export default {
 		name: "measurements",
@@ -50,7 +51,8 @@
 		components: {
 			FontAwesomeIcon,
 			TShirt,
-			Pants
+			Pants,
+			Other
 		},
 
 		props: {

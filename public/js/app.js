@@ -48323,6 +48323,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__measurements_Shirt___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__measurements_Shirt__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__measurements_Pants__ = __webpack_require__(202);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__measurements_Pants___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__measurements_Pants__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__measurements_Other__ = __webpack_require__(213);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__measurements_Other___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__measurements_Other__);
 //
 //
 //
@@ -48363,6 +48365,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
@@ -48375,7 +48378,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	components: {
 		FontAwesomeIcon: __WEBPACK_IMPORTED_MODULE_0__fortawesome_vue_fontawesome___default.a,
 		TShirt: __WEBPACK_IMPORTED_MODULE_2__measurements_Shirt___default.a,
-		Pants: __WEBPACK_IMPORTED_MODULE_3__measurements_Pants___default.a
+		Pants: __WEBPACK_IMPORTED_MODULE_3__measurements_Pants___default.a,
+		Other: __WEBPACK_IMPORTED_MODULE_4__measurements_Other___default.a
 	},
 
 	props: {
@@ -49499,6 +49503,422 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 210 */,
+/* 211 */,
+/* 212 */,
+/* 213 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(214)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(216)
+/* template */
+var __vue_template__ = __webpack_require__(217)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-eeaf1516"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\client\\measurements\\Other.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-eeaf1516", Component.options)
+  } else {
+    hotAPI.reload("data-v-eeaf1516", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 214 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(215);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(12)("f28c5eb6", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-eeaf1516\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Other.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-eeaf1516\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Other.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 215 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(6)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\ndiv[data-v-eeaf1516] {\n  position: relative;\n}\n.inseam[data-v-eeaf1516] {\n  position: absolute;\n  width: 4ch;\n  top: 84%;\n  left: 71%;\n}\n.length[data-v-eeaf1516] {\n  position: absolute;\n  width: 5ch;\n  top: 50%;\n  left: 81%;\n}\n.waist[data-v-eeaf1516] {\n  position: absolute;\n  width: 5ch;\n  top: 10%;\n  left: 38%;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 216 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	name: "measurements",
+
+	props: {
+		product: {
+			required: true,
+			type: Object
+		},
+		userData: {
+			required: true,
+			type: Object
+		}
+	},
+
+	data: function data() {
+		return {
+			sizes: this.sortSizes('height'),
+			inseam: 0,
+			length: 0,
+			waist: 0
+		};
+	},
+
+
+	methods: {
+		sortSizes: function sortSizes(category) {
+			var _this = this;
+
+			var result = _.keys(this.product.data);
+
+			result.sort(function (a, b) {
+				if (parseFloat(_this.product.data[a][category].min) < parseFloat(_this.product.data[b][category].min)) {
+					return -1;
+				}
+
+				if (parseFloat(_this.product.data[a][category].min) > parseFloat(_this.product.data[b][category].min)) {
+					return 1;
+				}
+				return 0;
+			});
+
+			return result;
+		},
+		isDefined: function isDefined(category) {
+			return this.product.data[this.sizes[0]][category].min || this.product.data[this.sizes[1]][category].min;
+		},
+		findCategorySize: function findCategorySize(category, measurement) {
+
+			var i = 0;
+
+			while (i + 1 !== this.sizes.length && parseFloat(this.product.data[this.sizes[i + 1]][category].min) <= measurement) {
+				i++;
+			}
+			return i;
+		},
+		calculateByHeightWeight: function calculateByHeightWeight() {
+			var resultCategory = 0;
+			var heightCategory = this.findCategorySize('height', this.userData.height);
+			var weightCategory = this.findCategorySize('weight', this.userData.weight);
+			console.log('height category', heightCategory);
+			console.log('weight category', weightCategory);
+			if (heightCategory === weightCategory) {
+				resultCategory = heightCategory;
+			} else {
+				if (this.userData.bmi < 22) {
+					resultCategory = Math.min(heightCategory, weightCategory);
+				} else if (this.userData.bmi < 25) {
+					if (heightCategory > weightCategory) {
+						var minHigh = this.product.data[this.sizes[heightCategory]]['height'].min;
+						var maxLow = this.product.data[this.sizes[weightCategory]]['weight'].max;
+						if (this.userData.height - minHigh > maxLow - this.userData.weight) {
+							resultCategory = heightCategory;
+						} else {
+							resultCategory = weightCategory;
+						}
+					} else {
+						var _maxLow = this.product.data[heightCategory]['height'].max;
+						var _minHigh = this.product.data[weightCategory]['weight'].min;
+						if (this.userData.weight - _minHigh > _maxLow - this.userData.height) {
+							resultCategory = weightCategory;
+						} else {
+							resultCategory = heightCategory;
+						}
+					}
+				} else if (this.userData.bmi < 28.5) {
+					resultCategory = Math.max(heightCategory, weightCategory);
+				} else if (this.userData.bmi < 35) {
+					resultCategory = Math.max(heightCategory, weightCategory);
+					if (resultCategory + 1 < this.sizes.length && Math.abs(heightCategory - weightCategory) === 1) {
+						resultCategory++;
+					}
+				} else {
+					resultCategory = Math.max(heightCategory, weightCategory);
+					if (resultCategory + 1 < this.sizes.length) {
+						resultCategory++;
+					}
+				}
+			}
+			return this.sizes[resultCategory];
+		}
+	},
+
+	mounted: function mounted() {
+		this.sizes = this.sortSizes('height');
+		var result = this.calculateByHeightWeight();
+		this.$emit('calculated', result);
+		this.inseam = parseFloat(this.product.data[result].inseam.min || 0);
+		this.length = parseFloat(this.product.data[result].length.min || 0);
+		this.waist = parseFloat(this.product.data[result].waist.min || 0);
+	},
+
+
+	computed: {
+		measuredCategory: {
+			get: function get() {
+				var inseamCategory = -1;
+				if (this.inseam) {
+					inseamCategory = this.findCategorySize('inseam', this.inseam);
+				}
+				var lengthCategory = -1;
+				if (this.length) {
+					lengthCategory = this.findCategorySize('length', this.length);
+				}
+				var waistCategory = -1;
+				if (this.waist) {
+					waistCategory = this.findCategorySize('waist', this.waist);
+				}
+				return this.sizes[Math.max(inseamCategory, lengthCategory, waistCategory)];
+			},
+			set: function set(val) {
+				this.inseam = parseFloat(this.product.data[val].inseam.min || 0);
+				this.length = parseFloat(this.product.data[val].length.min || 0);
+				this.waist = parseFloat(this.product.data[val].waist.min || 0);
+				return val;
+			}
+		}
+	}
+
+});
+
+/***/ }),
+/* 217 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "columns is-mobile" }, [
+    _c(
+      "div",
+      { staticClass: "column", staticStyle: { position: "relative" } },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.waist,
+              expression: "waist"
+            }
+          ],
+          staticClass: "input waist is-small",
+          domProps: { value: _vm.waist },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.waist = $event.target.value
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.length,
+              expression: "length"
+            }
+          ],
+          staticClass: "input length is-small",
+          domProps: { value: _vm.length },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.length = $event.target.value
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.inseam,
+              expression: "inseam"
+            }
+          ],
+          staticClass: "input inseam is-small",
+          domProps: { value: _vm.inseam },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.inseam = $event.target.value
+            }
+          }
+        })
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "column is-3 is-flex",
+        staticStyle: { "align-items": "center", "padding-left": "0" }
+      },
+      [
+        _c("div", { staticClass: "field" }, [
+          _c("div", { staticClass: "control" }, [
+            _c("div", { staticClass: "select" }, [
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.measuredCategory,
+                      expression: "measuredCategory"
+                    }
+                  ],
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.measuredCategory = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
+                  }
+                },
+                _vm._l(_vm.sizes, function(size) {
+                  return _c("option", {
+                    domProps: { value: size, innerHTML: _vm._s(size) }
+                  })
+                })
+              )
+            ])
+          ])
+        ])
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("figure", { staticClass: "image is-square" }, [
+      _c("img", { attrs: { src: "/images/pants-measurements.jpg" } })
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-eeaf1516", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
