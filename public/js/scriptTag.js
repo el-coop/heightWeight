@@ -115,6 +115,7 @@ function buildElements(checkoutForm, button) {
 	var openButton = document.createElement('button');
 	openButton.id = 'hw-button';
 	openButton.innerText = button.text;
+	openButton.type = 'button';
 	var iframe = document.createElement('iframe');
 	iframe.id = 'hw-frame';
 	iframe.src = url + '/client/' + meta.product.id;
@@ -137,11 +138,13 @@ function toggleForm() {
 }
 
 function sizeCalculated(event) {
-	var suggestedSize = event.data.suggestedSize;
-	var element = document.querySelector('option[value=\'' + suggestedSize + '\']');
-	element.parentElement.value = suggestedSize;
-	element = document.querySelector('input[value=\'' + suggestedSize + '\']');
-	element.checked = true;
+	if (event.data.suggestedSize) {
+		var suggestedSize = event.data.suggestedSize;
+		var element = document.querySelector('option[value=\'' + suggestedSize + '\']');
+		element.parentElement.value = suggestedSize;
+		element = document.querySelector('input[value=\'' + suggestedSize + '\']');
+		element.checked = true;
+	}
 }
 
 /***/ })

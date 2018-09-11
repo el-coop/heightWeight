@@ -39,6 +39,7 @@ function buildElements(checkoutForm, button) {
 	let openButton = document.createElement('button');
 	openButton.id = 'hw-button';
 	openButton.innerText = button.text;
+	openButton.type = 'button';
 	let iframe = document.createElement('iframe');
 	iframe.id = 'hw-frame';
 	iframe.src = `${url}/client/${meta.product.id}`;
@@ -61,9 +62,11 @@ function toggleForm() {
 }
 
 function sizeCalculated(event) {
-	let suggestedSize = event.data.suggestedSize;
-	let element = document.querySelector(`option[value='${suggestedSize}']`);
-	element.parentElement.value = suggestedSize;
-	element = document.querySelector(`input[value='${suggestedSize}']`);
-	element.checked = true;
+	if (event.data.suggestedSize) {
+		let suggestedSize = event.data.suggestedSize;
+		let element = document.querySelector(`option[value='${suggestedSize}']`);
+		element.parentElement.value = suggestedSize;
+		element = document.querySelector(`input[value='${suggestedSize}']`);
+		element.checked = true;
+	}
 }
