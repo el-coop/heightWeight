@@ -31,13 +31,17 @@ class UpdateButtonRequest extends FormRequest {
 	}
 	
 	public function commit() {
-		$button = new Button;
+		
+		$shop = ShopifyApp::shop();
+		$button = $shop->button;
+		if (!$button) {
+			$button = new Button;
+		}
 		$button->text = $this->input('text');
 		$button->color = $this->input('color');
 		$button->background = $this->input('background');
 		$button->border = $this->input('border');
 		
-		$shop = ShopifyApp::shop();
 		
 		$shop->button()->save($button);
 	}

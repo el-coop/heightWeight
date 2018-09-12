@@ -53,7 +53,7 @@ class Shop extends BaseShop {
 		$button = $this->button()->first();
 		if (!$button) {
 			$button = new Button;
-			$button->text = __('calculator.calculate',[], $this->language);
+			$button->text = __('calculator.calculate', [], $this->language);
 			$button->color = '#f5f5f5';
 			$button->background = '#363636';
 			$button->border = 'black';
