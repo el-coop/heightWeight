@@ -40,10 +40,14 @@ class InstallScriptTags extends Command {
 		if (count($scripttags) > 0) {
 			foreach (Shop::all() as $shop){
 				$this->info("Installing on {$shop->shopify_domain}");
-				dispatch(
-					new ScripttagInstaller($shop, $scripttags)
-				);
-				$this->info("Installed on {$shop->shopify_domain}");
+				try {
+					dispatch(
+						new ScripttagInstaller($shop, $scripttags)
+					);
+					$this->info("Installed on {$shop->shopify_domain}");
+				} catch (\Exception $exception){
+					$this->info("Not installed on {$shop->shopify_domain}");
+				}
 			}
 		}
 	}
