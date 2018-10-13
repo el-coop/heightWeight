@@ -1,7 +1,7 @@
 //let url = 'https://heightweight.test';
 let url = 'https://app.heightandweight.co';
 let embedTag = document.querySelector('#height-weight');
-let checkoutForm = document.querySelector('.product-form, #AddToCartForm, .product__form, .product-form-inline, .shopify-product-form, .cart-form');
+let checkoutForm = document.querySelector('.product-form, #AddToCartForm, .product__form, .product-form-inline, .shopify-product-form, .cart-form, .product-form--regular');
 
 
 if (checkoutForm || embedTags) {

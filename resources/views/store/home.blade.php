@@ -68,7 +68,7 @@
 									:disabled="selectedTo.length == 0"
 									@click="copyFields"
 									:class="{ 'is-loading' : copying }">
-								Copy Products
+								Paste
 							</button>
 						</div>
 						<div class="control level-item">
